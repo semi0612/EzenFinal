@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+nav{
+    width: 55px; /*마우스오버시 196px로 확장*/
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: var(--imp-color); 
+    color: rgba(255, 255, 255, 0.7);
+    transition: ease-out 0.2s;
+    float: left;
+}
+nav>ul{
+    position: fixed;
+    top:75px;
+    padding:0;
+}
+
+nav .fas{
+    width: 25px;
+    font-size: 18px;
+    color: white;
+}
+nav>ul{
+    width:196px;
+}
+nav ul li {
+    height:14px;
+    overflow-y: hidden;
+    padding: 15px;
+}
+nav ul.profile{
+    position: fixed;
+    bottom: 10px;
+    height: 100px;
+    top: unset;
+}
+
+nav div.menu-category {
+    transform: rotate(-0.03deg);
+    padding: 10px 0 0 10px;
+    font-weight: 400;
+    color: white;
+    font-size: 16px;
+}
+nav.menubar li em{
+    display: none; /*마우스 오버시 block*/
+    padding-left:10px;
+    color: white;
+    font-size: 16px;
+    transform: rotate(-0.03deg);
+    font-style: normal;
+    font-weight: 500;
+}
+nav.menubar:hover {
+    width: 196px;
+    transition: ease-in 0.2s;
+}
+nav.menubar:hover em{
+    display: inline-block;
+}
+
+.submenu{
+    padding-left: 0;
+    position: relative;
+    display: none;
+    font-weight: 100;
+    width: 100%;
+    padding-right:0;
+    position: relative;
+}
+.added{
+    display: block;
+    width:100%;
+}
+.submenu li {
+    /* transition: ease-in 0.3s; 마우스오버시 효과 */
+    padding:6px 0 18px 0;
+    display: block;
+    text-indent: 30px;
+    width:100%;
+    /* width:70px; */
+    /* text-indent: 20px; */
+    /* text-indent: 40px; */
+    /* padding-top: 12px; */
+}
+.added li:hover{
+    vertical-align: middle;
+    width:100%;
+    background-color: var(--imp-color2);
+}
+.menus{
+    width: 100%;
+}
