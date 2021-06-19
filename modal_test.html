@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/common_components.css">
+        <link rel="stylesheet" href="css/modal.css">
+        <link rel="stylesheet" href="css/common_all.css">
+        <title>모달연습</title>
+    </head>
+
+    <body>
+        <!--모달 내용-->
+        <div id="my_modal">
+            <a class="modal_close_btn"><i class="fas fa-times"></i></a>
+            <div class="request-head">
+                <h5 class="modal-left">요청명</h5><h5 class="modal-right">요청분류</h5>
+            </div>
+
+            <div class="request-input">
+                <label class="request-name">출퇴근 기록정정</label>
+               
+                <select class="select-request" name="request" >
+                    <option value="none">퇴근 누락</option>
+                    <option value="one">결근</option>
+                    <option value="two">지각</option>
+                </select>    
+            </div> 
+            <div class="request-head">
+                <h5 class="modal-left">날짜</h5>
+            </div>
+            <div class="request-input">
+                <label class="request-name">6/16</label>    
+            </div>
+            <div class="request-head">
+                <h5 class="modal-left">기록된 시각</h5><h5 class="modal-right-two">변경요청 시각</h5>
+            </div>
+            <div class="request-input">
+                <label class="request-name">누락</label>
+                <label class="request-name-right">18:00</label> 
+            </div>
+
+            <div class="request-head">
+                <h5 class="modal-left-two">요청사유</h5>
+            </div>
+
+            <div class="request-input">
+                <input type="text" class="underline" placeholder="  내용을 입력하세요."> 
+            </div>
+
+            <hr class="hr-class">
+
+            <button type="button" class="cancel-button">취소</button>
+            <button type="button" class="send-button">전송</button>
+
+        </div>
+
+        <button id="popup_open_btn">모달</button>
+
+        <script>
+            function modal(id) {
+                var zIndex = 9999;
+                var modal = document.getElementById(id);
+
+                // 모달 div 뒤에 희끄무레한 레이어
+                var bg = document.createElement('div');
+                bg.setStyle({
+                    position: 'fixed',
+                    zIndex: zIndex,
+                    left: '0px',
+                    top: '0px',
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'auto',
+                    // 레이어 색갈은 여기서 바꾸면 됨
+                    backgroundColor: 'rgba(0,0,0,0.4)'
+                });
+                document.body.append(bg);
+
+                // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+                modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+                    bg.remove();
+                    modal.style.display = 'none';
+                });
+                //닫기 버튼 2
+                modal.querySelector('.cancel-button').addEventListener('click', function() {
+                    bg.remove();
+                    modal.style.display = 'none';
+                });
+
+                modal.setStyle({
+                    position: 'fixed',
+                    display: 'block',
+                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+                    // 시꺼먼 레이어 보다 한칸 위에 보이기
+                    zIndex: zIndex + 1,
+
+                    // div center 정렬
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    msTransform: 'translate(-50%, -50%)',
+                    webkitTransform: 'translate(-50%, -50%)'
+                });
+            }
+
+            // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+            Element.prototype.setStyle = function(styles) {
+                for (var k in styles) this.style[k] = styles[k];
+                return this;
+            };
+
+            document.getElementById('popup_open_btn').addEventListener('click', function() {
+                // 모달창 띄우기
+                modal('my_modal');
+            });
+        </script>
+    </body>
+</html>
