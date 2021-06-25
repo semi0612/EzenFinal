@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+<!-- 여기서 name은 controller에서 요청명 -->
+  <definition name="empManagement.*.*" template="/WEB-INF/views/admin/inc/layout.jsp">
+    <put-attribute name="title" value="직원관리" />
+    <put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/admin/inc/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/admin/empManagement/{1}/{2}.jsp" />
+  </definition>
+  <definition name="request.*.*" template="/WEB-INF/views/admin/inc/layout.jsp">
+    <put-attribute name="title" value="요청관리" />
+    <put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/admin/inc/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}.jsp" />
+  </definition>
+  <definition name="timeRecord.*" template="/WEB-INF/views/admin/inc/layout.jsp">
+    <put-attribute name="title" value="출퇴근데이터" />
+    <put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/admin/inc/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/admin/timeRecord/{1}.jsp" />
+  </definition>
+	<!--  localhost:8090/"admin/empManagement/organization" return "empManagement.organization.list"-->
+	<!-- /WEB-INF/views/admin/empManagement/organization/list.jsp -->
+	
+  <!-- root에서 시작하는 페이지 : ex.index.jsp | notice.*부터 검사하고 해당없는 거는 root.*에서 찾음 그냥 *로 쓸 경우 무한루트-->
+<!--   <definition name="root.*" template="/WEB-INF/view/inc/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+  </definition> -->
+
+</tiles-definitions>

@@ -1,0 +1,62 @@
+.vacation-request-form label{
+    display: block;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: var(--font);
+    width: 100px;
+    display: inline-block;
+}
+.vacation-request-form .vac-q{
+    display: block;
+    padding: 10px;
+}
+.vac-q select, .vac-q input{
+    position: relative;
+    left: 13px;
+    width: 747px;
+    height: 1.5em;
+    border: 1.5px solid var(--base-color3);
+    background: white;
+}
+
+.vac-q select{
+    height: 30px;
+}
+.hiddenBtn{
+    display: none;
+}
+.vac-q .fileBtn{
+    border: 2px solid var(--base-color3);
+    width: 90px;
+    text-align: center;
+    padding-top:2px;
+    height: 23px;
+    transform: rotate(-0.03deg);
+    font-family: var( --font);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    /* transition: all 0.3s ease 0s; */
+    cursor: pointer;
+    color: var(--bg-color);  background-color: var(--base-color1);
+}
+.vac-send{
+    text-align: center;
+}
+.vac-q .fileBtn:hover{
+    background-color: var(--imp-color);
+}
+.vac-q.q5 {
+    text-align: right;
+    position: relative;
+    right: 110px;
+    overflow: hidden;
+}
+
+.fileName{
+    display: inline-block;
+    padding-right: 20px;
+    margin-left:10px;
+}
