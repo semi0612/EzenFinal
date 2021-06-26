@@ -28,5 +28,5 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="com.team2.web.mapper"/>
+	<mybatis-spring:scan base-package="com.clockOn.web.mapper"/>
 </beans>

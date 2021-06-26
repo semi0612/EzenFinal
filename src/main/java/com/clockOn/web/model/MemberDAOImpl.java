@@ -2,17 +2,49 @@ package com.clockOn.web.model;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
-	/*
-	 * @Inject SqlSession sqlSession;
-	 */
+	@Autowired
+	private SqlSession sqlSession;
+	private MemberDAO mapper;
+	
+	@Autowired
+	public MemberDAOImpl(SqlSession sqlSession) {
+		mapper = sqlSession.getMapper(MemberDAO.class);
+	}
+
 	@Override
-	public List<MemberDTO> list() {
-		return null;
-		/*
-		 * return sqlSession.selectList("member.list"); //member 네임스페이스 list 태그의 아이디
-		 */	}
+	public List list() {
+		return mapper.list();
+	}
+
+	@Override
+	public int add(Member member) {
+		return mapper.add(member);
+	}
+
+	@Override
+	public int editInfo(Member member) {
+		return mapper.editInfo(member);
+	}
+
+	@Override
+	public int del(String emp_id) {
+		return mapper.del(emp_id);
+	}
+
+	@Override
+	public int updatePw(String emp_pw, String emp_id) {
+		return mapper.updatePw(emp_pw, emp_id);
+	}
+
+	@Override
+	public int updateInfo(Member member) {
+		return mapper.updateInfo(member);
+	}
+
 }
