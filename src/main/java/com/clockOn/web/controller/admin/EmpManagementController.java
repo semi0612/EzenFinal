@@ -45,12 +45,17 @@ public class EmpManagementController {
 		return "empManagement.empinfo.memberList";
 	}
 	
+	@GetMapping("addMember")
+	public String addMemer() {
+		
+		return "empManagement.empinfo.addMember";
+	}
+	
 	@PostMapping("addMember")
 	public String addMember(String emp_id, String emp_name, String emp_email, String emp_tel, String emp_dept,
-			String emp_posi, String emp_level, String emp_sal, @RequestParam("total_annday") int total_annday, MultipartFile emp_pic) throws IllegalStateException, IOException {
+			String emp_posi, @RequestParam(name="emp_level", defaultValue="0") String emp_level, String emp_sal, @RequestParam(name="total_annday", defaultValue="15") int total_annday, MultipartFile emp_pic) throws IllegalStateException, IOException {
+			String fileName = emp_pic.getOriginalFilename();
 		
-		long size = emp_pic.getSize();
-		String fileName = emp_pic.getOriginalFilename();
 		if (fileName != null) {
 			String webPath = "/static/upload";
 			String realPath = ctx.getRealPath(webPath);
@@ -60,12 +65,15 @@ public class EmpManagementController {
 			realPath += File.separator + fileName;
 			File saveFile = new File(realPath);
 			emp_pic.transferTo(saveFile);
+			System.out.println(realPath);
 		}
+		System.out.println("컨트롤러 emp_id : " +emp_id + " emp_name : " + emp_name + " emp_email" + emp_email + "emp_tel : " + emp_tel
+				+ " emp_dept" + emp_dept + " emp_posi :" + emp_posi + " emp_level : " + emp_level + "emp_sal : " + emp_sal + " total_annday: " + total_annday + " fileName: " + fileName);
 		
 		Member member = new Member(emp_id, "", emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, null, null,	emp_sal, fileName, total_annday, 0);
 		int result = memberService.add(member);
 
-		return "empManagement.empinfo.addMember";
+		return "empManagement.organization.contacts";
 	}
 
 	@GetMapping("modify")

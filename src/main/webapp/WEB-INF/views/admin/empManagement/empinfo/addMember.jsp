@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/add_member.css">
+<script src="/js/check_img.js"></script>
+<script src="/js/check_dept.js"></script>
 <div class="content-wrapper">
 	<main>
 		<h2>직원추가</h2>
@@ -10,7 +12,7 @@
 				<h4 class="team-title">부서</h4>
 				&nbsp; &nbsp;
 				<!--부서목록-->
-				<select class="department-menu" name="department">
+				<select class="department-menu" name="emp_dept" id="dept">
 					<option value="none" hidden>부서목록</option>
 					<optgroup label="IT본부">
 						<option value="strategy">IT기획팀</option>
@@ -32,21 +34,21 @@
 					</optgroup>
 				</select> &nbsp;
 				<!--검색창-->
-				<form id='searchform'>
+				<!-- <form id='searchform'> -->
 					<div id='simpleSearch'>
-						<input type='search' name='search' class='searchInput'
-							placeholder='  검색'> <input type='submit' name='go'
-							class='searchButton'>
+						<input type='search' name='search' class='searchInput' placeholder='  검색'>
+						<input type='button' name='go' class='searchButton'>
 					</div>
-				</form>
+				<!-- </form> -->
 			</div>
 			<div class="add-component">
 				<!--직원이미지 입력폼-->
 				<div class="member-images">
 					<div class="member-image">
-						<i class="fas fa-user"></i>
+					 <img id="preview" src="/images/thumbnail.png" alt="image">
+						<!-- <i class="fas fa-user"></i> -->
 					</div>
-					<input type="file" name="emp_pic" id="empPic" style="display:none; apperance: none; -webkit-apperance: none;">
+					<input type="file" name="emp_pic" id="empPic" accept="image/*" style="display:none; apperance: none; -webkit-apperance: none;">
 					<label for="empPic" class="addbutton-three button-label">사진첨부</label>
 				</div>
 				<!--직원정보 입력폼-->
@@ -68,7 +70,7 @@
 					<span class="label-connect"><label for="empTel"><h4>직통전화</h4></label><input type="tel" id="empTel" name="emp_tel"></span> 
 					<span class="label-connect"><label for="empEmail"><h4>이메일로 초대</h4></label><input type="email" id="empEmail" name="emp_email" placeholder=" test@naver.com" required></span>
 					 <span class="label-connect"><label for="empPhone"><h4>연락처로 초대</h4></label><input type="tel" id="empPhone" name="emp_phone" placeholder=" 010-2579-2252"></span>
-					<button class="invite-button" type="submit">초대하기</button>
+					<button class="invite-button" type="submit" onclick="return checkImg()" name="직원추가">초대하기</button>
 				</div>
 			</div>
 			</form>

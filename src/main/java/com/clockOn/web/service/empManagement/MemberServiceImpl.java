@@ -15,7 +15,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int add(Member member) {
+		System.out.println(" 서비스단 : " + member);
 		 int result = memberDao.add(member);
+		System.out.println(" 반환값 : " + result);
+
 	     return result;
 	}
 

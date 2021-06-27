@@ -25,5 +25,7 @@ public class SampleMapperTest {
 		System.out.println("now=" + now);
 		assertTrue(StringUtils.startsWithIgnoreCase(className, "com.sun.proxy"));
 	}
+	
+	
 
 }

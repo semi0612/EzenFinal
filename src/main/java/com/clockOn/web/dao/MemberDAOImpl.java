@@ -14,6 +14,7 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlSession;
 	private MemberDAO mapper;
 	
+	/*생성자 통한 주입*/
 	@Autowired
 	public MemberDAOImpl(SqlSession sqlSession) {
 		mapper = sqlSession.getMapper(MemberDAO.class);
