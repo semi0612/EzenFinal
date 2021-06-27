@@ -12,8 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		new Member(emp_id, "", emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, null, null, emp_sal, fileName, total_annday, 0);
   		 -->
 	<insert id="add" parameterType="com.clockOn.web.entity.Member">
-		insert into employee(emp_id, emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, emp_sal, emp_pic, total_annday) 
-		values(#{emp_id}, #{emp_name}, #{emp_email}, #{emp_tel}, #{emp_dept}, #{emp_posi}, #{emp_level}, #{emp_sal}, #{emp_pic}, #{total_annday})
+		insert into employee(emp_id, emp_pw, emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, emp_sal, emp_pic, total_annday) 
+		values(#{emp_id}, #{emp_pw}, #{emp_name}, #{emp_email}, #{emp_tel}, #{emp_dept}, #{emp_posi}, #{emp_level}, #{emp_sal}, #{emp_pic}, #{total_annday})
 	</insert>
 	<delete id="del" parameterType="String">
 		delete from employee where id=#{emp_id}

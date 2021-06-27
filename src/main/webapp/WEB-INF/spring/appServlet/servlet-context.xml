@@ -42,4 +42,20 @@
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions" value="/WEB-INF/tiles.xml" />
 	</bean>
+	<!-- junit 테스트를 위해 추가 -->
+	<!-- <bean class="org.springframework.mock.web.MockServletContext"/> -->
+	
+	<!-- gmail 메일전송 설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="jeeyoolmin@gmail.com" />
+	    <property name="password" value="sbfprcj2021" />
+	    <property name="javaMailProperties">
+	    <props>
+	      <prop key="mail.smtp.auth">true</prop>
+	      <prop key="mail.smtp.starttls.enable">true</prop>
+	    </props>
+	    </property>
+  	</bean>
 </beans>

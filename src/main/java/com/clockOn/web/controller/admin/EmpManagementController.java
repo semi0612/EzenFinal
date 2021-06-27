@@ -67,8 +67,6 @@ public class EmpManagementController {
 			emp_pic.transferTo(saveFile);
 			System.out.println(realPath);
 		}
-		System.out.println("컨트롤러 emp_id : " +emp_id + " emp_name : " + emp_name + " emp_email" + emp_email + "emp_tel : " + emp_tel
-				+ " emp_dept" + emp_dept + " emp_posi :" + emp_posi + " emp_level : " + emp_level + "emp_sal : " + emp_sal + " total_annday: " + total_annday + " fileName: " + fileName);
 		
 		Member member = new Member(emp_id, "", emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, null, null,	emp_sal, fileName, total_annday, 0);
 		int result = memberService.add(member);

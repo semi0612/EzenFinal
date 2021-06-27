@@ -15,22 +15,22 @@
 				<select class="department-menu" name="emp_dept" id="dept">
 					<option value="none" hidden>부서목록</option>
 					<optgroup label="IT본부">
-						<option value="strategy">IT기획팀</option>
-						<option value="development">개발1팀</option>
-						<option value="development2">개발2팀</option>
+						<option value="IT기획팀">IT기획팀</option>
+						<option value="개발1팀">개발1팀</option>
+						<option value="개발2팀">개발2팀</option>
 					</optgroup>
 
 					<optgroup label="경영지원 본부">
-						<option value="HR">인사총무팀</option>
-						<option value="finance">재경팀</option>
-						<option value="purchasement">구매무역팀</option>
+						<option value="인사총무팀">인사총무팀</option>
+						<option value="재경팀">재경팀</option>
+						<option value="구매무역팀">구매무역팀</option>
 					</optgroup>
 
 					<optgroup label="생산본부">
-						<option value="safety">공정안전팀</option>
-						<option value="process">공정실행팀</option>
-						<option value="production1">생산1팀</option>
-						<option value="production2">생산2팀</option>
+						<option value="공정안전팀">공정안전팀</option>
+						<option value="공정실행팀">공정실행팀</option>
+						<option value="생산1팀">생산1팀</option>
+						<option value="생산2팀">생산2팀</option>
 					</optgroup>
 				</select> &nbsp;
 				<!--검색창-->
