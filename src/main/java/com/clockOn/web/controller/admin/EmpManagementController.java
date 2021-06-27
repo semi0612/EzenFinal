@@ -1,6 +1,6 @@
 package com.clockOn.web.controller.admin;
 
-import com.clockOn.web.model.Member;
+import com.clockOn.web.entity.Member;
 import com.clockOn.web.service.empManagement.*;
 import java.io.*;
 import java.util.List;
@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -46,7 +47,7 @@ public class EmpManagementController {
 	
 	@PostMapping("addMember")
 	public String addMember(String emp_id, String emp_name, String emp_email, String emp_tel, String emp_dept,
-			String emp_posi, int emp_level, String emp_sal, int total_annday, MultipartFile emp_pic) throws IllegalStateException, IOException {
+			String emp_posi, String emp_level, String emp_sal, @RequestParam("total_annday") int total_annday, MultipartFile emp_pic) throws IllegalStateException, IOException {
 		
 		long size = emp_pic.getSize();
 		String fileName = emp_pic.getOriginalFilename();

@@ -2,7 +2,7 @@ package com.clockOn.web.service.empManagement;
 
 import java.util.List;
 
-import com.clockOn.web.model.Member;
+import com.clockOn.web.entity.Member;
 
 public interface MemberService {
     public abstract int add(Member member);

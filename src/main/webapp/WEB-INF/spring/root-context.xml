@@ -13,7 +13,7 @@
 <!-- 사이트 전반적인 설정, 주로 DB -->
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/emp_db?serverTimezone=Asia/Seoul"/>
 		<property name="username" value="root"/>
@@ -26,7 +26,9 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:mappers/*Mapper.xml"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="com.clockOn.web.mapper"/>
+	<!-- mapper interface -->
+	<mybatis-spring:scan base-package="com.clockOn.web.dao"/>
 </beans>
