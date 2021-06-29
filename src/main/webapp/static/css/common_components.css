@@ -17,6 +17,7 @@ label.button-label {
     padding-top: 7px;
     height: 27px;
 }
+
 /*프리뷰 들어갈 img css*/
 img#preview {
     object-fit: cover;
@@ -158,6 +159,14 @@ input[type="checkbox"]:checked + label:after {
 }
 
 /* 검색창 */
+th input.search { /*테이블 컬럼별 작은 검색창*/
+  padding: 2px 0px 4px 7px;
+  width: 70px;
+  height: 15px;
+  text-align: left;
+  border: 1px solid var(--base-color4);
+}
+
 #searchform{
   display: inline-block;
 }

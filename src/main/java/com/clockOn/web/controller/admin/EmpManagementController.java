@@ -44,6 +44,12 @@ public class EmpManagementController {
 		model.addAttribute("list", list);
 		return "empManagement.empinfo.memberList";
 	}
+	@GetMapping("memberlist")
+	public String memberlist(Model model) {
+		List<Member> list = memberService.list();
+		model.addAttribute("list", list);
+		return "empManagement.empinfo.memberList";
+	}
 	
 	@GetMapping("addMember")
 	public String addMemer() {

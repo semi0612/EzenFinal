@@ -140,7 +140,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<Member> list() {
-		return null;
+		return memberDao.list();
 	}
 
 	@Override
