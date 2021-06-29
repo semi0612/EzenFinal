@@ -50,4 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			emp_pw = #{emp_pw}, 
 		where emp_id = #{emp_id}
 	</update>
+	<select id="getEmpId" resultType="java.util.List">
+		select emp_id from employee;
+	</select>
 </mapper>

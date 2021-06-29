@@ -54,7 +54,7 @@
 				<!--직원정보 입력폼-->
 				<div class="member-data">
 					<span class="label-connect"><label for="empName"><h4>이름</h4></label><input	type="text" id="empName" name="emp_name" required></span>
-					<span class="label-connect"><label for="empId"><h4>사번</h4></label><input type="text" id="empId" name="emp_id" required></span> 
+					<span class="label-connect"><label for="empId"><h4>사번</h4></label><input type="text" id="empId" name="emp_id" placeholder="입력하지 않는다면 자동생성"></span> 
 					<span class="label-connect c2"> <span class="label-connect2"><input	type="checkbox" id="empLevel" name="emp_level" value="1">
 					<label for="empLevel">관리</label></span> <label for="empPosition"><h4>직급</h4></label>
 						<select class="select-input" id="empPosition" name="emp_posi">

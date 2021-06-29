@@ -17,4 +17,6 @@ public interface MemberDAO {
 	public int updatePw(String emp_pw, String emp_id);
 
 	public int updateInfo(Member member);
+	
+	public List<String> getEmpId();
 }

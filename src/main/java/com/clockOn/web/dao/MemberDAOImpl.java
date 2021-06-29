@@ -49,5 +49,10 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateInfo(Member member) {
 		return mapper.updateInfo(member);
 	}
+	
+	@Override
+	public List<String> getEmpId() {
+		return mapper.getEmpId();
+	}
 
 }
