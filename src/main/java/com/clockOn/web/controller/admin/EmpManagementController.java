@@ -86,7 +86,6 @@ public class EmpManagementController {
 	public String addMember(String emp_id, String emp_name, String emp_email, String emp_tel, String emp_dept,
 			String emp_posi, @RequestParam(name="emp_level", defaultValue="0") String emp_level, String emp_sal, @RequestParam(name="total_annday", defaultValue="15") int total_annday, MultipartFile emp_pic) throws IllegalStateException, IOException {
 			String fileName = emp_pic.getOriginalFilename();
-		
 		if (fileName != null) {
 			String webPath = "/static/upload";
 			String realPath = ctx.getRealPath(webPath);
@@ -96,7 +95,6 @@ public class EmpManagementController {
 			realPath += File.separator + fileName;
 			File saveFile = new File(realPath);
 			emp_pic.transferTo(saveFile);
-			System.out.println(realPath);
 		}
 		
 		Member member = new Member(emp_id, "", emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, null, null,	emp_sal, fileName, total_annday, 0);

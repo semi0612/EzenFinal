@@ -9,6 +9,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.clockOn.web.dao.MemberDAO;
@@ -18,8 +19,13 @@ import com.clockOn.web.entity.MemberLeave;
 import com.clockOn.web.entity.MemberList;
 import com.clockOn.web.entity.MemberSal;
 
+import lombok.Setter;
+
 @Service
 public class MemberServiceImpl implements MemberService {
+	@Setter(onMethod_ = @Autowired)
+	PasswordEncoder pwencoder;
+	
 	@Autowired
 	private JavaMailSender mailSender;
 	 
@@ -31,19 +37,20 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int add(Member member) {
-		System.out.println(" 서비스단 : " + member);
 		/*빈값으로 넘어 올 경우 사번 생성 */
-		if(member.getEmp_id()==null) member.setEmp_id(makeEmp_id(member));
+		if(member.getEmp_id()==null || member.getEmp_id().equals("")) member.setEmp_id(makeEmp_id(member));
+		System.out.println(member.getEmp_id());
 		/*이메일 전송-1.비밀번호(난수) 생성 및 추가*/
 		String emp_pwd = makePw();
 		member.setEmp_pw(emp_pwd);
 		//2.이메일 보내기
 		sendEmail(member.getEmp_id(),member.getEmp_email(), emp_pwd, member.getEmp_name());
-		//3.Dao
+		//3.비밀번호 암호화
+		member.setEmp_pw(pwencoder.encode(member.getEmp_pw()));
+		//4.Dao
 		int result = memberDao.add(member);
-		System.out.println(" 반환값 : " + result);
 
-	     return result;
+	    return result;
 	}
 
 	private String makeEmp_id(Member member) {
