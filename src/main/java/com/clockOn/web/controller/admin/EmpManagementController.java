@@ -1,8 +1,12 @@
 package com.clockOn.web.controller.admin;
 
 import com.clockOn.web.entity.Member;
+import com.clockOn.web.entity.MemberLeave;
+import com.clockOn.web.entity.MemberList;
+import com.clockOn.web.entity.MemberSal;
 import com.clockOn.web.service.empManagement.*;
 import java.io.*;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -40,16 +44,37 @@ public class EmpManagementController {
 
 	@PostMapping("memberlist")
 	public String list(Model model) {
-		List<Member> list = memberService.list();
+		List<MemberList> list = memberService.listView();
 		model.addAttribute("list", list);
 		return "empManagement.empinfo.memberList";
 	}
+	
 	@GetMapping("memberlist")
 	public String memberlist(Model model) {
-		List<Member> list = memberService.list();
+		List<MemberList> list = memberService.listView();
 		model.addAttribute("list", list);
+		int cnt = memberService.count();
+		model.addAttribute("cnt", cnt);
 		return "empManagement.empinfo.memberList";
 	}
+	@GetMapping("leaveInfo")
+	public String leaveInfo(Model model) {
+		List<MemberLeave> list = memberService.listLeave();
+		model.addAttribute("list", list);
+		int cnt = memberService.count();
+		model.addAttribute("cnt", cnt);
+		return "empManagement.empinfo.leaveInfo";
+	}
+	
+	@GetMapping("salaryInfo")
+	public String salaryInfo(Model model) {
+		List<MemberSal> list = memberService.listSal();
+		model.addAttribute("list", list);
+		int cnt = memberService.count();
+		model.addAttribute("cnt", cnt);
+		return "empManagement.empinfo.salaryInfo";
+	}
+	
 	
 	@GetMapping("addMember")
 	public String addMemer() {
@@ -80,9 +105,21 @@ public class EmpManagementController {
 		return "empManagement.organization.contacts";
 	}
 
-	@GetMapping("modify")
-	public String modify() {
-		return "empManagement.empinfo.modify";
+	@GetMapping("corrInfo")
+	public String modify(Model model) {
+		List<MemberList> list = memberService.listView();
+		model.addAttribute("list", list);
+		int cnt = memberService.count();
+		model.addAttribute("cnt", cnt);
+		return "empManagement.empinfo.corrInfo";
+	}
+	
+	@PostMapping("corrInfo")
+	public String updateInfo(String org_groupname, String emp_dept, String emp_id, String emp_name, String emp_posi, String emp_tel, String emp_email, 
+			String emp_level) {
+		MemberList list = new MemberList(org_groupname, emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level);
+		memberService.update(list);
+		return "empManagement.empinfo.memberList";
 	}
 
 }

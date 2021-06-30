@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.clockOn.web.entity.Member;
+import com.clockOn.web.entity.MemberLeave;
+import com.clockOn.web.entity.MemberList;
+import com.clockOn.web.entity.MemberSal;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -46,13 +49,33 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int updateInfo(Member member) {
+	public int updateInfo(MemberList member) {
 		return mapper.updateInfo(member);
 	}
 	
 	@Override
 	public List<String> getEmpId() {
 		return mapper.getEmpId();
+	}
+
+	@Override
+	public List<MemberList> listView() {
+		return mapper.listView();
+	}
+
+	@Override
+	public List<MemberLeave> listLeave() {
+		return mapper.listLeave();
+	}
+
+	@Override
+	public List<MemberSal> listSal() {
+		return mapper.listSal();
+	}
+
+	@Override
+	public int count() {
+		return mapper.count();
 	}
 
 }

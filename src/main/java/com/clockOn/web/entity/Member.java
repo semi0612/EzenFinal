@@ -41,4 +41,16 @@ public class Member{
         this.annday_used = annday_used;
     }
 
+	public Member(String emp_dept, String emp_id, String emp_name, String emp_posi, int total_annday,
+			int annday_used, Date emp_join, Date emp_resi) {
+		this.emp_dept = emp_dept;
+		this.emp_id = emp_id;
+		this.emp_name = emp_name;
+		this.emp_posi = emp_posi;
+		this.total_annday = total_annday;
+	    this.annday_used = annday_used;
+	    this.emp_join = emp_join;
+	    this.emp_resi = emp_resi;
+	}
+
 }

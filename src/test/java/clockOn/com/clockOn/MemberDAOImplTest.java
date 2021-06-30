@@ -34,5 +34,9 @@ public class MemberDAOImplTest {
 //		Member member = new Member("")
 //		memberDao.add(member);
 	}
+	@Test
+	public void listView() {
+		System.out.println(memberDao.listLeave().get(0).getEmp_dept());
+	}
 
 }

@@ -37,3 +37,17 @@ summary {
 .sub-tab h4 {
     margin-bottom: 10px;
 }
+
+.emp-modify input {
+    width: 100px;
+    margin: 5px;
+    line-height: 20px;
+    border: 1px solid var(--base-color4);
+}
+.emp-modify select {
+    border: 1px solid var(--base-color3);
+}
+
+.emp-modify input#email {
+    width: 140px;
+}

@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.dao.OrgDAO;
 import com.clockOn.web.entity.Member;
+import com.clockOn.web.entity.MemberLeave;
+import com.clockOn.web.entity.MemberList;
+import com.clockOn.web.entity.MemberSal;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -147,10 +150,30 @@ public class MemberServiceImpl implements MemberService {
 	public int update(String emp_id) {
 		return 0;
 	}
+	//관리자페이지 -직원정보 일괄 수정
+	@Override
+	public int update(MemberList member) {
+		return memberDao.updateInfo(member);
+	}
 
 	@Override
-	public int update(Member member) {
-		return 0;
+	public List<MemberList> listView() {
+		return memberDao.listView();
+	}
+
+	@Override
+	public List<MemberLeave> listLeave() {
+		return memberDao.listLeave();
+	}
+
+	@Override
+	public List<MemberSal> listSal() {
+		return memberDao.listSal();
+	}
+
+	@Override
+	public int count() {
+		return memberDao.count();
 	}
 
 }

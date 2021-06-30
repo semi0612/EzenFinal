@@ -68,6 +68,16 @@ select{
   width: 1px;
 }
 
+.emp-tbl input[type="checkbox"] {
+    border: 1px solid var(--base-color3);
+    overflow: hidden;
+    padding: 0;
+    width: 12px;
+    height: 13px;
+    margin: 0;
+    clip: unset;
+    position: relative;
+}
 
 input[type="checkbox"] + label {
   font-size: 14px;
