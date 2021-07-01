@@ -50,6 +50,7 @@
 						</div>
 					</article>
 
+					<!--
 					<article class="component">
 						<img src="/images/bangul2.jpg" alt="직원 이미지" />
 						<div class="description">
@@ -69,28 +70,7 @@
 							</div>
 							<a href="#" class="button">채팅하기</a>
 						</div>
-					</article>
-
-					<article class="component">
-						<img src="/images/bangul2.jpg" alt="직원 이미지" />
-						<div class="description">
-							<div class="user-title">
-								<h3>최샘이</h3>
-								<h4 class="position">과장</h4>
-							</div>
-							<div class="user-description">
-								<p>OO사 | 개발1팀</p>
-								<hr>
-								<p>
-									<i class="fas fa-envelope"></i>&nbsp; &nbsp;test@naver.com
-								</p>
-								<p>
-									<i class="fas fa-phone-alt"></i>&nbsp; &nbsp;010-5555-6666
-								</p>
-							</div>
-							<a href="#" class="button">채팅하기</a>
-						</div>
-					</article>
+					</article> -->
 				</div>
 			</div>
 		</div>

@@ -7,6 +7,9 @@ import com.clockOn.web.entity.MemberSal;
 import com.clockOn.web.service.empManagement.*;
 import java.io.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -77,8 +80,9 @@ public class EmpManagementController {
 	
 	
 	@GetMapping("addMember")
-	public String addMemer() {
-		
+	public String addMemer(Model model) {
+		List<HashMap<String, String>> org = memberService.listTeam();
+		model.addAttribute("orgList", org);
 		return "empManagement.empinfo.addMember";
 	}
 	
@@ -100,23 +104,36 @@ public class EmpManagementController {
 		Member member = new Member(emp_id, "", emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, null, null,	emp_sal, fileName, total_annday, 0);
 		int result = memberService.add(member);
 
-		return "empManagement.organization.contacts";
+		return "empManagement.organization.memberList";
 	}
 
 	@GetMapping("corrInfo")
 	public String modify(Model model) {
 		List<MemberList> list = memberService.listView();
 		model.addAttribute("list", list);
+		
 		int cnt = memberService.count();
 		model.addAttribute("cnt", cnt);
+		
+		List<String> posiList = memberService.listPosi();
+		model.addAttribute("posiList", posiList);
+		
+		List<HashMap<String, String>> org = memberService.listTeam();
+		model.addAttribute("orgList", org);
+
 		return "empManagement.empinfo.corrInfo";
 	}
 	
 	@PostMapping("corrInfo")
-	public String updateInfo(String org_groupname, String emp_dept, String emp_id, String emp_name, String emp_posi, String emp_tel, String emp_email, 
-			String emp_level) {
-		MemberList list = new MemberList(org_groupname, emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level);
-		memberService.update(list);
+	public String updateInfo(String[] emp_id, String[] emp_dept, String[] emp_name, String[] emp_posi, String[] emp_tel, String[] emp_email, String[] emp_level) {
+		
+		List<MemberList> list = new ArrayList();
+		for(int i=0; i<emp_name.length; i++) {
+			MemberList member = new MemberList(emp_id[i], emp_dept[i], emp_name[i], emp_posi[i], emp_tel[i], emp_email[i], emp_level[i]);
+			list.add(member);
+		}
+		memberService.updateAll(list);
+		
 		return "empManagement.empinfo.memberList";
 	}
 

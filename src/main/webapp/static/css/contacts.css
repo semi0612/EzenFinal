@@ -1,5 +1,5 @@
 
-/* 연락망 콘텐츠 부분 */
+/* �뿰�씫留� 肄섑뀗痢� 遺�遺� */
 h3.team-title {
     padding-left: 20px;
     font-size: 24px;
@@ -14,13 +14,14 @@ h3.team-title {
 .main-content {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: 100px;
   margin-left: 20px;
   margin-right: 20px;
 }
 
 .component {
+  margin-right: 40px;
   margin-top: 30px;
   border-radius: 2px; 
   box-shadow: rgba(0, 0, 0, 0.227) 3px 3px 8px 0px;

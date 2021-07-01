@@ -7,6 +7,7 @@
 <div class="content-wrapper">
 	<main>
 		<h2>직원정보관리</h2>
+		<form action="corrInfo" method="post">
 		<div class="sub-tab">
 			<span class="tab-group1">
 				<h4>서브메뉴</h4> <span class="wrap"><button class="button-three" onclick="location.href='leaveInfo'">연차</button></span>
@@ -51,30 +52,27 @@
 				<tr>
 					<td><select name="emp_dept">
 						<option value="none" hidden>부서목록</option>
-							<optgroup label="IT본부">
-							<option value="IT기획팀">IT기획팀</option>
-							<option value="개발1팀">개발1팀</option>
-							<option value="개발2팀">개발2팀</option>
-						</optgroup>
-						<optgroup label="경영지원 본부">
-							<option value="인사총무팀">인사총무팀</option>
-							<option value="재경팀">재경팀</option>
-							<option value="구매무역팀">구매무역팀</option>
-						</optgroup>
-
-						<optgroup label="생산본부">
-							<option value="공정안전팀">공정안전팀</option>
-							<option value="공정실행팀">공정실행팀</option>
-							<option value="생산1팀">생산1팀</option>
-							<option value="생산2팀">생산2팀</option>
-						</optgroup>
+						<c:forEach var="org" items="${orgList}"> <!-- org라는 HashMap<Key,Value> key : org_groupname, teamList -->
+							<optgroup label="${org.org_groupname}"> 
+								<c:forTokens var="team" items="${org.teamList}" delims="/"> <!--인사총무팀/재경팀/구매무역팀 -->
+									<option value="${team}" name="emp_dept" ${team==list.emp_dept?'selected':''}>${team}</option>
+								</c:forTokens>
+							</optgroup>
+						</c:forEach>
 						</select></td>
-					<td><input type="text" id="empId" value="${list.emp_id}" readonly></td>
-					<td><input type="text" id="ename" value="${list.emp_name}"></td>
-					<td><input type="text" id="position" value="${list.emp_posi}"></td>
-					<td><input type="text" id="tel" value="${list.emp_tel}"></td>
-					<td><input type="text" id="email" value="${list.emp_email}"></td>
-					<td><select>
+					<td><input type="text" id="empId" name="emp_id" value="${list.emp_id}" readonly></td>
+					<td><input type="text" id="ename" name="emp_name" value="${list.emp_name}"></td>
+					<td>
+					<c:set var="posi" value="${list.emp_posi}"/>
+						<select class="select-input" id="position" name="emp_posi">
+							<c:forEach var="pos" items="${posiList}">
+								<option value="${pos}" ${posi==pos?'selected':''}>${pos}</option>
+							</c:forEach>
+						</select>
+					<%-- <input type="text" id="position" value="${list.emp_posi}"> --%></td>
+					<td><input type="tel" name="emp_tel" id="tel" value="${list.emp_tel}" ></td>
+					<td><input type="email" name="emp_email" id="email" value="${list.emp_email}"></td>
+					<td><select name="emp_level">
 						<option value="1" ${mgr}>관리자</option>
 						<option value="0" ${emp}>직원</option>							
 						</select>
@@ -82,5 +80,6 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</form>
 	</main>
 </div>

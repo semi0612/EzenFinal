@@ -63,4 +63,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getEmpId" resultType="String">
 		select emp_id from employee;
 	</select>
+	<select id="listPosi" resultType="String">
+		select distinct emp_posi from employee;
+	</select>
+
+	<!-- <update id="updateBatch" parameterType="com.bootproj.pmcweb.Domain.StudyMaterial">
+	<foreach collection="list" item="attachment" index="index" open="" close="" separator=";">
+	update study_material
+	<set> attachment_id = #{attachment.attachmentId}, study_id = #{attachment.studyId}, type = #{attachment.type} </set>
+	where id = #{attachment.id} </foreach> </update> -->
+
+	<update id="updateAll" parameterType="com.clockOn.web.entity.MemberList">
+		<foreach item="info" collection="list" separator=";">
+			update employee
+			<set> emp_dept = #{info.emp_dept}, emp_name = #{info.emp_name}, emp_posi = #{info.emp_posi}, emp_tel = #{info.emp_tel}, emp_email = #{info.emp_email}, emp_level = #{info.emp_level} </set>
+			where emp_id = #{info.emp_id}
+		</foreach>
+	</update>
+	
+	<!-- 본부명을 Key값으로 가지는  해쉬맵생성-->
+	<select id="listTeam" resultType="HashMap">
+		select org_groupname, group_concat(org_teamname separator '/') as teamList from organization group by org_groupname;
+	</select>
 </mapper>

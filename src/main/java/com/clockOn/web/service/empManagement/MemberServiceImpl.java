@@ -1,6 +1,7 @@
 package com.clockOn.web.service.empManagement;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -159,8 +160,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//관리자페이지 -직원정보 일괄 수정
 	@Override
-	public int update(MemberList member) {
-		return memberDao.updateInfo(member);
+	public int updateAll(List<MemberList> member) {
+		return memberDao.updateAll(member);
 	}
 
 	@Override
@@ -181,6 +182,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int count() {
 		return memberDao.count();
+	}
+
+	@Override
+	public List<String> listPosi() {
+		return memberDao.listPosi();
+	}
+
+	@Override
+	public List<HashMap<String, String>> listTeam() {
+		return memberDao.listTeam();
 	}
 
 }

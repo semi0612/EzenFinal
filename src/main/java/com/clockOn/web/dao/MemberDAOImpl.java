@@ -1,5 +1,6 @@
 package com.clockOn.web.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -49,8 +50,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int updateInfo(MemberList member) {
-		return mapper.updateInfo(member);
+	public int updateAll(List<MemberList> memberList) {
+		return mapper.updateAll(memberList);
 	}
 	
 	@Override
@@ -76,6 +77,16 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int count() {
 		return mapper.count();
+	}
+
+	@Override
+	public List<String> listPosi() {
+		return mapper.listPosi();
+	}
+
+	@Override
+	public List<HashMap<String, String>> listTeam() {
+		return mapper.listTeam();
 	}
 
 }

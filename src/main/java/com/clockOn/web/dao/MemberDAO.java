@@ -1,5 +1,6 @@
 package com.clockOn.web.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.clockOn.web.entity.Member;
@@ -21,7 +22,7 @@ public interface MemberDAO {
 
 	public int updatePw(String emp_pw, String emp_id);
 
-	public int updateInfo(MemberList member);
+	public int updateAll(List<MemberList> member);
 	
 	public List<String> getEmpId();
 
@@ -30,4 +31,8 @@ public interface MemberDAO {
 	public List<MemberLeave> listLeave();
 
 	public List<MemberSal> listSal();
+
+	public List<String> listPosi();
+
+	public List<HashMap<String, String>> listTeam();
 }

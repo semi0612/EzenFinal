@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="/css/add_member.css">
 <script src="/js/check_img.js"></script>
 <script src="/js/check_dept.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="content-wrapper">
 	<main>
 		<h2>직원추가</h2>
@@ -14,24 +15,13 @@
 				<!--부서목록-->
 				<select class="department-menu" name="emp_dept" id="dept">
 					<option value="none" hidden>부서목록</option>
-					<optgroup label="IT본부">
-						<option value="IT기획팀">IT기획팀</option>
-						<option value="개발1팀">개발1팀</option>
-						<option value="개발2팀">개발2팀</option>
-					</optgroup>
-
-					<optgroup label="경영지원 본부">
-						<option value="인사총무팀">인사총무팀</option>
-						<option value="재경팀">재경팀</option>
-						<option value="구매무역팀">구매무역팀</option>
-					</optgroup>
-
-					<optgroup label="생산본부">
-						<option value="공정안전팀">공정안전팀</option>
-						<option value="공정실행팀">공정실행팀</option>
-						<option value="생산1팀">생산1팀</option>
-						<option value="생산2팀">생산2팀</option>
-					</optgroup>
+						<c:forEach var="org" items="${orgList}"> <!-- org라는 HashMap<Key,Value> key : org_groupname, teamList -->
+							<optgroup label="${org.org_groupname}"> 
+								<c:forTokens var="team" items="${org.teamList}" delims="/"> <!--인사총무팀/재경팀/구매무역팀 -->
+									<option value="${team}" name="emp_dept">${team}</option>
+								</c:forTokens>
+							</optgroup>
+						</c:forEach>
 				</select> &nbsp;
 				<!--검색창-->
 				<!-- <form id='searchform'> -->
