@@ -26,7 +26,7 @@
                         <a href="#">
                             <li><em>근태관리</em></li>
                         </a>
-                        <a href="#">
+                        <a href="memberlist">
                             <li><em>직원정보관리</em></li>
                         </a>
                         <a href="#">

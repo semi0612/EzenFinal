@@ -1,10 +1,28 @@
 .vacation-request-form label{
+    margin-bottom: 5px;
     display: block;
     font-weight: 600;
     font-size: 20px;
     font-family: var(--font);
     width: 100px;
-    display: inline-block;
+}
+.q1 label, .q1 input{
+    width: 360px;
+}
+.q2, .q3{
+    display: inline-block !important;
+}
+.vacation-request-form form {
+    width: 800px;
+    margin: auto;
+}
+.except{
+	color:var(--base-color4);
+}
+
+.vacation-request-form{
+    margin:auto;
+    width:1000px;
 }
 .vacation-request-form .vac-q{
     display: block;
@@ -12,15 +30,16 @@
 }
 .vac-q select, .vac-q input{
     position: relative;
-    left: 13px;
-    width: 747px;
     height: 1.5em;
     border: 1.5px solid var(--base-color3);
     background: white;
 }
-
-.vac-q select{
-    height: 30px;
+.q4 input{
+    width: 750px;
+}
+.vac-q select {
+    width: 365px;
+    height: 25px;
 }
 .hiddenBtn{
     display: none;
@@ -51,8 +70,11 @@
 .vac-q.q5 {
     text-align: right;
     position: relative;
-    right: 110px;
     overflow: hidden;
+    width: 770px;
+}
+.q4 {
+    padding-left: 20px !important;
 }
 
 .fileName{
