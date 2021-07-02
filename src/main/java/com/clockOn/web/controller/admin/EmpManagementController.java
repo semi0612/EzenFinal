@@ -106,7 +106,7 @@ public class EmpManagementController {
 		Member member = new Member(emp_id, "", emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, null, null,	emp_sal, fileName, total_annday, 0);
 		int result = memberService.add(member);
 
-		return "empManagement.organization.memberList";
+		return "empManagement.empinfo.memberList";
 	}
 
 	@GetMapping("corrInfo")
