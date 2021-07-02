@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
- 뜨긴뜨나ㅡㅡ
- 아니 왜 안뜨는거야 진짜??????
+왜안떠!!!!!!!
+ <img src="/images/generated_photos_5f182ae61f67b00006852c42.jpg"/>
  
 </body>
 </html>

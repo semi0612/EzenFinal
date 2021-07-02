@@ -101,6 +101,7 @@ public class EmpManagementController {
 			realPath += File.separator + fileName;
 			File saveFile = new File(realPath);
 			emp_pic.transferTo(saveFile);
+			System.out.println(realPath);
 		}
 		
 		Member member = new Member(emp_id, "", emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, null, null,	emp_sal, fileName, total_annday, 0);

@@ -58,8 +58,6 @@ function readDate(target){
         target.style.background = 'transparent';
         target.style.color = 'var(--base-color)';
 
-        var str = "hello world";
-        str = str.replace("world", "stranger");
         input.value=document.getElementById('vac-period').value.replace(cdate,'');
     }
     else{

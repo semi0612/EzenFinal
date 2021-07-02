@@ -21,6 +21,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
 	<mvc:resources location="/static/" mapping="/**"/>
+	<mvc:resources mapping="/images/**" location="C:\Users\jeey0\Documents\workspace-spring-tool-suite-4-4.11.0.RELEASE\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\clockOn\static\upload" />
 	
 	<!-- 다중파일 업로드 -->
 	<bean id="multipartResolver"
