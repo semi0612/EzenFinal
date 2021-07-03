@@ -52,7 +52,7 @@ public class MemberServiceImplTest {
 		String id = "";
 		String teamCode = "";
 		//ºÎ¼­ÄÚµå[00-99]
-		int teamCode_ = orgDao.getTeamCode("°³¹ß1ÆÀ");
+		int teamCode_=0;/* = orgDao.getTeamCode("°³¹ß1ÆÀ"); */
 		if(teamCode_<10) teamCode="0"+teamCode_;
 		else teamCode = String.valueOf(teamCode_);
 		id +=teamCode;

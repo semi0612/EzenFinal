@@ -21,8 +21,9 @@ public interface OrgDAO {
 	//팀정보 수정
 	public int updateInfo(Organization org);
 	
-	//부서번호 리스트얻기 (직원추가 페이지에서 사용)
-	public int getTeamCode(String org_teamname);  
+	/*
+	 * //부서번호 리스트얻기 (직원추가 페이지에서 사용) public int getTeamCode(String org_teamname);
+	 */
 
 	/*조직도 수(팀수, 본부수)*/
 	public HashMap orgCount();

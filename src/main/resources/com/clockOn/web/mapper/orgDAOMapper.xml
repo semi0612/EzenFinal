@@ -28,11 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where emp_teamcode = #{org_teamcode}
 	</update>
 	
-	<!-- 수정될 수 있다. hashMap을 쓰는 방법 확실치 않음 -->
+<!--수정될 수 있다. hashMap을 쓰는 방법 확실치 않음
 	<select id="getTeamCode" parameterType="String" resultType="int">
 		select org_teamcode from organization 
 		where org_teamname = #{org_teamname}
-	</select>
+	</select> -->
 
 	<!-- 조직도 게시판 위에 본부,팀 갯수 값 불러오기 -->
 	<select id="orgCount" resultType="HashMap">
