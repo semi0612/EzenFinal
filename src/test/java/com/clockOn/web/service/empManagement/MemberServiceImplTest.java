@@ -26,6 +26,12 @@ public class MemberServiceImplTest {
     private MemberDAO memberDao;
 
 	@Test
+	public void getAuth() {
+		System.out.println(memberDao.read("068210").getAuth().get(0).getEmp_level()+memberDao.read("068210").getAuth().get(0).getEmp_id());
+		
+	}
+	
+	@Test
 	public void makePW() {
 		int charLen = 8;
 		final char[] charTable = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',

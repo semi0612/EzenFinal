@@ -30,12 +30,7 @@
 		<put-attribute name="body"	value="/WEB-INF/views/admin/timeRecord/{1}.jsp" />
 	</definition>
 
-<!-- 	<definition name="leaveReq.*" template="/WEB-INF/views/emp/inc/layout.jsp">
-		<put-attribute name="title" value="휴가요청" />
-		<put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/emp/inc/menu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/emp/leaveReq/{1}.jsp" />
-	</definition> -->
+
   <!-- 직원 -->
 	<definition name="emp.main"	template="/WEB-INF/views/emp/inc/layout.jsp">
 		<put-attribute name="title" value="홈" />

@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.clockOn.web.dao.MemberDAO;
-import com.clockOn.web.entity.Member;
+import com.clockOn.web.entity.member.Member;
 
 import lombok.extern.log4j.Log4j;
 

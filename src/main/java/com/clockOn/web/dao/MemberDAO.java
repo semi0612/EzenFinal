@@ -3,13 +3,14 @@ package com.clockOn.web.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import com.clockOn.web.entity.Member;
-import com.clockOn.web.entity.MemberLeave;
-import com.clockOn.web.entity.MemberList;
-import com.clockOn.web.entity.MemberSal;
+import com.clockOn.web.entity.member.Member;
+import com.clockOn.web.entity.member.MemberLeave;
+import com.clockOn.web.entity.member.MemberList;
+import com.clockOn.web.entity.member.MemberSal;
 
 
 public interface MemberDAO {
+	/*지율*/
 	public List list();
 
 	public int add(Member member);
@@ -19,8 +20,6 @@ public interface MemberDAO {
 	public int editInfo(Member member);
 
 	public int del(String emp_id);
-
-	public int updatePw(String emp_pw, String emp_id);
 
 	public int updateAll(List<MemberList> member);
 	
@@ -35,4 +34,13 @@ public interface MemberDAO {
 	public List<String> listPosi();
 
 	public List<HashMap<String, String>> listTeam();
+	
+	/*정연님 level 처리 확인하기(테이블 합쳤음)*/
+	public Member read(String emp_id);
+	
+	public List<Member> contactsRead(String org_teamname);
+	
+	/*예슬님*/   
+	public int infoUpdate(Member member);
+	   
 }

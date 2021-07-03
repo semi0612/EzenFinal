@@ -43,10 +43,10 @@
 			<c:forEach var="list" items="${list}">
 					<c:set var="mgr" value=""/>
 					<c:set var="emp" value=""/>
-					<c:if test="${list.emp_level=='1'}">
+					<c:if test="${list.emp_level=='ROLE_ADMIN'}">
 						<c:set var="mgr" value="selected"/>
 					</c:if>
-					<c:if test="${list.emp_level!='1'}">
+					<c:if test="${list.emp_level!='ROLE_ADMIN'}">
 						<c:set var="emp" value="selected"/>
 					</c:if>
 				<tr>
@@ -73,8 +73,8 @@
 					<td><input type="tel" name="emp_tel" id="tel" value="${list.emp_tel}" ></td>
 					<td><input type="email" name="emp_email" id="email" value="${list.emp_email}"></td>
 					<td><select name="emp_level">
-						<option value="1" ${mgr}>관리자</option>
-						<option value="0" ${emp}>직원</option>							
+						<option value="ROLE_ADMIN" ${mgr}>관리자</option>
+						<option value="ROLE_MEMBER" ${emp}>직원</option>							
 						</select>
 					</td>
 				</tr>

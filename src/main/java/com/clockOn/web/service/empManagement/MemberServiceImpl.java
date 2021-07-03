@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 
 import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.dao.OrgDAO;
-import com.clockOn.web.entity.Member;
-import com.clockOn.web.entity.MemberLeave;
-import com.clockOn.web.entity.MemberList;
-import com.clockOn.web.entity.MemberSal;
+import com.clockOn.web.entity.member.Member;
+import com.clockOn.web.entity.member.MemberLeave;
+import com.clockOn.web.entity.member.MemberList;
+import com.clockOn.web.entity.member.MemberSal;
 
 import lombok.Setter;
 
@@ -140,11 +140,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int edit(String emp_id) {
-		return 0;
-	}
-
-	@Override
 	public int del(String emp_id) {
 		return 0;
 	}
@@ -192,6 +187,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<HashMap<String, String>> listTeam() {
 		return memberDao.listTeam();
+	}
+	/*직원아이디로 직원정보 불러오기*/
+	@Override
+	public Member read(String emp_id) {
+		return memberDao.read(emp_id); /*null로 되어 있어 확인필요*/
+	}
+
+	/*개인정보수정*/
+	@Override
+	public int infoUpdate(Member member) { //서비스 //MemberMapper
+		member.setEmp_pw(pwencoder.encode(member.getEmp_pw()));
+		return memberDao.infoUpdate(member);
+
+	}
+
+	@Override
+	public List<Member> contactsRead(String org_teamname) {
+		return memberDao.contactsRead(org_teamname);
 	}
 
 }

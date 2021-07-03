@@ -7,10 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.clockOn.web.entity.Member;
-import com.clockOn.web.entity.MemberLeave;
-import com.clockOn.web.entity.MemberList;
-import com.clockOn.web.entity.MemberSal;
+import com.clockOn.web.entity.member.Member;
+import com.clockOn.web.entity.member.MemberLeave;
+import com.clockOn.web.entity.member.MemberList;
+import com.clockOn.web.entity.member.MemberSal;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -23,7 +23,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDAOImpl(SqlSession sqlSession) {
 		mapper = sqlSession.getMapper(MemberDAO.class);
 	}
-
+	
 	@Override
 	public List list() {
 		return mapper.list();
@@ -32,6 +32,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int add(Member member) {
 		return mapper.add(member);
+	}
+
+	@Override
+	public int count() {
+		return mapper.count();
 	}
 
 	@Override
@@ -45,15 +50,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int updatePw(String emp_pw, String emp_id) {
-		return mapper.updatePw(emp_pw, emp_id);
+	public int updateAll(List<MemberList> member) {
+		return mapper.updateAll(member);
 	}
 
-	@Override
-	public int updateAll(List<MemberList> memberList) {
-		return mapper.updateAll(memberList);
-	}
-	
 	@Override
 	public List<String> getEmpId() {
 		return mapper.getEmpId();
@@ -75,11 +75,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int count() {
-		return mapper.count();
-	}
-
-	@Override
 	public List<String> listPosi() {
 		return mapper.listPosi();
 	}
@@ -87,6 +82,21 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<HashMap<String, String>> listTeam() {
 		return mapper.listTeam();
+	}
+
+	@Override
+	public Member read(String emp_id) {
+		return mapper.read(emp_id);
+	}
+
+	@Override
+	public List<Member> contactsRead(String org_teamname) {
+		return mapper.contactsRead(org_teamname);
+	}
+
+	@Override
+	public int infoUpdate(Member member) {
+		return mapper.infoUpdate(member);
 	}
 
 }
