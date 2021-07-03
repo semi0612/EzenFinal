@@ -58,7 +58,8 @@ public class MemberServiceImpl implements MemberService {
 		String id = "";
 		String teamCode = "";
 		//부서코드[00-99]
-		int teamCode_ = orgDao.getTeamCode(member.getEmp_dept());
+//		int teamCode_ = orgDao.getTeamCode(member.getEmp_dept());
+		int teamCode_ = Integer.parseInt(member.getEmp_dept());
 		if(teamCode_<10) teamCode="0"+teamCode_;
 		else teamCode = String.valueOf(teamCode_);
 		id +=teamCode;

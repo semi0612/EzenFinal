@@ -6,7 +6,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="list"
 		resultType="com.clockOn.web.entity.member.Member">
-		select * from employee order by emp_name
+		select emp_id, emp_pw, emp_name, emp_email, emp_tel, org_teamname as emp_dept,
+			emp_posi, emp_level, emp_join, emp_resi, emp_sal, emp_pic, total_annday, annday_used
+		from employee e join organization o on e.emp_dept=o.org_teamcode 
+		order by emp_name;
 	</select>
 	
 	<select id="count" resultType="int">
@@ -14,16 +17,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="listView" resultType ="com.clockOn.web.entity.member.MemberList">
-		select o.org_groupname, emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level from employee e join organization o on e.emp_dept=o.org_teamname order by o.org_groupname;	
+		select o.org_groupname, o.org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level from employee e join organization o on e.emp_dept=o.org_teamcode order by o.org_groupname;	
 	</select>
 	
 	<select id="listLeave" resultType="com.clockOn.web.entity.member.MemberLeave">
-		select emp_dept, emp_id, emp_name, emp_posi, total_annday, annday_used, (total_annday-annday_used) as annday_rest, emp_join, emp_resi from employee order by emp_dept;	
+		select org_teamname as emp_dept, emp_id, emp_name, emp_posi, total_annday, annday_used, (total_annday-annday_used) as annday_rest, emp_join, emp_resi from employee e join organization o on e.emp_dept = o.org_teamcode order by emp_dept;
 	</select>
 	
 	<select id="listSal" resultType="com.clockOn.web.entity.member.MemberSal">
-		select org_groupname, emp_dept, emp_id, emp_name, emp_posi, emp_sal, cast(floor(emp_sal/12) as char) as emp_pay, emp_join, emp_resi from employee e 
-		inner join organization o on o.org_teamname = e.emp_dept;
+		select org_groupname, org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_sal,
+			cast(floor(emp_sal/12) as char) as emp_pay, emp_join, emp_resi from employee e 
+		inner join organization o on o.org_teamcode = e.emp_dept;
 	</select>
 	<insert id="add" parameterType="com.clockOn.web.entity.member.Member">
 		insert into employee(emp_id, emp_pw, emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, emp_sal, emp_pic, total_annday) 
@@ -92,10 +96,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<resultMap type="com.clockOn.web.entity.member.Member" id="memberMap">
-		<!-- <result property="emp_id" column="emp_id" /> 주석처리할지말지 추후결정
-		<result property="emp_pw" column="emp_pw" />
-		<result property="emp_name" column="emp_name" />
-		<result property="emp_level" column="emp_level" /> -->
 		<collection property="auth" resultMap="authMap">
 		</collection>
 	</resultMap>
@@ -105,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </select>
 	
    <select id="contactsRead" parameterType="String" resultType="com.clockOn.web.entity.member.Member">
-      select emp_name, emp_dept, emp_posi, emp_email, emp_tel, emp_pic from employee emp JOIN organization org on emp.emp_dept = org.org_teamname where emp.emp_dept = #{org_teamname};    
+      select emp_name, org_teamname as emp_dept, emp_posi, emp_email, emp_tel, emp_pic from employee emp JOIN organization org on emp.emp_dept = org.org_teamcode where org.org_teamname = #{org_teamname}
    </select>
    <!-- 예슬님 -->
    <update id="infoUpdate" parameterType="com.clockOn.web.entity.member.Member">
