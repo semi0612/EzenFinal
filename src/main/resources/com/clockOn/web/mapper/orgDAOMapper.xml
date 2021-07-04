@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clockOn.web.dao.OrgDAO"> <!-- 인터페이스명 정확하게 적어야 한다. -->
+
+    <select id="list"
+      resultType="com.clockOn.web.entity.Organization"> <!-- 리스트인지 객체인지는 구분하지 않는다. 전부 객체로 적어줌 -->
+      select * from organization order by org_teamcode
+   </select> 
+        
+   <insert id="add" parameterType="com.clockOn.web.entity.Organization">
+      insert into organization(org_groupname, org_teamname, org_teamtel, org_content) 
+      values(#{org_groupname},#{org_teamname},#{org_teamtel}, #{org_content});
+   </insert>
+   
+   <delete id="del" parameterType="int">
+      delete from organization where org_teamcode=#{org_teamcode}
+   </delete> <!-- 사실 이건 제약조건 걸려있는 테이블도 모두 먼저 건드려야 해서 코드 추가되어야 함 employee테이블 -->
+   
+   <update id="updateInfo" parameterType="com.clockOn.web.entity.Organization">
+      update organization 
+      set 
+         org_groupname = #{org_groupname},
+         org_teamname = #{org_teamname},
+         org_teamtel = #{org_teamtel},
+         org_content = #{org_content} 
+      where emp_teamcode = #{org_teamcode}
+   </update>
+   
+<!--수정될 수 있다. hashMap을 쓰는 방법 확실치 않음
+   <select id="getTeamCode" parameterType="String" resultType="int">
+      select org_teamcode from organization 
+      where org_teamname = #{org_teamname}
+   </select> -->
+
+   <!-- 조직도 게시판 위에 본부,팀 갯수 값 불러오기 -->
+   <select id="orgCount" resultType="HashMap">
+      select count(distinct org_groupname) as groupcount, count(distinct org_teamname) as teamcount from organization;
+   </select>
+</mapper>

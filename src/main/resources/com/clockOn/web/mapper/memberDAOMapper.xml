@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clockOn.web.dao.MemberDAO"> <!-- 인터페이스명 정확하게 적어야 한다. -->
+
+   <select id="list"
+      resultType="com.clockOn.web.entity.member.Member">
+      select emp_id, emp_pw, emp_name, emp_email, emp_tel, org_teamname as emp_dept,
+         emp_posi, emp_level, emp_join, emp_resi, emp_sal, emp_pic, total_annday, annday_used
+      from employee e join organization o on e.emp_dept=o.org_teamcode 
+      order by emp_name;
+   </select>
+   
+   <select id="count" resultType="int">
+      select count(emp_id) from employee
+   </select>
+   
+   <select id="listView" resultType ="com.clockOn.web.entity.member.MemberList">
+      select o.org_groupname, o.org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level from employee e join organization o on e.emp_dept=o.org_teamcode order by o.org_groupname;   
+   </select>
+   
+   <select id="listLeave" resultType="com.clockOn.web.entity.member.MemberLeave">
+      select org_teamname as emp_dept, emp_id, emp_name, emp_posi, total_annday, annday_used, (total_annday-annday_used) as annday_rest, emp_join, emp_resi from employee e join organization o on e.emp_dept = o.org_teamcode order by emp_dept;
+   </select>
+   
+   <select id="listSal" resultType="com.clockOn.web.entity.member.MemberSal">
+      select org_groupname, org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_sal,
+         cast(floor(emp_sal/12) as char) as emp_pay, emp_join, emp_resi from employee e 
+      inner join organization o on o.org_teamcode = e.emp_dept;
+   </select>
+   <insert id="add" parameterType="com.clockOn.web.entity.member.Member">
+      insert into employee(emp_id, emp_pw, emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, emp_sal, emp_pic, total_annday) 
+      values(#{emp_id}, #{emp_pw}, #{emp_name}, #{emp_email}, #{emp_tel}, #{emp_dept}, #{emp_posi}, #{emp_level}, #{emp_sal}, #{emp_pic}, #{total_annday})
+   </insert>
+   <delete id="del" parameterType="String">
+      delete from employee where id=#{emp_id}
+   </delete>
+   <!-- update: 관리자 - 직원정보update 직원 - password update, 직원정보 update -->
+   <update id="editInfo" parameterType="com.clockOn.web.entity.member.Member">
+      update employee 
+      set 
+         emp_email = #{emp_email},
+         emp_pic = #{emp_pic},
+         emp_pw = #{emp_pw}, 
+      where emp_id = #{emp_id}
+   </update>
+   
+   <update id="updatePw" parameterType="String">
+      update employee 
+      set 
+         emp_pw = #{emp_pw} 
+      where emp_id = #{emp_id}
+   </update>
+   <update id="updateInfo" parameterType="com.clockOn.web.entity.member.MemberList">
+      update employee 
+      set 
+         emp_name = #{emp_name},
+         emp_tel = #{emp_tel},
+         emp_dept = #{emp_dept},
+         emp_posi = #{emp_posi},
+         emp_email = #{emp_email},
+         emp_level = #{emp_level},
+      where emp_id = #{emp_id}
+         <!--annday_used = #{annday_used} where   혹시라도 나중에 연차 사용 취소할 경우 위해 열어둠..?? -->
+   </update>
+   <select id="getEmpId" resultType="String">
+      select emp_id from employee;
+   </select>
+   <select id="listPosi" resultType="String">
+      select distinct emp_posi from employee;
+   </select>
+
+   <update id="updateAll" parameterType="com.clockOn.web.entity.member.MemberList">
+      <foreach item="info" collection="list" separator=";">
+         update employee
+         <set> emp_dept = #{info.emp_dept}, emp_name = #{info.emp_name}, emp_posi = #{info.emp_posi}, emp_tel = #{info.emp_tel}, emp_email = #{info.emp_email}, emp_level = #{info.emp_level} </set>
+         where emp_id = #{info.emp_id}
+      </foreach>
+   </update>
+   
+   <!-- 본부명을 Key값으로 가지는  해쉬맵생성-->
+   <select id="listTeam" resultType="HashMap">
+      select org_groupname, group_concat(org_teamname separator '/') as teamList from organization group by org_groupname;
+   </select>
+   
+   <!-- 정연님꺼 시작 -->
+   <!--직원 id로 직원정보 가져오기 SelectOne-->
+<!--    <select id="read" resultType="com.clockOn.web.entity.member.Member">
+      SELECT * from employee WHERE emp_id = #{emp_id}
+   </select> -->
+   
+   <resultMap type="com.clockOn.web.entity.member.Auth" id="authMap">
+      <result property="emp_id" column="emp_id" />
+      <result property="emp_level" column="emp_level" />
+   </resultMap>
+
+   <resultMap type="com.clockOn.web.entity.member.Member" id="memberMap">
+      <collection property="auth" resultMap="authMap">
+      </collection>
+   </resultMap>
+   
+   <select id="read" resultMap="memberMap" parameterType="String">
+      SELECT emp_id, emp_pw, emp_name, emp_level from employee where emp_id = #{emp_id}
+   </select>
+   
+   <select id="contactsRead" parameterType="String" resultType="com.clockOn.web.entity.member.MemberProfile">
+      select emp_name, org_teamname as emp_dept, emp_posi, emp_email, emp_tel, emp_pic from employee emp JOIN organization org on emp.emp_dept = org.org_teamcode where org.org_teamname = #{org_teamname}
+   </select>
+   
+   <select id="profile" parameterType="String" resultType="com.clockOn.web.entity.member.MemberProfile">
+     select org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_pic from employee emp JOIN organization org on emp.emp_dept = org.org_teamcode where emp_id = #{emp_id}
+   </select>
+   
+   
+   <!-- 예슬님 -->
+   <update id="infoUpdate" parameterType="com.clockOn.web.entity.member.Member">
+      update employee
+      		set 
+     	 	emp_pw=#{emp_pw}, 
+	      	emp_email=#{emp_email}, 
+	      	<if test='emp_pic!=null and emp_pic!=""'>
+	      	emp_pic=#{emp_pic}, <!-- 동적쿼리로 만들어야함 --> 
+	      	</if>
+	      	emp_tel=#{emp_tel}
+      	where emp_id=#{emp_id}
+    </update>
+</mapper>
