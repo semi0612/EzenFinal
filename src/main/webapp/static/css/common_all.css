@@ -1,31 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
-:root {  /*사용할 때는 var(--bg-color), var(--font)로 색상명, 폰트명 바로 대체하면 됨*/
-    --bg-color: whitesmoke;/*배경색*/ 
-    --imp-color: #0c4c77; /*강조 진한 파랑색*/
-    --imp-color2:#3498db; /*강조 연한 파랑색*/
-    --base-color:#333; /*기본 검정색, 글자색*/
+:root {  /*�궗�슜�븷 �븣�뒗 var(--bg-color), var(--font)濡� �깋�긽紐�, �룿�듃紐� 諛붾줈 ��泥댄븯硫� �맖*/
+    --bg-color: whitesmoke;/*諛곌꼍�깋*/ 
+    --imp-color: #0c4c77; /*媛뺤“ 吏꾪븳 �뙆�옉�깋*/
+    --imp-color2:#3498db; /*媛뺤“ �뿰�븳 �뙆�옉�깋*/
+    --base-color:#333; /*湲곕낯 寃��젙�깋, 湲��옄�깋*/
     --base-color1:rgb(94, 94, 94);
-    --base-color2: #7f858e; /*기본 회색, 아이콘 등*/
-    --base-color3: #c5c7c9; /*옅은 회색, 버튼 등*/
-    --base-color4:lightgray; /*연한회색*/
+    --base-color2: #7f858e; /*湲곕낯 �쉶�깋, �븘�씠肄� �벑*/
+    --base-color3: #c5c7c9; /*�쁾�� �쉶�깋, 踰꾪듉 �벑*/
+    --base-color4:lightgray; /*�뿰�븳�쉶�깋*/
     --warn-color:#C0392B;
-    --font: 'Noto Sans KR';/*폰트 정의*/ 
+    --font: 'Noto Sans KR';/*�룿�듃 �젙�쓽*/ 
 }
-/*소제목 제외 컨텐츠 랩퍼*/
+/*�냼�젣紐� �젣�쇅 而⑦뀗痢� �옪�띁*/
 .main-wrapper { margin: 50px 80px; }
 
-/*여백 삭제, 기본 글씨색 설정*/
+/*�뿬諛� �궘�젣, 湲곕낯 湲��뵪�깋 �꽕�젙*/
 body {margin:0;padding:0; color:var(--base-color);}
 
-/*기본글씨체 설정*/
+/*湲곕낯湲��뵪泥� �꽕�젙*/
 *{ font-family: var(--font), sans-serif; user-select: none;}
 
-/*li 불릿 제거*/
+/*li 遺덈┸ �젣嫄�*/
 ul li{ list-style: none;}
 
-/*a태그 밑줄 없애기 */
+/*a�깭洹� 諛묒쨪 �뾾�븷湲� */
 a {
+	color: black;
     cursor: pointer;
     text-decoration: none;
 }

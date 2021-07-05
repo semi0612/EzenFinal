@@ -5,7 +5,7 @@
 	  
  <nav class="menubar emp" onmouseover="content_flow()" onmouseout="content_flow2()">
         <ul>
-            <a href="#">
+            <a href="/emp/main">
                 <li class="menu"><i class="fas fa-home"></i> <em>홈</em></li>
             </a>
             <div class="menus" onmouseleave="undo(this)">

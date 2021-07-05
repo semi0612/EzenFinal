@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,11 +61,10 @@ public class EmpController {
 	 */
 	
 	@GetMapping("infoUpdate") //보여줄 때
-	public String infoUpdate() {
-
+	public String infoUpdate(String emp_id, Model model) {
+		model.addAttribute("updateProfile", memberService.profile(emp_id));
 		return "emp.infoUpdate";
 	}
-
 	
 	@PostMapping("infoUpdate") //처리할 때 (form action) 
 	public String infoUpdate(String emp_id, String emp_pw, String emp_email, String emp_tel, MultipartFile emp_pic) throws IllegalStateException, IOException {

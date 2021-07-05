@@ -14,8 +14,8 @@ public class Test {
 		// 오름차순으로 정렬
 		Collections.sort(list);
 		System.out.println("오름차순 : " + list); // [A, B, C, a]
-		String[] m = new String[(arr.length-1)];
-		String[] d = new String[(arr.length-1)];
+		String[] m = new String[(arr.length)];
+		String[] d = new String[(arr.length)];
 		for(int i=1; i<list.size(); i++) {
 			m[i] = list.get(i).split("/")[0];
 			d[i] = list.get(i).split("/")[1];
