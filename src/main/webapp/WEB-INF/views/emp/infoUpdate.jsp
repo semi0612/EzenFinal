@@ -15,7 +15,7 @@
             <!--직원이미지 입력폼-->
             <div class="member-images">
                <div class="member-image">
-                  <img id="preview" src="/images/thumbnail.png" alt="image">
+                  <img id="preview" src="/images/${updateProfile.emp_pic}" alt="image">
                </div>
                <input type="file" name="emp_pic" id="empPic" accept="image/*"
                   style="display: none; apperance: none; -webkit-apperance: none;">
@@ -30,11 +30,12 @@
                </div>
                <div class="member-input">
                   <input type="text" name="emp_id" class="text-input"
-                     value="<sec:authentication property="principal.member.emp_id" />">
+                  	 readonly="readonly"
+                     value="${updateProfile.emp_id}">
                   &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                   &nbsp;&nbsp; &nbsp; <input type="text" class="text-input"
                      readonly="readonly"
-                     value="<sec:authentication property="principal.member.emp_name" />">
+                     value="${updateProfile.emp_name}">
                </div>
 
                <div class="member-head">
@@ -44,11 +45,11 @@
 
                <div class="member-input">
                   <input type="text" class="text-input" readonly="readonly"
-                     value="<sec:authentication property="principal.member.emp_dept" />">
+                     value="${updateProfile.emp_dept}">
                   &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                   &nbsp;&nbsp; &nbsp; <input type="text" class="text-input"
                      readonly="readonly"
-                     value="<sec:authentication property="principal.member.emp_posi" />">
+                     value="${updateProfile.emp_posi}">
                </div>
 
 
@@ -74,11 +75,11 @@
 
                <div class="member-input">
                   <input type="text" class="text-input" name="emp_email"
-                     value="<sec:authentication property="principal.member.emp_email" />">
+                     value="${updateProfile.emp_email}">
                   &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                   &nbsp;&nbsp; &nbsp; 
                   <input type="text" class="text-input" name="emp_tel"
-                     value="<sec:authentication property="principal.member.emp_tel" />">
+                     value="${updateProfile.emp_tel}">
                </div>
                <button class="update-button" type="submit" onclick="return checkPw()">수정하기</button>
             </div>

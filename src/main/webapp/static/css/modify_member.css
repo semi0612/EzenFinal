@@ -97,3 +97,12 @@
   background-color: var(--imp-color);
 }
 
+.addbutton-three {
+  color: var(--bg-color); 
+  background-color: var(--imp-color2); 
+  height: 35px; 
+  float: right;
+  margin-right: 20px;
+}
+.addbutton-three:hover {background-color: var(--imp-color);}
+
