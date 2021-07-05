@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -45,10 +47,13 @@ public class VacReqController {
 	public void sendReq(String period, String kind, String reason, MultipartFile file, HttpServletResponse response, HttpSession session) throws IllegalStateException, IOException {
 		/*휴가 기간 처리*/
 		String[] p = period.split(" ");
+		ArrayList<String> list = new ArrayList<>(Arrays.asList(p));
+		// 오름차순으로 정렬 [(n), 1, 2, 3, ...]
+		Collections.sort(list);
 		String[] m = new String[(p.length-1)];
 		String[] d = new String[(p.length-1)];
 		/*월, 일 쪼개서 배열에 저장*/
-		for(int i=0; i<p.length-1; i++) {
+		for(int i=1; i<p.length; i++) {
 			m[i] = p[i].split("/")[0];
 			d[i] = p[i].split("/")[1];
 		}
@@ -59,7 +64,7 @@ public class VacReqController {
 		
 		
 		//완성되면 List에 추가
-		List<String[]> list = new ArrayList<String[]>();
+//		List<String[]> list = new ArrayList<String[]>();
 		
 		
 		

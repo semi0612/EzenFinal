@@ -13,5 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			total_annday, annday_used, total_annday-annday_used as annday_rest, emp_join, emp_resi 
 		from employee e join organization o on e.emp_dept = o.org_teamcode;
 	</select>
+	
+	<insert id="" parameterType="com.clockOn.web.entity.vacation.Vacation">
+		insert into holiday(holi_start, holi_end, holi_res, holi_code, holi_evi, emp_id) values('2021-07-12','2021-07-15','여름휴가','연차','결재.jpg','072210');
+	</insert>
 
 </mapper>
