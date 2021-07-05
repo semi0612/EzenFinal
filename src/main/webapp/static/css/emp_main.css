@@ -88,19 +88,23 @@ background-color: var(--base-color4);
   width: 588px;
 }
 
+
+
 .hi-button {
   color: var(--bg-color);
   background-color: var(--imp-color2);
   margin-left: 20px;
   margin-top : 20px;
-  width: 150px;	
+  width: 120px;
+  font-size: 14px;
 }
 
 .bye-button {
   color: var(--bg-color);
-  background-color: var(--base-color1);
-  width: 150px;
-  margin-top : 20px;	
+  background-color: var(--base-color2);
+  width: 120px;
+  margin-top : 20px;
+  font-size: 14px;
 }
 
 .hi-button:hover {
@@ -108,5 +112,5 @@ background-color: var(--base-color4);
 }
 
 .bye-button:hover {
-  background-color: var(--imp-color);
+  background-color: var(--base-color);
 }

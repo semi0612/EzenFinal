@@ -19,6 +19,7 @@ import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
 import com.clockOn.web.service.empManagement.MemberService;
+import com.clockOn.web.service.vacation.LeaveService;
 
 import lombok.Setter;
 
@@ -35,17 +36,25 @@ public class EmpController {
 	private MemberService memberService;
 	
 	@Autowired
+	private LeaveService leaveService;
+	
+	@Autowired
 	private ServletContext ctx;
 	
 	@GetMapping("main")
-	public String emp_main(Principal principal, HttpSession session) {
+	public String emp_main(Principal principal, HttpSession session, Model model) {
+		String username = principal.getName();
+		model.addAttribute("annday", leaveService.getVacinfo(username));
+		System.out.println(username);
 		if(session.getAttribute("level")==null) {
-			String username = principal.getName();
+			
 			Member member= memberMapper.read(username);
 	        session.setAttribute("level", member.getEmp_level());
 	        session.setAttribute("id", member.getEmp_id());
 	        session.setAttribute("name", member.getEmp_name());
 		}
+		
+		
 		
 		return "emp.main";
 	}

@@ -28,7 +28,7 @@
 					<!-- 권한이 관리자 이면서 status = emp_mode(직원모드) 일때  -->
 					<c:if test="${level eq 'ROLE_ADMIN' && status eq 'emp_mode'}">
 					
-					<li class="link"><a href="/emp/infoUpdate?emp_id=<sec:authentication property='principal.member.emp_id' />" class="dropdown-item" style="text-decoration: none; color: black;"><i class="fas fa-user-alt"></i> 계정 설정 </a></li>
+					<li class="link"><a href="/emp/infoUpdate?emp_id=<sec:authentication property='principal.member.emp_id' />" class="dropdown-item"><i class="fas fa-user-alt"></i> 계정 설정 </a></li>
 					<li class="dropdown-divider"></li>
 					<li class="link"><a onclick="document.getElementById('to_admin').submit();" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> 관리자 모드로 전환 </a></li>
 							
@@ -36,7 +36,7 @@
 					<!-- 권한이 멤버일때  -->
 					<c:if test="${level eq 'ROLE_MEMBER'}">
 					
-					<li class="link"><a href="/emp/infoUpdate?emp_id=<sec:authentication property='principal.member.emp_id' />" class="dropdown-item" style="text-decoration: none; color: black;"><i class="fas fa-user-alt"></i> 계정 설정 </a></li>
+					<li class="link"><a href="/emp/infoUpdate?emp_id=<sec:authentication property='principal.member.emp_id' />" class="dropdown-item"><i class="fas fa-user-alt"></i> 계정 설정 </a></li>
 					<li class="dropdown-divider"></li>
 							
 					</c:if>		

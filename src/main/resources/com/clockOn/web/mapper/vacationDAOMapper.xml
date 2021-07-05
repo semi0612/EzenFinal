@@ -2,9 +2,12 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.clockOn.web.dao.vacationDAO">
+<mapper namespace="com.clockOn.web.dao.VacationDAO">
 
 
-
+<!-- 직원 총연차, 남은연차 얻기 -->
+<select id="getVacInfo" resultType="com.clockOn.web.entity.vacation.Annday" parameterType="String">
+      select total_annday, annday_used, total_annday-annday_used as annday_rest from employee where emp_id = #{emp_id};
+</select>
 
 </mapper>

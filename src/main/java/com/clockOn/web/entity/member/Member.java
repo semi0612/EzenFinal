@@ -67,6 +67,8 @@ public class Member{
       this.emp_level = emp_level;
 //      this.auth.add(new Auth(emp_id, emp_level));
    }
+   
+   
 
 
 

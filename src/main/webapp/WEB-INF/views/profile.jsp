@@ -22,6 +22,7 @@
 				</div>
 				<!--직원정보 입력폼-->
 				<div class="member-data">
+				<p><a href="/emp/infoUpdate?emp_id=<sec:authentication property='principal.member.emp_id' />" class="goUpdate-button">수정하기</a></p>
 					<div class="member-container">
 						<div class="member-name">
 							<h4>이름</h4>

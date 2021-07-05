@@ -37,7 +37,8 @@ public class RootController {
 		log.info("logout: " + logout);
 
 		if(error != null) {
-			model.addAttribute("error", "Login Error Check Your Account");
+			model.addAttribute("error", "사번과 비밀번호를 확인해주세요.");
+			model.addAttribute("url", "/index");
 
 		}
 	

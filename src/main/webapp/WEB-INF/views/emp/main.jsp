@@ -6,7 +6,7 @@
    prefix="sec"%>    
 <link rel="stylesheet" href="/css/emp_main.css">
 <div class="content-wrapper">
-<sec:authentication property="principal.member.emp_id" var="id"/>
+	<sec:authentication property="principal.member.emp_id" var="id"/>
 	<sec:authentication property="principal.member.emp_pw" var="pw"/>
 	<sec:authentication property="principal.member.emp_name" var="name"/>
 	<sec:authentication property="principal.member.emp_level" var="level"/>
@@ -17,14 +17,14 @@
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
 	<main>
-		<c:out value="${level}" />
+		
 	
 		<h2><%= sf.format(nowTime) %></h2>
 		<div class="main-wrapper">
 		
 			<h3 class="commute-title">출·퇴근 요청</h3>
-			<button class="hi-button" type="submit" onclick="return checkPw()">출근</button>
-			<button class="bye-button" type="submit" onclick="return checkPw()">퇴근</button>
+			<button class="hi-button" type="submit" onclick="return checkPw()">출&nbsp;근</button>
+			<button class="bye-button" type="submit" onclick="return checkPw()">퇴&nbsp;근</button>
 			<h3 class="work-title">나의 근로 통계</h3>
 			<table class="tbl-work">
                     <tr>
@@ -54,22 +54,18 @@
                         <th>총</th>
                         <th>사용</th>
                         <th>잔여</th>
-                        
+                        <th>비고</th>
                     </tr>
                     
                     <tr>
                         <td>연차</td>
-                        <td><sec:authentication property="principal.member.total_annday" /></td>
-                        <td><sec:authentication property="principal.member.annday_used" /></td>
+                        <td>${annday.total_annday}</td>
+                        <td>${annday.annday_used}</td>
+                        <td>${annday.annday_rest}</td>
                         <td></td>  
                     </tr>
                     
-                    <tr>
-                        <td>병가</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>  
-                    </tr>
+                    
                     
                     
                     

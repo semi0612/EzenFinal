@@ -6,11 +6,12 @@
 <head>
 <link rel="stylesheet" href="/css/login.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+<title>ClockOn Login</title>
 </head>
 <body>
 
-<h2><c:out value="${error}" /></h2>
- <h2><c:out value="${logout}" /></h2>
+
+ 
 <div class="container">
    <div class="wrapper">
       <div class="title">
@@ -35,6 +36,17 @@
             <a href="#">신규직원은 여기를 눌러주세요.</a>
          </div>
          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+         
+         <c:if test="${not empty error}">
+         	
+         	<script type="text/javascript">
+				var error = "${error}";
+				var url = "${url}";
+				alert(error);
+				
+			</script>
+
+         </c:if>
          
       </form>
    </div>
