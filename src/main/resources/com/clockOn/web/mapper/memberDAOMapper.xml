@@ -104,11 +104,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       SELECT emp_id, emp_pw, emp_name, emp_level from employee where emp_id = #{emp_id}
    </select>
 	
-   <select id="contactsRead" parameterType="String" resultType="com.clockOn.web.entity.member.Member">
+   <select id="contactsRead" parameterType="String" resultType="com.clockOn.web.entity.member.MemberProfile">
       select emp_name, org_teamname as emp_dept, emp_posi, emp_email, emp_tel, emp_pic from employee emp JOIN organization org on emp.emp_dept = org.org_teamcode where org.org_teamname = #{org_teamname}
    </select>
+      
+   <select id="profile" parameterType="String" resultType="com.clockOn.web.entity.member.MemberProfile">
+     select org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_pic from employee emp JOIN organization org on emp.emp_dept = org.org_teamcode where emp_id = #{emp_id}
+   </select>
+   
    <!-- 예슬님 -->
    <update id="infoUpdate" parameterType="com.clockOn.web.entity.member.Member">
-      update employee set emp_pw=#{emp_pw}, emp_email=#{emp_email}, emp_tel=#{emp_tel}, emp_pic=#{emp_pic} where emp_id=#{emp_id}
+      update employee
+      		set 
+     	 	emp_pw=#{emp_pw}, 
+	      	emp_email=#{emp_email}, 
+	      	<if test='emp_pic!=null and emp_pic!=""'>
+	      	emp_pic=#{emp_pic}, <!-- 동적쿼리로 만들어야함 --> 
+	      	</if>
+	      	emp_tel=#{emp_tel}
+      	where emp_id=#{emp_id}
     </update>
 </mapper>

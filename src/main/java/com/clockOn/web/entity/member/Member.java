@@ -25,6 +25,7 @@ public class Member{
 	private int annday_used;
 	private List<Auth> auth; 
 
+
 	
     public Member(String emp_id, String emp_pw, String emp_name, String emp_email, String emp_tel, String emp_dept, String emp_posi, 
             String emp_level, Date emp_join, Date emp_resi, String emp_sal, String emp_pic, int total_annday, int annday_used){

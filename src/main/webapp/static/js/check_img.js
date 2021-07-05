@@ -11,6 +11,17 @@ function checkImg() {
 	else return false;
 }
 
+function checkEvi() {
+	var imgname = document.getElementById('vac-prove').value;
+	if (imgname == "") {
+		alert("이미지를 첨부해주세요.");
+		return false;
+	}
+	return true;
+}
+
+
+
 
 /**
  * 이미지 확장자 검사 & 리스너 등록 → 프리뷰 구현 */

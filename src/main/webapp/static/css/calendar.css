@@ -6,12 +6,11 @@
     margin: 20px;
 }
 body {
-/*padding과 margin을 없애고 body태그 전체에 배경색과 폰트를 넣어줍니다.*/ 
     padding: 0; margin: 0; background-color: var(--bg-color); 
     font-family: var(--font); 
 }
 
-button { /*버튼에는 따로 폰트를 적용시켜줘야됩니다. 테두리선을 없애고 적당히 높이를 지정해줍시다. */ 
+button {  
     font-family: var(--font);
     border:none;
     height: 32px; 
@@ -20,26 +19,18 @@ button { /*버튼에는 따로 폰트를 적용시켜줘야됩니다. 테두리�
     display: flex;
     font-size: 48px;
     justify-content: center;
-    /* justify-content: space-around;아이템들을 일정한 간격으로 벌려 배치합니다.  */
     align-items: center; 
     padding-bottom: 12px; 
     margin: 12px 24px 12px 24px; 
-    border-bottom: 2px solid var(--line-color);/*header쪽과 달력을 구분하기 위해 밑에만 선을 넣어줍시다.*/ 
+    border-bottom: 2px solid var(--line-color); 
 } 
 .title {
-     /*년, 월이 세로로 정렬되게 하기 위함입니다.*/ 
-    /* display: flex;  */
-    /* flex-direction: column;  */
-    /* align-items: center;  */
-    /* justify-content: center;  */
     display: inline-block;
     font-weight: 700;
     font-size: 28px;
 } 
 .calendar-main {
-    /*요일과 날짜는 가로가아니라 세로로 정렬되야 하므로 flex-diretion: column;을 해줍시다.*/ 
     border-top: 1px solid var(--base-color3);
-    /* border-left: 1px solid var(--base-color3); */
     border-right: 1px solid var(--base-color3);
     display: flex; 
     flex-direction: column; 
@@ -53,14 +44,12 @@ button { /*버튼에는 따로 폰트를 적용시켜줘야됩니다. 테두리�
     width: 100%; 
 }
 .dates {
-      /*wrap을 주어서 한줄에 날짜가 7개만 나오게 만들겁니다.*/ 
     display: flex; flex-wrap: wrap; 
     width: 100%; 
 }
 .date, .day{
     border-bottom: 1px solid var(--base-color3);
     border-left: 1px solid var(--base-color3);
-    /*width가 100/7을 가지기 때문에 한 줄에 7개의 날짜와 요일이 정렬됩니다.*/
     text-align: center;
     width: calc(100%/7);
     padding: 15px 0 15px 0;
@@ -72,17 +61,16 @@ button { /*버튼에는 따로 폰트를 적용시켜줘야됩니다. 테두리�
     text-align: left;
 }
  .date:nth-child(7n), .day:nth-child(7n) {
-    /*.date와 .day의 7n번째 요소만 적용시킵니다. 즉 토요일의 세로줄만 적용합니다.*/
+ 	pointer-events: none !important;
     background-color: var(--base-color4);
-    color: var(--base-color1);/*글자색입니다.*/ 
+    color: var(--base-color1);/*湲��옄�깋�엯�땲�떎.*/ 
 }
 .date:nth-child(7n+1), .day:nth-child(7n+1) {
-    /*.date와 .day의 7n+1번째 요소만 적용시킵니다. 즉 일요일의 세로줄만 적용합니다.*/ 
+	pointer-events: none !important;
     background-color: var(--base-color4); 
     color: var(--base-color1); 
 }
-.today { /*오늘 날짜에 테두리를 줍니다. !important로 border의 우선순위를 1순위로 만들 수 있습니다.*/
-    /* border: 2px solid var(--imp-color) !important;  */
+.today { 
     border-radius: 100%;
     background-color: var(--base-color1);
     color:white;

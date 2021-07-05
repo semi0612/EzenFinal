@@ -6,6 +6,7 @@ import java.util.List;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
+import com.clockOn.web.entity.member.MemberProfile;
 import com.clockOn.web.entity.member.MemberSal;
 
 
@@ -38,9 +39,11 @@ public interface MemberDAO {
 	/*정연님 level 처리 확인하기(테이블 합쳤음)*/
 	public Member read(String emp_id);
 	
-	public List<Member> contactsRead(String org_teamname);
+	public List<MemberProfile> contactsRead(String org_teamname);
+	
+	public MemberProfile profile(String emp_id);
 	
 	/*예슬님*/   
-	public int infoUpdate(Member member);
+	public int infoUpdate(MemberProfile member);
 	   
 }

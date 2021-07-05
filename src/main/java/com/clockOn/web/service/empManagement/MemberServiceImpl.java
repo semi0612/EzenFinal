@@ -18,6 +18,7 @@ import com.clockOn.web.dao.OrgDAO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
+import com.clockOn.web.entity.member.MemberProfile;
 import com.clockOn.web.entity.member.MemberSal;
 
 import lombok.Setter;
@@ -197,15 +198,21 @@ public class MemberServiceImpl implements MemberService {
 
 	/*개인정보수정*/
 	@Override
-	public int infoUpdate(Member member) { //서비스 //MemberMapper
+	public int infoUpdate(MemberProfile member) { //서비스 //MemberMapper
 		member.setEmp_pw(pwencoder.encode(member.getEmp_pw()));
 		return memberDao.infoUpdate(member);
 
 	}
 
 	@Override
-	public List<Member> contactsRead(String org_teamname) {
+	public List<MemberProfile> contactsRead(String org_teamname) {
 		return memberDao.contactsRead(org_teamname);
+	}
+
+	/* 직원&관리자 프로필 */
+	@Override
+	public MemberProfile profile(String emp_id) {
+		return memberDao.profile(emp_id);
 	}
 
 }
