@@ -1,0 +1,138 @@
+
+/* 조직도 부분 */
+.org-wrapper{ text-align: center;}
+
+.org-header {
+  display: flex;
+  width: 800px;
+  height: 30px;
+  margin: auto;  
+}
+.org-header>div{
+  border: 2px solid var(--base-color3);
+}
+
+.org-header .org-header-left {
+  display: flex;
+  width: 400px;
+  height: 30px;
+}
+.org-content{
+  margin-top: 100px;
+  text-align: center;
+}
+
+.org-header-content{
+  transform:rotate(-0.03deg);
+  font-size: 14px;
+  padding-top: 5px;
+  height: 25px;
+  text-align: center;
+}
+.org-content-one {
+  border-right: 1.5px solid var(--base-color3);
+  background-color: var(--base-color4);
+  width: 50px;
+  font-size: 15px;
+}
+
+.org-content-two {
+  margin-left: 20px;
+}
+
+.org-content-two-text {
+  margin-left: 10px;
+  color: var(--imp-color2);
+  font-weight: bold;
+}
+
+
+.org-header .org-header-center {
+  display: flex;
+  width: 150px;
+  height: 30px;
+  margin-left: 30px;
+}
+
+.org-header .org-header-search {
+  display: flex;
+  width: 200px;
+  height: 30px;
+  margin-left: 20px;
+}
+
+.org-search {
+    margin-top: 3px;
+    width: 200px;
+    background: white;
+    transform:rotate(-0.03deg);
+}
+
+.orgInput {
+  width: 80%;
+  margin: 0; border: 0;
+  vertical-align: text-top;
+  padding: 0.3em 0 0.2em 0.2em;
+  font-size: 13px;
+  font-family: var(--font);
+  line-height: 120%;
+  outline: none;
+  transform: rotate(-0.03deg);
+}
+
+.org-center-one {
+  border-right: 1.5px solid var(--base-color3);
+  background-color: var(--base-color4);
+  width: 75px;
+  height: 25px;
+  padding-top:5px;
+  text-align: center;
+  transform:rotate(-0.03deg);
+  font-size: 15px;
+}
+
+.org-center-two {
+  transform:rotate(-0.03deg);
+  font-size: 14px;
+  margin-top: 5px;
+  margin-left: 20px;
+  color: var(--imp-color2);
+  font-weight: bold;
+}
+
+.org-center-two-text {
+  transform:rotate(-0.03deg);
+  font-size: 14px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+/* org게시판 디자인 */
+
+.org-table, .org-table th , .org-table td{
+  border:1px solid var(--base-color4);
+  width: 800px;    
+  border-width: 0.1px 0;
+  border-collapse: collapse;
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 200px;
+  font-size: 15px;
+  padding:10px;
+  transform: rotate(-0.03deg);
+}
+
+.org-img { margin:auto; }
+.org-table th{
+  border-top: 1.5px solid var(--base-color4);
+  border-bottom: 1.5px solid var(--base-color4);
+  font-size: 14px;
+  color: var(--base-color);
+}
+
+.org-table td{
+  border-style:solid;
+  font-size: 14px;
+}
+.org-table .td-two { cursor: pointer;}

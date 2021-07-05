@@ -1,0 +1,53 @@
+.emp-tbl{
+    width:1200px !important;
+    margin-top: 0 !important;
+}
+
+tr.search-tr th {
+    border-bottom: none;
+    border-top: 1.5px solid var(--base-color4);
+}
+.tbl-ex thead th {
+    border: 0 none;
+    /* border-bottom: 1.5px solid var(--base-color4); */
+}
+tr.title-tr {
+    border-bottom: 2px solid var(--base-color4);
+}
+
+.sub-tab {
+    position: relative;
+    left:1040px;
+}
+
+span.tab-group1, .tab-group2 {
+    padding-right: 40px;
+    display: inline-block;
+}
+
+summary {
+    position: relative;
+    left: 300px;
+    top: -30px;
+    font-weight: 700;
+    font-size: 22px;
+    display: inline-block;
+}
+
+.sub-tab h4 {
+    margin-bottom: 10px;
+}
+
+.emp-modify input {
+    width: 100px;
+    margin: 5px;
+    line-height: 20px;
+    border: 1px solid var(--base-color4);
+}
+.emp-modify select {
+    border: 1px solid var(--base-color3);
+}
+
+.emp-modify input#email {
+    width: 140px;
+}

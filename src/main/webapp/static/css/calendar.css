@@ -1,0 +1,170 @@
+.prevBtn, .nextBtn{
+    cursor: pointer;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    margin: 20px;
+}
+body {
+    padding: 0; margin: 0; background-color: var(--bg-color); 
+    font-family: var(--font); 
+}
+
+button {  
+    font-family: var(--font);
+    border:none;
+    height: 32px; 
+}
+.header {
+    display: flex;
+    font-size: 48px;
+    justify-content: center;
+    align-items: center; 
+    padding-bottom: 12px; 
+    margin: 12px 24px 12px 24px; 
+    border-bottom: 2px solid var(--line-color); 
+} 
+.title {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 28px;
+} 
+.calendar-main {
+    border-top: 1px solid var(--base-color3);
+    border-right: 1px solid var(--base-color3);
+    display: flex; 
+    flex-direction: column; 
+    margin: 12px 24px 0px 24px;
+    font-size: 14px;
+}
+.days { 
+    font-weight: 600;
+    display: flex; 
+    flex-wrap: wrap; 
+    width: 100%; 
+}
+.dates {
+    display: flex; flex-wrap: wrap; 
+    width: 100%; 
+}
+.date, .day{
+    border-bottom: 1px solid var(--base-color3);
+    border-left: 1px solid var(--base-color3);
+    text-align: center;
+    width: calc(100%/7);
+    padding: 15px 0 15px 0;
+    box-sizing: border-box;
+}
+.date{
+    font-size: 13px;
+    padding: 10px 0 30px 10px;
+    text-align: left;
+}
+ .date:nth-child(7n), .day:nth-child(7n) {
+ 	pointer-events: none !important;
+    background-color: var(--base-color4);
+    color: var(--base-color1);/*湲��옄�깋�엯�땲�떎.*/ 
+}
+.date:nth-child(7n+1), .day:nth-child(7n+1) {
+	pointer-events: none !important;
+    background-color: var(--base-color4); 
+    color: var(--base-color1); 
+}
+.today { 
+    border-radius: 100%;
+    background-color: var(--base-color1);
+    color:white;
+    width:23px;
+    height: 21px;
+    padding-right: 1px;
+    padding-top: 1px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    right: 5px;
+    position: relative;
+}
+.calendar{
+    width: 1500px;
+    margin:auto;
+}
+.clock-record {
+    text-align: center;
+    font-size: 12px;
+    position: relative;
+    color: var(--base-color);
+    font-weight: 400;
+}
+#msg{
+    color: var(--warn-color);
+    position: relative;
+    top: 3px;
+}
+
+/*관리자 데이터 캘린더형보기 설정*/
+.cal-admin{
+    width:1800px;
+}
+
+.cal-admin td{
+    height: 50px;
+    display: table-cell;
+}
+.cal-admin th,td{
+    border: 1px solid var(--base-color4);
+}
+
+.record-calendar{
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+tr.dates-admin { 
+    height: 30px;
+    border-bottom: 2px solid var(--base-color4);
+}
+
+.dates-admin th {
+    font-weight: 500;
+    font-size: 12px;
+    transform: rotate(-0.03deg);
+}
+
+.tab-admin{ border:none;}
+tfoot td{
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+tbody .emps{font-weight: 400;}
+tfoot tr{ border-top: 2px solid var(--base-color4);}
+th,td{transform: rotate(-0.03deg);}
+.req-link{ cursor: pointer;}
+.msg-admin{left: 0;}
+
+
+/*휴가요청 혹은 정정페이지 관련*/
+.cal-request{
+    width:800px;
+}
+.cal-request-header{
+    margin:0;
+    height: 30px;
+    padding-bottom: 0;
+}
+.cal-request-header, .req-year, .req-month{
+    font-size:20px;
+}
+.nextBtn.req-btn, .prevBtn.req-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    position: relative;
+    top: 3px;
+}
+
+.choice-date{cursor: pointer;}
+.choice-date:hover {
+    background: var(--imp-color2);
+    color: white;
+}

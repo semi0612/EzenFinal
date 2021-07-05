@@ -1,0 +1,163 @@
+
+/* 流盔眠啊 能刨明 何盒 */
+.page-title {
+    position: relative;
+    padding-left: 95px;
+    top: 95px;
+    left: 30px;
+}
+
+.page-title .team-title{display: block; padding-left: 13px;}
+.page-title .department-menu { display: inline;}
+
+.department-menu{
+  width: 160px;
+}
+.add-component {
+  height: 400px;
+  width: 1200px;
+  /* margin-top: 50px; */
+  margin-left: 120px;
+  display: flex;
+}
+
+.add-component .member-images {
+  width: 400px;
+  height: 500px;
+  background-color: whitesmoke;
+  border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.227) 3px 3px 8px 0px; 
+}
+/* .page-title #simpleSearch .searchInput {
+  width: 120px;
+}
+.page-title #simpleSearch{
+  width:126px;
+} */
+
+.add-component .member-images .member-image {
+  background-color: var(--base-color3);
+  height: 300px;
+  margin-left: 20px;
+  margin-top: 120px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+
+.add-component .member-images .member-image > i {
+  margin-top: 80px;
+  margin-left: 120px;
+  font-size: 150px;
+  color: white;
+}
+
+.addbutton-three {
+  color: var(--bg-color); 
+  background-color: var(--imp-color2); 
+  height: 35px; 
+  float: right;
+  margin-right: 20px;
+}
+.addbutton-three:hover {background-color: var(--imp-color);}
+
+.add-component .member-data {
+  width: 655px;
+  height: 500px;
+  margin-left: 100px;
+  background-color: whitesmoke;
+  border-radius: 2px; 
+  box-shadow: rgba(0, 0, 0, 0.227) 3px 3px 8px 0px; 
+}
+
+.add-component .member-data .member-head {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.add-component .member-data .member-head > h4 {
+  display: inline;
+  
+}
+
+.right-title {
+  margin-left: 300px;
+}
+
+.right-title2 {
+  margin-left: 270px;
+}
+
+.right-title3 {
+  margin-left: 235px;
+}
+
+.add-component .member-data .member-input {
+  margin-left: 30px;
+  margin-top: 10px;
+  transform:rotate(-0.03deg);
+}
+
+.label-connect{
+  display: inline-block;
+  width: 300px;
+  padding-left: 25px;
+  height: 90px;
+}
+span.label-connect.c2 {
+    top: -15px;
+    position: relative;
+}
+
+.label-connect2{
+  font-size: 14px;
+  width: 50px;
+  position: relative;
+  top: 50px;
+  left: 200px;
+}
+.label-connect2 > input[type="checkbox"] + label{
+  color: var(--base-color1);
+}
+.label-connect2 > input[type="checkbox"] + label:after {
+  left: 7px;
+}
+.label-connect2 > input[type="checkbox"] + label:before {
+  transform: translate(4px, 2px);
+  width: 12px;
+  height: 12px;
+}
+
+.label-connect2 >label {
+    font-weight: 600;
+}
+
+/* .text-input { */
+.member-data input[type="text"], .member-data input[type="email"], .member-data input[type="tel"]{
+  width: 250px;
+  transform:rotate(-0.03deg);
+  padding: 3px;
+  border: 1px solid var(--base-color3);
+}
+
+.select-input {
+  width: 255px;
+  height: 25px;
+  transform:rotate(-0.03deg);
+  border: 1px solid var(--base-color3);
+}
+
+.invite-button {
+  color: var(--bg-color);
+  background-color: var(--imp-color2);
+  height: 35px;
+  float: left;
+  margin-top: 50px;
+  margin-right: 20px;
+  margin-left: 30px;
+  width: 588px;
+}
+
+.invite-button:hover {
+  background-color: var(--imp-color);
+}
+
