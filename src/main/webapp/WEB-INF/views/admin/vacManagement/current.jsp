@@ -11,14 +11,14 @@
 		<div class="sub-tab">
 			<span class="tab-group1 btns3">
 				<!-- <h4>직원정보</h4> -->
-				<span class="wrap"><button class="button-three" onclick="location.href='request'">승인</button></span>
-				<span class="wrap"><button class="button-three" onclick="location.href='request'">거절</button></span>
-				<span class="wrap"><button class="button-two" onclick="location.href='waiting'">모든 내역</button></span>
+				<span class="wrap"><a href="confirmAll" onclick="return confirm('선택한 요청을 일괄승인 하시겠습니까?')"><button class="button-three">일괄승인</button></a></span>
+				<span class="wrap"><a href="rejectAll" onclick="return confirm('선택한 요청을 일괄거절 하시겠습니까?')"><button class="button-three">일괄거절</button></a></span>
+				<span class="wrap"><button class="button-two" onclick="location.href='all'">모든 내역</button></span>
 				<!-- <span class="wrap"><button class="button-two" onclick="location.href='all'">모든 내역</button></span> --> 
 			</span>
 		</div>
 		<table class="tbl-ex emp-tbl check">
-			<summary>대기중 요청 : ${cntw} 모든 요청내역 : ${cnt}</summary>
+			<summary>대기중 요청 : ${cnt}</summary>
 			<thead>
 				<tr class="title-tr">
 					<th></th>
@@ -55,10 +55,10 @@
 					<td>${vac.holi_state}</td>
 					<td>
 						<!-- 승인 전에만 취소 가능 -->
-						<form action="confirm">
+						<form action="confirm?id=${vac.holi_rid}&emp_id=${vac.emp_id}">
 							<button class="button-two" type="submit" onclick="return confirm('해당 요청을 승인하시겠습니까?');">승인</button>
 						</form>
-						<form action="reject">
+						<form action="reject?id=${vac.holi_rid}">
 							<button class="button-two" type="submit" onclick="return confirm('해당 요청을 거절하시겠습니까?');">거절</button>
 						</form>
 					</td>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/component_board.css">
 <link rel="stylesheet" href="/css/update_memberinfo.css">
+<link rel="stylesheet" href="/css/request_vacation.css">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="content-wrapper">
@@ -45,9 +46,9 @@
 					<td>
 						<!-- 승인 전에만 취소 가능 -->
 						<c:if test="${vac.holi_state == '대기'}">
-							<form action="cancelVacReq?id=${vac.holi_rid}">
-								<button class="button-two" type="submit" onclick="return confirm('해당 요청을 취소하시겠습니까?');">취소</button>
-							</form>
+							<a href="cancelVacReq?id=${vac.holi_rid}" onclick="return confirm('해당 요청을 취소하시겠습니까?');">
+								<button class="button-two">취소</button>
+							</a>
 						</c:if>
 						<c:if test="${vac.holi_state == '승인'}">
 							취소불가

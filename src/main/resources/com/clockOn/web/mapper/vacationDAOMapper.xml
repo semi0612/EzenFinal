@@ -60,9 +60,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			join organization o on e.emp_dept = o.org_teamcode
 	    where holi_state ='0'
 	</select>
-	<update id="confirm" parameterType="String">
+	
+	<update id="confrim" parameterType="String">
 		update holiday set holi_state = '1' where holi_rid = #{holi_rid}
 	</update>
+	<insert id="processVac" parameterType="com.clockOn.web.entity.commute.WorkOff">
+		<foreach item="vac" collection="list" separator=";">
+		insert into working_atti(work_day, holi_code, emp_id) values (#{vac.work_day}, #{vac.holi_code}, #{vac.emp_id});
+		</foreach>
+	</insert>
+	<update id="subAnnday" parameterType="Map">
+		update employee set annday_used = annday_used +1, total_annday = total_annday -1 where emp_id = #{emp_id}; 
+	</update>
+	
 	<update id="reject" parameterType="String">
 		update holiday set holi_state = '2' where holi_rid = #{holi_rid}
 	</update>

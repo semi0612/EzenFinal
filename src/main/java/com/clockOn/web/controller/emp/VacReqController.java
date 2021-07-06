@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clockOn.web.entity.vacation.Vacation;
@@ -71,10 +73,11 @@ public class VacReqController {
 	}
 	
 	/*쿼리스트링으로 매개값을 받아 일단은 GET요청처리함*/
-	@GetMapping("cancelVacReq")
-	public String cancelVacReq(String id) {
-		vacationService.cancelVacReq(id);
-		return "emp.vacation.vcList";
+	@GetMapping("cancelVacReq") //@RequestParam String id,
+	public void cancelVacReq(String id, HttpServletResponse response) throws IOException {
+		int result = vacationService.cancelVacReq(id);
+		System.out.println(result);
+		response.sendRedirect("vcList");
 	}
 
 }

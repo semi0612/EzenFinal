@@ -28,12 +28,13 @@ function buildCalendar() {
     }
     
     //선택한 날짜 달력에 체크하기 - 날짜 쪼개서 배열로 보관
-    var periods = document.getElementById('vac-period').value.split(' ');
+    var periods = document.getElementById('vac-period').value.split(' / ');
     var check = [];
     for(var i=0; i<periods.length-1; i++){
-    	var period = periods[i].split('/');
-    		var m = period[0];
-    		var d = period[1];
+    	var period = periods[i].split('-');
+    		var y = period[0]
+    		var m = period[1];
+    		var d = period[2];
     		if(m == CDate.getMonth()+1){
     			check.push(d);
     		}
@@ -45,16 +46,19 @@ function buildCalendar() {
     }
     
     for (let i = 0; i < dates.length; i++) {//42일을 출력할 for문 
-    	if(dates[i]<today.getDate() &&  CDate.getMonth() == today.getMonth()|| CDate.getMonth() < today.getMonth() ){
+    	/*이번달 오늘 이전이거나 과거일때(이번 해 이전달들 혹은 지난해들)*/
+    	if(dates[i]<today.getDate() &&  CDate.getMonth() == today.getMonth()|| CDate.getMonth() < today.getMonth() && CDate.getFullYear() <=today.getFullYear() ){
     		htmlDates += `<div class="date choice-date except">${dates[i]}</div>`
     	}
-    	else{
+    	else{//오늘이라면
 	        if (today.getDate() == dates[i] && today.getMonth() == CDate.getMonth() && today.getFullYear() == CDate.getFullYear()) { //만약 년도, 월, 일이 똑같은 dates[i]값이 나오면 class에 today를 추가하기 위함. 
 	        			//이를 이용해서 today표시
 	        			htmlDates += `<div class="date choice-date"><span class="today">${dates[i]}</span></div>`;
+	        //오늘 이후라면
 	        } else {
 	        	let y = false;
 	        	for(let j=0; j<check.length; j++){
+	        		//선택된 날짜일때
 	        		if(dates[i]==check[j]){
 	        			htmlDates += `<div class="date choice-date" onclick="readDate(this)" style="background:var(--imp-color); color:white;">${dates[i]}</div>`
 	        				y = true;
@@ -80,7 +84,16 @@ function nextCal() { CDate.setMonth(CDate.getMonth() + 1); buildCalendar(); }
 var cnt = 0;
 var pr = [];
 function readDate(target){
-	let cdate = (CDate.getMonth()+1)+'/'+target.innerText;
+	let vDate = new Date();
+	let d = target.innerText;
+	if(d.length==1) d = '0'+d;
+	let m = (CDate.getMonth()+1).toString();
+	if(m.length==1) m = '0'+m;
+	let y = CDate.getFullYear().toString();
+	y = y.substr(2,2);
+	let cdate = y +'-'+ m +'-'+ d;
+	console.log("cdate:"+cdate);
+	console.log("cnt : " +cnt);
 	let input = document.getElementById('vac-period');
 	
 	//잔여연차를 초과하여 추가 선택하려할 때
@@ -95,24 +108,30 @@ function readDate(target){
 	        target.style.background = 'transparent';
 	        target.style.color = 'var(--base-color)';
 	        
-	        input.value='';
 	        pr.splice(pr.indexOf(cdate),1);
-	    	for(let i=0; i<pr.length; i++){ input.value += (pr[i] +' ');}
+	    	for(let i=0; i<pr.length; i++){
+	    		if(i==0) input.value = pr[i]; 
+	    		else input.value += (' / ' + pr[i]);
+	    	}
 	        cnt--;
-	        let sCnt1 = "(" + cnt + ")";
+	        let sCnt1 = " (" + cnt + ")";
 	        input.value+= sCnt1;
 	        
 	    //클릭하여 선택
 	    } else {
 	    	target.style.background='var(--imp-color)';
 	    	target.style.color = 'white';
-	    	input.value='';
 	    	cnt++;
-	    	let sCnt2 = "(" + cnt + ")";
+	    	let sCnt2 = " (" + cnt + ")";
 	    	pr.push(cdate);
-	    	pr.sort((a, b) => a.split('/')[1] - b.split('/')[1]);
+	    	pr.sort();
 	    	
-	    	for(let i=0; i<pr.length; i++){ input.value += (pr[i]+' ');	}
+	    	for(let i=0; i<pr.length; i++){
+	    		if(i==0) input.value = pr[i];
+	    		else{
+	    			input.value += (' / ' + pr[i]);
+	    		}
+	    	}
 	        input.value += sCnt2;
 	    }
 	//잔여연차를 초과한 상황에서 선택한 날짜를 해제할 때
@@ -122,9 +141,12 @@ function readDate(target){
         
         input.value='';
         pr.splice(pr.indexOf(cdate),1);
-    	for(let i=0; i<pr.length; i++){ input.value += (pr[i]+' ');	}
+    	for(let i=0; i<pr.length; i++){
+    		if(i==0) {input.value = pr[i];}
+    		else input.value += (' / ' + pr[i]);
+    	}
         cnt--;
-        let sCnt1 = "(" + cnt + ")";
+        let sCnt1 = " (" + cnt + ")";
         input.value+= sCnt1;
   	}
 }

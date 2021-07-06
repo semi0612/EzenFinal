@@ -24,10 +24,10 @@ public interface LeaveService {
 	
 	int cntwReq();
 
-	int confirm(String holi_rid);
-
 	int reject(String holi_rid);
 
 	int cancel(String holi_rid);
+
+	int confirm(String holi_rid, String emp_id, String holi_code, String[] offs, String holi_period);
 		
 }
