@@ -51,7 +51,6 @@ public class EmpManageController {
 	
 	@GetMapping("contacts")
 	   public String contacts(Model model, String org_teamname) {
-	      //System.out.println(contactsService.contactsRead(org_teamname).get(0).getEmp_name());
 	      model.addAttribute("contacts", memberService.contactsRead(org_teamname));
 	      
 	      return "empManagement.organization.contacts";
@@ -162,10 +161,8 @@ public class EmpManageController {
 			list.add(member);
 		}
 		memberService.updateAll(list);
-//		return "empManagement.empinfo.corrInfo";
 		
 		response.sendRedirect("memberlist");
-		/*empManage.empinfo.corrInfo -->> ≈∏¿œ¡Ó : admin/empManagement/corrInfo*/
 		return "empManagement.empinfo.memberList";
 	}
 

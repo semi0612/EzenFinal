@@ -78,38 +78,63 @@ function prevCal() { CDate.setMonth(CDate.getMonth() - 1); buildCalendar(); }
 function nextCal() { CDate.setMonth(CDate.getMonth() + 1); buildCalendar(); }
 
 var cnt = 0;
+var pr = [];
 function readDate(target){
-	let cdate = (CDate.getMonth()+1)+'/'+target.innerText+' ';
+	let cdate = (CDate.getMonth()+1)+'/'+target.innerText;
 	let input = document.getElementById('vac-period');
+	
+	//잔여연차를 초과하여 추가 선택하려할 때
 	if(cnt==document.getElementById('rest').value && !input.value.includes(cdate)){
 		alert("잔여연차를 초과하셨습니다.");
-	}else if(cnt<document.getElementById('rest').value){
-	    target.style.background='var(--imp-color)';
-	    target.style.color = 'white';
+	
+	//잔여연차가 있을 때
+	} else if(cnt<document.getElementById('rest').value){
   		
+	    //선택된 날짜 한번 더 클릭하여 해제
 	    if(input.value.includes(cdate)){
 	        target.style.background = 'transparent';
 	        target.style.color = 'var(--base-color)';
-	        input.value=document.getElementById('vac-period').value.replace(cdate,'');
-	        input.value=document.getElementById('vac-period').value.replace("("+cnt+")",'');
+	        
+	        input.value='';
+	        pr.splice(pr.indexOf(cdate),1);
+	    	for(let i=0; i<pr.length; i++){ input.value += (pr[i] +' ');}
 	        cnt--;
 	        let sCnt1 = "(" + cnt + ")";
 	        input.value+= sCnt1;
-	    }
-	    else{
-	    	input.value=document.getElementById('vac-period').value.replace("("+cnt+")",'');
+	        
+	    //클릭하여 선택
+	    } else {
+	    	target.style.background='var(--imp-color)';
+	    	target.style.color = 'white';
+	    	input.value='';
 	    	cnt++;
 	    	let sCnt2 = "(" + cnt + ")";
-	        input.value += cdate;
+	    	pr.push(cdate);
+	    	pr.sort((a, b) => a.split('/')[1] - b.split('/')[1]);
+	    	
+	    	for(let i=0; i<pr.length; i++){ input.value += (pr[i]+' ');	}
 	        input.value += sCnt2;
 	    }
+	//잔여연차를 초과한 상황에서 선택한 날짜를 해제할 때
   	} else {
   		target.style.background = 'transparent';
         target.style.color = 'var(--base-color)';
-        input.value=document.getElementById('vac-period').value.replace(cdate,'');
-        input.value=document.getElementById('vac-period').value.replace("("+cnt+")",'');
+        
+        input.value='';
+        pr.splice(pr.indexOf(cdate),1);
+    	for(let i=0; i<pr.length; i++){ input.value += (pr[i]+' ');	}
         cnt--;
         let sCnt1 = "(" + cnt + ")";
         input.value+= sCnt1;
   	}
 }
+
+function checkEvi() {
+	var imgname = document.getElementById('vac-prove').value;
+	if (imgname == "") {
+		alert("이미지를 첨부해주세요.");
+		return false;
+	}
+	return true;
+}
+

@@ -44,10 +44,10 @@
                         </li>
                     </a>
                     <ul class="submenu">
-                        <a href="/admin/vacManagement/current">
+                        <a href="/admin/vacManage/current">
                             <li><em>대기중 요청</em></li>
                         </a>
-                        <a href="/admin/vacManagement/all">
+                        <a href="/admin/vacManage/all">
                             <li><em>전체 내역</em></li>
                         </a>
                     </ul>

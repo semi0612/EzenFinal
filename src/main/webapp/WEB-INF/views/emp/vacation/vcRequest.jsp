@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/request_vacation.css">
 <link rel="stylesheet" href="/css/calendar.css">
-<script src="/js/check_img.js"></script>
 <div class="content-wrapper">
     <main>
         <h2>휴가 신청</h2>
@@ -47,7 +46,8 @@
                                 <option value="오전반차">오전반차</option>
                                 <option value="오후반차">오후반차</option>
                                 <option value="병가">병가</option>
-                                <option value="경조사">경조사</option>
+                                <option value="대체휴일">대체휴일</option>
+                                <option value="특별휴가">특별휴가</option>
                                 <option value="기타">기타</option>
                             </select>
                         </div>

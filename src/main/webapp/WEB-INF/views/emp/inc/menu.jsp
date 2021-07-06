@@ -29,7 +29,7 @@
                     <a href="/emp/vacation/request">
                         <li><em>휴가신청</em></li>
                     </a>
-                    <a href="#">
+                    <a href="/emp/vacation/vcList">
                         <li><em>신청내역</em></li>
                     </a>
                 </ul>

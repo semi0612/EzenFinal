@@ -35,7 +35,6 @@ public class VacReqController {
 	@GetMapping("request")
 	public String vacReq(Model model, Principal principal) {
         String emp_id = principal.getName();
-		System.out.println(emp_id);
 		model.addAttribute("annday", vacationService.getVacinfo(emp_id));
 		
 		return "emp.vacation.vcRequest";
@@ -45,28 +44,6 @@ public class VacReqController {
 	//요청 페이지 입력 처리
 	@PostMapping("request")
 	public void sendReq(String period, String kind, String reason, MultipartFile file, HttpServletResponse response, HttpSession session) throws IllegalStateException, IOException {
-		/*휴가 기간 처리*/
-		String[] p = period.split(" ");
-		ArrayList<String> list = new ArrayList<>(Arrays.asList(p));
-		// 오름차순으로 정렬 [(n), 1, 2, 3, ...]
-		Collections.sort(list);
-		String[] m = new String[(p.length-1)];
-		String[] d = new String[(p.length-1)];
-		/*월, 일 쪼개서 배열에 저장*/
-		for(int i=1; i<p.length; i++) {
-			m[i] = p[i].split("/")[0];
-			d[i] = p[i].split("/")[1];
-		}
-		/*비교하여 기간별 요청 만들기*/
-		
-		//임시 요청 배열
-		String[] req;
-		
-		
-		//완성되면 List에 추가
-//		List<String[]> list = new ArrayList<String[]>();
-		
-		
 		
 		String fileName = file.getOriginalFilename();
 		if(fileName !=null && fileName !="") {
@@ -80,13 +57,23 @@ public class VacReqController {
 			file.transferTo(saveFile);
 		}
 		String emp_id = session.getAttribute("id").toString();
-//		new Vacation(holi_start, holi_end, reason, kind, fileName, emp_id);
+		int result = vacationService.reqVac(new Vacation(period, reason, kind, fileName, emp_id));
 		response.sendRedirect("vcList");
 	}
 	
 	@GetMapping("vcList")
-	public String vacReqlist() {
-		
+	public String vacReqlist(HttpSession session, Model model) {
+		String emp_id = session.getAttribute("id").toString();
+		List<Vacation> vac = vacationService.listVacReq(emp_id);
+		model.addAttribute("vacList",vac);
+		model.addAttribute("annday", vacationService.getVacinfo(emp_id));
+		return "emp.vacation.vcList";
+	}
+	
+	/*쿼리스트링으로 매개값을 받아 일단은 GET요청처리함*/
+	@GetMapping("cancelVacReq")
+	public String cancelVacReq(String id) {
+		vacationService.cancelVacReq(id);
 		return "emp.vacation.vcList";
 	}
 
