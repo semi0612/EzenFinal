@@ -14,10 +14,10 @@
                         <li class="menu" onmouseover="expand_sub(this)"><i class="fas fa-clock"></i> <em>출퇴근기록</em></li>
                     </a>
                     <ul class="submenu">
-                        <a href="timeRecord/byCalendar">
+                        <a href="/admin/timeRecord/byCalendar">
                             <li><em>캘린더형</em></li>
                         </a>
-                        <a href="timeRecord/byList">
+                        <a href="/admin/timeRecord/byList">
                             <li><em>목록형</em></li>
                         </a>
                     </ul>
@@ -27,13 +27,13 @@
                         <li class="menu" onmouseover="expand_sub(this)"><i class="fas fa-users"></i> <em>직원관리</em></li>
                     </a>
                     <ul class="submenu">
-                        <a href="#">
-                            <li><em>근태관리</em></li>
+                        <a href="/admin/empManagement/workinginfo">
+                            <li><em>근태기록 조회</em></li>
                         </a>
                         <a href="#">
                             <li><em>직원정보관리</em></li>
                         </a>
-                        <a href="organization">
+                        <a href="/admin/empManagement/organization">
                             <li><em>조직도</em></li>
                         </a>
                     </ul>

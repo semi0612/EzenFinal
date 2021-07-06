@@ -8,7 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TimeRecordController {
 	
 	@RequestMapping("byCalendar")
-	public String organization() {
+	public String byCalendar() {
 		return "timeRecord.byCalendar";
+	}
+	
+	
+	@RequestMapping("byList")
+	public String byList() {
+		return "timeRecord.byList";
 	}
 }

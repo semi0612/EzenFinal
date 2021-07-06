@@ -177,6 +177,13 @@ public class EmpManageController {
 	   
    }
    
+   @GetMapping("workinginfo")
+   public String workinginfo() {
+	   
+	   
+	   return "empManagement.workingSearch.workinginfo";
+   }
+   
    
    
 
