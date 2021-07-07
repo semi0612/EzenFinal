@@ -1,0 +1,43 @@
+.member-count {
+	margin-left: 1120px;
+	margin-top: 100px;
+	width: 100px;
+}
+
+
+.working-cards {
+	width : 1300px;
+	height: 300px;
+	display: flex;
+	margin-top: 30px;
+	margin-left: 100px;
+}
+
+.working-cards > .working-card {
+	width: 250px;
+	margin-left: 30px;
+	height: 250px;
+	border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.227) 3px 3px 8px 0px;
+	text-align: center;
+	 
+}
+
+.working-cards > .working-card > .working-title {
+	margin-top: 70px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.working-cards > .working-card > .underline {
+	width: 60px;
+	background-color: var(--base-color2);
+	height: 0.3px;
+}
+
+
+.working-cards > .working-card > .working-data {
+	margin-top: 20px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
