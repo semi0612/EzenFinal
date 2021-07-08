@@ -16,7 +16,7 @@
 			</span>
 		</div>
 		<table class="tbl-ex emp-tbl">
-			<summary>총 연차 : ${annday.total_annday} 잔여연차 : ${annday.annday_rest}</summary>
+			<summary>총 연차 : ${annday.total_annday} &nbsp; | &nbsp; 잔여연차 : ${annday.annday_rest} &nbsp;|&nbsp; 신청 가능 연차 : ${annday.annday_rest - cntwoff} </summary>
 			<thead>
 				<tr class="title-tr">
 					<th>요청번호</th>
@@ -31,13 +31,16 @@
 			<c:forEach var="vac" items="${vacList}">
 				<tr>
 					<td>${vac.holi_rid}</td>
-					<td>
+					<td>${vac.holi_period} <b style="color:var(--imp-color)">(${vac.holi_cnt}일)</b></td>
+				<%--<td>
 						<c:set var="period" value="${vac.holi_period}"/>
 						<c:set var="len" value="${fn:length(period)}"/>
-						<c:set var="days" value="${fn:substring(period,0,(len-3))}"/>
-						<c:set var="cnt" value="${fn:substring(period,(len-2),len-1)}"/>
+						<c:set var="index" value="${fn:indexOf(period,'(')}"/>
+						<c:set var="index2" value="${fn:indexOf(period,')')}"/>
+						<c:set var="days" value="${fn:substring(period,0,index-1)}"/>
+						<c:set var="cnt" value="${fn:substring(period,(index+1),index2)}"/>
 						${days} <b style="color:var(--imp-color)">(${cnt}일)</b>
-					</td>
+					</td> --%>
 					<td>${vac.holi_res}</td>
 					<td>${vac.holi_code}</td>
 					<c:set var="style" value="font-weight:500;"/>

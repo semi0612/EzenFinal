@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class Annday {
 	private int total_annday;
-	private int annday_rest;
+	private float annday_rest;
 	
-	public Annday(int total_annday, int annday_rest) {
+	public Annday(int total_annday, float annday_rest) {
 		this.total_annday = total_annday;
 		this.annday_rest = annday_rest;
 	}

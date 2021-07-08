@@ -7,7 +7,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="content-wrapper">
 	<main>
-		<h2>휴가요청관리 - 모든 요청</h2>
+		<h2>휴가요청관리 - 처리할 요청</h2>
 		<div class="sub-tab">
 			<span class="tab-group1 btns3">
 				<!-- <h4>직원정보</h4> -->
@@ -18,7 +18,7 @@
 			</span>
 		</div>
 		<table class="tbl-ex emp-tbl check">
-			<summary>대기중 요청 : ${cnt}</summary>
+			<summary>대기중 요청 : ${cntw}</summary>
 			<thead>
 				<tr class="title-tr">
 					<th></th>
@@ -41,13 +41,16 @@
 					<td>${vac.org_teamname}</td>
 					<td>${vac.emp_id}</td>
 					<td>${vac.emp_name}</td>
-					<td>
+					<td>${vac.holi_period} <b style="color:var(--imp-color)">(${vac.holi_cnt}일)</b></td>
+					<%--<td>
 						<c:set var="period" value="${vac.holi_period}"/>
 						<c:set var="len" value="${fn:length(period)}"/>
-						<c:set var="days" value="${fn:substring(period,0,(len-3))}"/>
-						<c:set var="cnt" value="${fn:substring(period,(len-2),len-1)}"/>
+						<c:set var="index" value="${fn:indexOf(period,'(')}"/>
+						<c:set var="index2" value="${fn:indexOf(period,')')}"/>
+						<c:set var="days" value="${fn:substring(period,0,index-1)}"/>
+						<c:set var="cnt" value="${fn:substring(period,(index+1),index2)}"/>
 						${days} <b style="color:var(--imp-color)">(${cnt}일)</b>
-					</td>
+					</td> --%>
 					<td>${vac.holi_res}</td>
 					<td>${vac.holi_code}</td>
 					<c:set var="style" value="font-weight:500;"/>
@@ -55,12 +58,16 @@
 					<td>${vac.holi_state}</td>
 					<td>
 						<!-- 승인 전에만 취소 가능 -->
-						<form action="confirm?id=${vac.holi_rid}&emp_id=${vac.emp_id}">
-							<button class="button-two" type="submit" onclick="return confirm('해당 요청을 승인하시겠습니까?');">승인</button>
-						</form>
-						<form action="reject?id=${vac.holi_rid}">
-							<button class="button-two" type="submit" onclick="return confirm('해당 요청을 거절하시겠습니까?');">거절</button>
-						</form>
+					<form action="confirm" method="post">
+							<input type="hidden" value="${vac.holi_rid}" name="id">
+							<input type="hidden" value="${vac.emp_id}" name="emp_id">
+							<input type="hidden" value="${vac.holi_code}" name="holi_code">
+							<input type="hidden" value="${vac.holi_period}" name="holi_period">
+							<button class="button-two" type="submit" onclick="return confirm('해당 요청을 승인하시겠습니까?');">승인 </button>
+					</form>
+					<a href="reject?id=${vac.holi_rid}" onclick="return confirm('해당 요청을 거절하시겠습니까?');">
+							<button class="button-two" >거절 </button>
+					</a>		
 					</td>
 				</tr>
 			</c:forEach>

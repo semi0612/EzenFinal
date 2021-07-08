@@ -91,12 +91,16 @@ li.nav-item.setting {
 #menu > ul > li > ul > li.link:hover {
     padding-bottom: 5px;
     background: var(--imp-color);
-    color:#fff;
+    color:fff;
 }
-#menu > ul > li > ul > li.link:hover a {
+#menu > ul > li > ul > li a {
+	display:block;
+}
+#menu > ul > li > ul > li:hover a {
 	color:white;
 }
 li.dropdown-divider {
     border-bottom: 1px solid #d8dfe8;
     margin-bottom: 5px;
 }
+

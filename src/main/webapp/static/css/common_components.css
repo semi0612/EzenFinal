@@ -18,6 +18,17 @@ label.button-label {
     height: 27px;
 }
 
+.addbutton-three {
+    color: var(--bg-color);
+    background-color: var(--imp-color2);
+    height: 35px;
+    float: right;
+    margin-right: 20px;
+}
+
+.addbutton-three:hover {background-color: var(--imp-color);}
+
+
 /*프리뷰 들어갈 img css*/
 img#preview {
     object-fit: cover;

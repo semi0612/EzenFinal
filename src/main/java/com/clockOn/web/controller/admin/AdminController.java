@@ -26,7 +26,7 @@ public class AdminController {
 	
 	@GetMapping("main")
 	public String admin_main(Principal principal, HttpSession session) {
-		if(session.getAttribute("level")==null) {
+		if(session.getAttribute("level")==null || !session.getAttribute("level").equals("ROLE_ADMIN")) {
 			String username = principal.getName();
 			Member member= memberMapper.read(username);
 	        session.setAttribute("level", member.getEmp_level());

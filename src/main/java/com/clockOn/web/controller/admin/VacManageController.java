@@ -35,18 +35,20 @@ public class VacManageController {
 	public String vcCurrList(Model model){
 		List<VacationInfo> vac = vacationService.listWaitReq();
 		model.addAttribute("vacList", vac);
-		model.addAttribute("cnt", vacationService.cntReq());
+		model.addAttribute("cntw", vacationService.cntwReq());
 		return "reqManagement.vacation.current";
 	}
 	
 	@PostMapping("confirm")
-	public void confirmReq(String id, String holi_code, String holi_period, String emp_id, HttpServletResponse response) throws IOException {
+	public void confirmReq(String id, String holi_code, String holi_period, float holi_cnt, String emp_id, HttpServletResponse response) throws IOException {
 		String[] off = holi_period.split(" / ");
-		String last = off[off.length-1];
-		off[off.length-1] = last.substring(0, 8); //날짜별로 쪼개서 배열에 저장
-		
-		vacationService.confirm(id, emp_id, holi_code, off, holi_period);
-		
+//		String last = off[off.length-1];
+//		off[off.length-1] = last.substring(0, 8); //날짜별로 쪼개서 배열에 저장
+//		int indexf = last.indexOf("(");
+//		int indexl = last.indexOf(")");
+//		float cnt = Float.parseFloat(last.substring(indexf+1,indexl));
+		int result = vacationService.confirm(id, emp_id, holi_code, off, holi_period, holi_cnt);
+		System.out.println("변경된 레코드 수 :" + result);
 		response.sendRedirect("all");
 	}
 	

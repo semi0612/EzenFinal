@@ -30,7 +30,7 @@
 					</c:if>
 					<!-- 권한이 멤버일때  -->
 					<c:if test="${level eq 'ROLE_MEMBER'}">
-						<li class="link"><a href="/emp/infoUpdate?emp_id=<sec:authentication property='principal.member.emp_id' />" class="dropdown-item" style="text-decoration: none; color: black;"><i class="fas fa-user-alt"></i> 계정 설정 </a></li>
+						<li class="link"><a href="/emp/infoUpdate?emp_id=${id}" class="dropdown-item" style="text-decoration: none;"><i class="fas fa-user-alt"></i> 계정 설정 </a></li>
 						<li class="dropdown-divider"></li>
 					</c:if>	
 					<li class="link"><a onclick="document.getElementById('logout').submit();" class="dropdown-item"><i
@@ -38,7 +38,7 @@
 				</ul>
 			</li>
 		</ul>
-	</div>
+	</div><!-- <sec:authentication property='principal.member.emp_id' /> -->
 	
 	<form id="to_emp" action="/emp/mode" method="POST"></form>
 	<form id="to_admin" action="/admin/mode" method="POST"></form>

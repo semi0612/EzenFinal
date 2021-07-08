@@ -8,6 +8,7 @@ import lombok.Setter;
 public class Vacation {
 	private String holi_rid;
 	private String holi_period;
+	private float holi_cnt;
 	private String holi_res;
 	private String holi_state;	//int? 보류:0 승인:1 거절:2
 	private String holi_code;	//휴가 종류
@@ -15,27 +16,30 @@ public class Vacation {
 	private String emp_id;
 	
 	/*휴가신청 정보 insert*/
-	public Vacation(String holi_period, String holi_res, String holi_code, String holi_evi, String emp_id) {
+	public Vacation(String holi_period, float cnt, String holi_res, String holi_code, String holi_evi, String emp_id) {
 		this.holi_period = holi_period;
+		this.holi_cnt = cnt;
 		this.holi_res = holi_res;
 		this.holi_code = holi_code;
 		this.holi_evi = holi_evi;
 		this.emp_id = emp_id;
 	}
-
-	public Vacation(String holi_rid, String holi_period, String holi_res, String holi_state, String holi_code, String holi_evi, String emp_id) {
+	/*VacationInfo객체에서 사용하는 생성자*/
+	public Vacation(String holi_rid, String holi_period, float holi_cnt, String holi_res, String holi_state, String holi_code, String holi_evi, String emp_id) {
 		this.holi_rid = holi_rid;
 		this.holi_period = holi_period;
+		this.holi_cnt = holi_cnt;
 		this.holi_res = holi_res;
 		this.holi_state = holi_state;
 		this.holi_code = holi_code;
 		this.holi_evi = holi_evi;
 		this.emp_id = emp_id;
 	}
-	/*모든,특정 직원 휴가요청정보 불러오기*/
-	public Vacation(String holi_rid, String holi_period, String holi_res, String holi_code, String holi_state, String holi_evi) {
+	/*직원 &관리자 : 모든,특정 직원 휴가요청정보 불러오기*/
+	public Vacation(String holi_rid, String holi_period, float holi_cnt, String holi_res, String holi_code, String holi_state, String holi_evi) {
 		this.holi_rid = holi_rid;
 		this.holi_period = holi_period;
+		this.holi_cnt = holi_cnt;
 		this.holi_res = holi_res;
 		this.holi_state = holi_state;
 		this.holi_code = holi_code;

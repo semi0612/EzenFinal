@@ -39,7 +39,7 @@ public class EmpController {
 	
 	@GetMapping("main")
 	public String emp_main(Principal principal, HttpSession session) {
-		if(session.getAttribute("level")==null) {
+		if(session.getAttribute("level")==null || !session.getAttribute("level").equals("ROLE_MEMBER")) {
 			String username = principal.getName();
 			Member member= memberMapper.read(username);
 	        session.setAttribute("level", member.getEmp_level());
@@ -49,16 +49,6 @@ public class EmpController {
 		
 		return "emp.main";
 	}
-	
-	/*
-	 * public ModelAndView handleRequest(HttpServletRequest request,
-	 * HttpServletResponse response) throws Exception {
-	 * 
-	 * ModelAndView mv = new ModelAndView("/login_emp");
-	 * //mv.setViewName("/WEB-INF/view/notice/list.jsp");
-	 * 
-	 * return mv; }
-	 */
 	
 	@GetMapping("infoUpdate") //보여줄 때
 	public String infoUpdate(String emp_id, Model model) {

@@ -6,10 +6,10 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clockOn.web.entity.vacation.Vacation;
@@ -38,7 +37,20 @@ public class VacReqController {
 	public String vacReq(Model model, Principal principal) {
         String emp_id = principal.getName();
 		model.addAttribute("annday", vacationService.getVacinfo(emp_id));
-		
+		model.addAttribute("cntwoff", vacationService.cntwoff(emp_id));
+		model.addAttribute("cVac",vacationService.comingVac(emp_id));
+		List<HashMap<String,String>> list= vacationService.waitingVac(emp_id);
+		List<HashMap<String, Object>> wVac = new ArrayList<HashMap<String, Object>>();
+		for(HashMap<String, String> map : list) {
+			String date = map.get("dates");
+			List<String> dates = Arrays.asList(date.split(" / ")); //날짜 문자열
+			Collections.sort(dates);
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("dates", dates); //날짜 배열 들어감
+			m.put("code", map.get("holi_code"));
+			wVac.add(m);
+		}
+		model.addAttribute("wVac",wVac);
 		return "emp.vacation.vcRequest";
 	}
 	
@@ -59,16 +71,27 @@ public class VacReqController {
 			file.transferTo(saveFile);
 		}
 		String emp_id = session.getAttribute("id").toString();
-		int result = vacationService.reqVac(new Vacation(period, reason, kind, fileName, emp_id));
+		
+		String[] off = period.split(" / ");
+		String last = off[off.length-1];
+		off[off.length-1] = last.substring(0, 8); //날짜별로 쪼개서 배열에 저장
+		int indexf = last.indexOf("(");
+		int indexl = last.indexOf(")");
+		period = period.substring(0, indexf-1);
+		float cnt = Float.parseFloat(last.substring(indexf+1,indexl));
+		
+		int result = vacationService.reqVac(new Vacation(period, cnt, reason, kind, fileName, emp_id));
 		response.sendRedirect("vcList");
 	}
 	
+	/*본인 요청 불러오기*/
 	@GetMapping("vcList")
 	public String vacReqlist(HttpSession session, Model model) {
 		String emp_id = session.getAttribute("id").toString();
 		List<Vacation> vac = vacationService.listVacReq(emp_id);
 		model.addAttribute("vacList",vac);
 		model.addAttribute("annday", vacationService.getVacinfo(emp_id));
+		model.addAttribute("cntwoff", vacationService.cntwoff(emp_id));
 		return "emp.vacation.vcList";
 	}
 	

@@ -1,5 +1,6 @@
 package com.clockOn.web.service.vacation;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.clockOn.web.entity.vacation.Annday;
@@ -28,6 +29,12 @@ public interface LeaveService {
 
 	int cancel(String holi_rid);
 
-	int confirm(String holi_rid, String emp_id, String holi_code, String[] offs, String holi_period);
+	int confirm(String holi_rid, String emp_id, String holi_code, String[] offs, String holi_period, float cnt);
+
+	int cntwoff(String emp_id);
+
+	List<HashMap<String, Object>> comingVac(String emp_id);
+
+	List<HashMap<String, String>> waitingVac(String emp_id);
 		
 }

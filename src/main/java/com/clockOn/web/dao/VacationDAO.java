@@ -32,11 +32,16 @@ public interface VacationDAO {
 	//2- work_atti 테이블에 휴가 정보 삽입
 	public int processVac(List<WorkOff> off);
 	//3- 연차차감
-
 	
 	public int subAnnday(Map<String, Object> map);
 
 	public int reject(String holi_rid);
 	
 	public int cancel(String holi_rid);
+
+	public int cntwoff(String emp_id);
+
+	public List<HashMap<String, Object>> comingVac(String emp_id);
+
+	public List<HashMap<String, String>> waitingVac(String emp_id);
 }

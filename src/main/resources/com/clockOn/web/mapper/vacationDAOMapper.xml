@@ -8,7 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getVacInfo" resultType="com.clockOn.web.entity.vacation.Annday" parameterType="String">
 		select total_annday, total_annday-annday_used as annday_rest from employee where emp_id = #{emp_id}
 	</select>
-
+	<!-- 특정 직원 휴가일정 불러오기 -->
+	<select id="comingVac" resultType="HashMap" parameterType="String">
+		select work_day, holi_code from working_atti where work_day>curdate() and emp_id = ${emp_id} order by work_day asc
+	</select>
+	<!-- 특정 직원 대기중인 요청 정보 불러오기 -->
+	<select id="waitingVac" resultType="HashMap" parameterType="String">
+		select holi_code, group_concat(holi_period separator ' / ') as dates
+			from (select holi_period, holi_code, holi_cnt from holiday 
+				where emp_id = #{emp_id} and holi_state='0' 
+				order by holi_rid desc) as period 
+		group by holi_code;
+	</select>
 	<!-- 휴가 정보페이지 리스트 -->
 	<select id="list" resultType="com.clockOn.web.entity.member.MemberLeave">
 		select org_teamname as emp_dept, emp_id, emp_name, emp_posi,
@@ -18,42 +29,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 휴가요청 삽입 -->
 	<insert id="reqVac" parameterType="com.clockOn.web.entity.vacation.Vacation">
-		insert into holiday(holi_period, holi_res, holi_code, holi_evi, emp_id) 
-			values (#{holi_period}, #{holi_res}, #{holi_code}, #{holi_evi}, #{emp_id}) <!-- 여기서 getter호출됨 -->
+		insert into holiday(holi_period, holi_cnt, holi_res, holi_code, holi_evi, emp_id) 
+			values (#{holi_period}, #{holi_cnt}, #{holi_res}, #{holi_code}, #{holi_evi}, #{emp_id}) <!-- 여기서 getter호출됨 -->
 	</insert>
 	<!-- 직원 : 휴가요청 취소 -->
-	
 	<delete id="cancelVacReq" parameterType="String">
 		delete from holiday where holi_rid = #{holi_rid}
 	</delete>
 	
-	<!-- 특정 직원의 모든 요청 불러오기 -->
+	<!-- 직원 : 특정 직원의 모든 요청 불러오기 -->
 	<select id="listVacReq" parameterType="String" resultType="com.clockOn.web.entity.vacation.Vacation">
-		select holi_rid, holi_period, holi_res, holi_code,
+		select holi_rid, holi_period, holi_cnt, holi_res, holi_code,
 			case when holi_state= '0' then '대기' when holi_state ='1' then '승인' when holi_state ='2' then '거절' end as 'holi_state', holi_evi
 		from holiday where emp_id=#{emp_id} order by holi_rid desc
 	</select>
 
 	<!-- 관리자 : 모든 직원의 모든 요청 불러오기 -->
 	<select id="listAllVacReq" resultType="com.clockOn.web.entity.vacation.VacationInfo">
-		select holi_rid, org_teamname, e.emp_id, emp_name, holi_period, holi_res, holi_code, 
+		select holi_rid, org_teamname, e.emp_id, emp_name, holi_period, holi_cnt, holi_res, holi_code, 
 				case when holi_state= '0' then '대기' when holi_state ='1' then '승인' when holi_state ='2' then '거절' end as 'holi_state', holi_evi 
 		from holiday h
 			join employee e on e.emp_id =h.emp_id 
 			join organization o on e.emp_dept = o.org_teamcode 
 		order by holi_rid desc
 	</select>
+	<!-- 관리자 : 모든 요청 수 카운트 -->
 	<select id="cntReq" resultType="int">
 		select count(holi_rid)
 		from holiday h join employee e on e.emp_id =h.emp_id join organization on e.emp_dept = org_teamcode;
 	</select>
-	<!--관리자 : 대기중 요청 불러오기 (&카운트) -->
+	<!--관리자 : 대기중 요청 불러오기 -->
 	<select id="listWaitReq" resultType="com.clockOn.web.entity.vacation.VacationInfo">
-		select holi_rid, org_teamname, e.emp_id, emp_name, holi_period, holi_res, holi_code, 
+		select holi_rid, org_teamname, e.emp_id, emp_name, holi_period, holi_cnt, holi_res, holi_code, 
 			case when holi_state= '0' then '대기' end as 'holi_state', holi_evi 
 		from holiday h join employee e on e.emp_id =h.emp_id join organization o on e.emp_dept = o.org_teamcode
 	    where holi_state ='0' order by holi_rid asc
 	</select>
+	<!-- 관리자 : 대기중 요청 수 세기 -->
 	<select id="cntwReq" resultType="int">
 		select count(holi_rid) from holiday h
 			join employee e on e.emp_id =h.emp_id 
@@ -61,23 +73,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    where holi_state ='0'
 	</select>
 	
-	<update id="confrim" parameterType="String">
+	<!--휴가요청 승인시 요청테이블 상태변경  -->
+	<update id="confirm" parameterType="String">
 		update holiday set holi_state = '1' where holi_rid = #{holi_rid}
 	</update>
+	<!-- 휴가요청 승인시 근태테이블에 휴가일정 추가 -->
 	<insert id="processVac" parameterType="com.clockOn.web.entity.commute.WorkOff">
 		<foreach item="vac" collection="list" separator=";">
-		insert into working_atti(work_day, holi_code, emp_id) values (#{vac.work_day}, #{vac.holi_code}, #{vac.emp_id});
+		insert into working_atti(work_day, holi_code, emp_id) values (#{vac.work_day}, #{vac.holi_code}, #{vac.emp_id})
 		</foreach>
 	</insert>
-	<update id="subAnnday" parameterType="Map">
-		update employee set annday_used = annday_used +1, total_annday = total_annday -1 where emp_id = #{emp_id}; 
+	<!-- 연차 차감 -->
+	<update id="subAnnday" parameterType="HashMap">
+		update employee set annday_used = annday_used +${cnt} where emp_id = #{emp_id} 
 	</update>
-	
+	<!-- 요청 거절 -->
 	<update id="reject" parameterType="String">
 		update holiday set holi_state = '2' where holi_rid = #{holi_rid}
 	</update>
-	<delete id="cancel" parameterType="String">
+	<!-- 요청 반송 -->
+	<update id="cancel" parameterType="String">
+		update holiday set holi_state = '0' where holi_rid = #{holi_rid}
+	</update>
+	
+	<!-- 직원 : 처리되지 않은 요청들의 합계 연차수 -->
+	<select id="cntwoff" parameterType="String" resultType="int">
+		SELECT ifnull(sum(cntoff), 0)
+		from (SELECT CASE WHEN HOLI_CODE = '오후반차' OR HOLI_CODE = '오전반차' THEN 0.5 
+						WHEN HOLI_CODE = '반반차' THEN 0.25 WHEN HOLI_CODE = '연차' THEN HOLI_CNT
+						ELSE 0 END AS 'CNTOFF' 
+		FROM HOLIDAY 
+		WHERE EMP_ID = #{emp_id} AND HOLI_STATE = '0') as cnt
+	</select>
+	
+	<!-- <delete id="cancel" parameterType="String">
 		delete from holiday where holi_rid = #{holi_rid}
-	</delete>
+	</delete> -->
 	
 </mapper>

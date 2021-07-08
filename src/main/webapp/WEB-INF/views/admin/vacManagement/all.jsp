@@ -41,13 +41,16 @@
 					<td>${vac.org_teamname}</td>
 					<td>${vac.emp_id}</td>
 					<td>${vac.emp_name}</td>
-					<td>
+					<td>${vac.holi_period} <b style="color:var(--imp-color)">(${vac.holi_cnt}일)</b></td>
+					<%-- <td>
 						<c:set var="period" value="${vac.holi_period}"/>
 						<c:set var="len" value="${fn:length(period)}"/>
-						<c:set var="days" value="${fn:substring(period,0,(len-3))}"/>
-						<c:set var="cnt" value="${fn:substring(period,(len-2),len-1)}"/>
+						<c:set var="index" value="${fn:indexOf(period,'(')}"/>
+						<c:set var="index2" value="${fn:indexOf(period,')')}"/>
+						<c:set var="days" value="${fn:substring(period,0,index-1)}"/>
+						<c:set var="cnt" value="${fn:substring(period,(index+1),index2)}"/>
 						${days} <b style="color:var(--imp-color)">(${cnt}일)</b>
-					</td>
+					</td> --%>
 					<td>${vac.holi_res}</td>
 					<td>${vac.holi_code}</td>
 					<c:set var="style" value="font-weight:500;"/>
@@ -56,7 +59,7 @@
 					<td>
 						<!-- 승인 전에만 취소 가능 -->
 						<c:if test="${vac.holi_state == '대기'}">
-							<form action="confirm">
+							<form action="confirm" method="post">
 								<input type="hidden" value="${vac.holi_rid}" name="id">
 								<input type="hidden" value="${vac.emp_id}" name="emp_id">
 								<input type="hidden" value="${vac.holi_code}" name="holi_code">
