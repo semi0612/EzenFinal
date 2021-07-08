@@ -11,7 +11,7 @@
 					메뉴 고정/해제</span></li>
 			<li class="nav-item company-name">
 				<!---->
-				<span> HMG </span>
+				<span> Clock On </span>
 			</li>
 			<li class="nav-item setting" onclick="dp_menu()"><a><i
 					class="fas fa-cog"></i></a>

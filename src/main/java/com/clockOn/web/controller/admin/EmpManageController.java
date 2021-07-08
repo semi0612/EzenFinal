@@ -45,7 +45,7 @@ public class EmpManageController {
       model.addAttribute("orgView", orgService.orgView());
       model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
       model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
-      
+      model.addAttribute("memberCount", memberService.count());
       return "empManagement.organization.list";
    }
    

@@ -1,5 +1,8 @@
 package com.clockOn.web.entity.commute;
 
-public class Commute {
 
+public class Commute {
+	
+	
+	
 }

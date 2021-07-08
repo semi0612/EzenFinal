@@ -10,7 +10,7 @@
 	<main>
 		<h2>프로필</h2>
 		<div class="main-wrapper">
-
+		
 
 			<div class="member-component">
 				<!--직원이미지 입력폼-->

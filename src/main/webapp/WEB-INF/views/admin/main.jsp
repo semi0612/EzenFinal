@@ -30,25 +30,25 @@
 				<div class="working-card">
 					<p class="working-title">출근</p>
 					<hr class="underline">
-					<p class="working-data">3</p>
+					<p class="working-data">${gowork_count}</p>
 				</div>
 				
 				<div class="working-card">
 					<p class="working-title">미출근</p>
 					<hr class="underline">
-					<p class="working-data">4</p>
+					<p class="working-data">${notwork_count}</p>
 				</div>
 				
 				<div class="working-card">
 					<p class="working-title">휴가</p>
 					<hr class="underline">
-					<p class="working-data">2</p>
+					<p class="working-data">${holiday_count}</p>
 				</div>
 				
 				<div class="working-card">
 					<p class="working-title">지각</p>
 					<hr class="underline">
-					<p class="working-data">1</p>
+					<p class="working-data">${late_count}</p>
 				</div>
 			
 			

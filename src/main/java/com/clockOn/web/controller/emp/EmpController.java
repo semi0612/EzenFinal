@@ -19,6 +19,7 @@ import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
 import com.clockOn.web.service.empManagement.MemberService;
+import com.clockOn.web.service.empManagement.OrgService;
 import com.clockOn.web.service.vacation.LeaveService;
 
 import lombok.Setter;
@@ -37,6 +38,8 @@ public class EmpController {
 	
 	@Autowired
 	private LeaveService leaveService;
+	
+	@Autowired OrgService orgService;
 	
 	@Autowired
 	private ServletContext ctx;
@@ -60,6 +63,23 @@ public class EmpController {
 	}
 	
 	
+	
+	@GetMapping("organization")
+	public String organization(Model model) {
+		model.addAttribute("orgView", orgService.orgView());
+	      model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
+	      model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
+	      model.addAttribute("memberCount", memberService.count());
+		return "emp.organization.list";
+	}
+	
+	@GetMapping("contacts")
+    public String contacts(Model model, String org_teamname) {
+       //System.out.println(contactsService.contactsRead(org_teamname).get(0).getEmp_name());
+       model.addAttribute("contacts", memberService.contactsRead(org_teamname));
+       
+       return "empManagement.organization.contacts";
+ }
 	
 	
 	/*

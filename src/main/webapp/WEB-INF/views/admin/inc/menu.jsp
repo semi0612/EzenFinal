@@ -30,7 +30,7 @@
                         <a href="/admin/empManagement/workinginfo">
                             <li><em>근태기록 조회</em></li>
                         </a>
-                        <a href="#">
+                        <a href="/admin/empManagement/memberlist">
                             <li><em>직원정보관리</em></li>
                         </a>
                         <a href="/admin/empManagement/organization">

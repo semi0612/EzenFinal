@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date" %>    
+<%@ page import="java.util.*" %>    
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib uri="http://www.springframework.org/security/tags"
    prefix="sec"%>    
@@ -12,19 +12,26 @@
 	<sec:authentication property="principal.member.emp_level" var="level"/>
 
 
+
 <% 
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
+	Calendar now = Calendar.getInstance();
+	int month = now.get(Calendar.MONTH) + 1;
+	int year = now.get(Calendar.YEAR);
 %>
+
 	<main>
 		
 	
 		<h2><%= sf.format(nowTime) %></h2>
 		<div class="main-wrapper">
-		
+			
 			<h3 class="commute-title">출·퇴근 요청</h3>
 			<button class="hi-button" type="submit" onclick="return checkPw()">출&nbsp;근</button>
+			
 			<button class="bye-button" type="submit" onclick="return checkPw()">퇴&nbsp;근</button>
+			
 			<h3 class="work-title">나의 근로 통계</h3>
 			<table class="tbl-work">
                     <tr>
@@ -36,7 +43,17 @@
                         <th>총 근무시간</th>
                     </tr>
                     <tr>
+                    	
+                        <td><%= month+"월" %></td>
                         <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>  
+                    </tr>
+                    
+                    <tr>
+                        <td><%= year+"년" %></td>
                         <td></td>
                         <td></td>
                         <td></td>

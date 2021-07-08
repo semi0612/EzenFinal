@@ -16,7 +16,7 @@
 					<div class="org-header-content org-content-two">팀</div>
 					<div class="org-header-content org-content-two-text">${teamcount}</div>
 					<div class="org-header-content org-content-two">총 인원</div>
-					<div class="org-header-content org-content-two-text">70</div>
+					<div class="org-header-content org-content-two-text">${memberCount}</div>
 					<div class="org-header-content org-content-two">기획·감사</div>
 					<div class="org-header-content org-content-two-text">2</div>
 				</div>
