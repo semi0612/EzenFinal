@@ -13,6 +13,7 @@
 
 
 
+
 <% 
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
@@ -28,9 +29,12 @@
 		<div class="main-wrapper">
 			
 			<h3 class="commute-title">출·퇴근 요청</h3>
-			<button class="hi-button" type="submit" onclick="return checkPw()">출&nbsp;근</button>
 			
-			<button class="bye-button" type="submit" onclick="return checkPw()">퇴&nbsp;근</button>
+			<form action="/emp/hiSuccess?emp_id=${id}" method="post" class="hiSuccess-form">
+			<button class="hi-button" id="hi-button" type="submit">출&nbsp;근</button>
+			</form>
+			
+			<button class="bye-button" type="submit">퇴&nbsp;근</button>
 			
 			<h3 class="work-title">나의 근로 통계</h3>
 			<table class="tbl-work">
@@ -45,8 +49,8 @@
                     <tr>
                     	
                         <td><%= month+"월" %></td>
-                        <td></td>
-                        <td></td>
+                        <td>${thisMonthCount}일</td>
+                        <td>${thisMonthLate}일</td>
                         <td></td>
                         <td></td>
                         <td></td>  

@@ -112,6 +112,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      select org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_pic from employee emp JOIN organization org on emp.emp_dept = org.org_teamcode where emp_id = #{emp_id}
    </select>
    
+   
+   
   
   
    <!-- 예슬님 -->

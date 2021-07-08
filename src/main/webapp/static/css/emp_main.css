@@ -114,3 +114,7 @@ background-color: var(--base-color4);
 .bye-button:hover {
   background-color: var(--base-color);
 }
+
+.hiSuccess-form {
+	display: inline;
+}

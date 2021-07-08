@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
+import com.clockOn.web.service.attendance.CommuteService;
 import com.clockOn.web.service.empManagement.MemberService;
 import com.clockOn.web.service.empManagement.OrgService;
 import com.clockOn.web.service.vacation.LeaveService;
@@ -39,6 +41,9 @@ public class EmpController {
 	@Autowired
 	private LeaveService leaveService;
 	
+	@Autowired
+	private CommuteService commuteService;
+	
 	@Autowired OrgService orgService;
 	
 	@Autowired
@@ -47,6 +52,8 @@ public class EmpController {
 	@GetMapping("main")
 	public String emp_main(Principal principal, HttpSession session, Model model) {
 		String username = principal.getName();
+		model.addAttribute("thisMonthCount",commuteService.thisMonthWork(username));
+		model.addAttribute("thisMonthLate", commuteService.thisMonthLate(username));
 		model.addAttribute("annday", leaveService.getVacinfo(username));
 		System.out.println(username);
 		if(session.getAttribute("level")==null) {
@@ -127,6 +134,14 @@ public class EmpController {
 		
 		return "emp.main"; 
 
+	}
+	
+	@PostMapping("hiSuccess")
+	public void hiSuccess(String emp_id, HttpServletResponse response) throws IOException {
+		
+		commuteService.hiSuccess(emp_id);
+		
+		response.sendRedirect("/emp/main");
 	}
 
 }

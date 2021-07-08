@@ -29,6 +29,25 @@ select * from lateCount
 
 </select>
 
+<insert id="hiSuccess" parameterType="String">
+
+insert into working_atti (WORK_RID, WORK_DAY, WORK_IN, EMP_ID) values('09', curdate(), DATE_FORMAT(now(), '%H:%i:%s'), #{emp_id})
+   
+</insert>
+
+<!-- 자신의 해당 월 출근 기록 확인 -->
+<select id="thisMonthWork" parameterType="String" resultType="int">
+ <![CDATA[    
+	select count(WORK_RID) from working_atti where (work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW())) and emp_id = #{emp_id} and work_in is not null
+ ]]>
+</select>
+
+<!-- 자신의 해당 월 지각 기록 확인 -->
+<select id="thisMonthLate" parameterType="String" resultType="int">
+<![CDATA[ 
+	select count(*) from working_atti where( work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW()) ) and emp_id= #{emp_id} and work_in is not null and WORK_IN between '09:00:00' and '18:00:00';
+]]>
+</select>
 
 
 </mapper>
