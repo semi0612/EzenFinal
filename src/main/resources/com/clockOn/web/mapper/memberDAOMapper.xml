@@ -20,6 +20,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select o.org_groupname, o.org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level from employee e join organization o on e.emp_dept=o.org_teamcode order by o.org_groupname;	
 	</select>
 	
+	<!-- 실시간 검색되는 멤버리스트 -->
+	<select id="searchList" resultType ="com.clockOn.web.entity.member.MemberList" parameterType="HashMap">
+		select o.org_groupname, o.org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, case when emp_level='0' then '직원' when emp_level='1' then '관리자' end 
+		from employee e join organization o on e.emp_dept=o.org_teamcode 
+	    <where> 
+    		<foreach item="map" collection="list">
+    			<if test="map.keyword !=null and map.keyword !=''">
+					and ${map.field} like '%${map.keyword}%'
+				</if>
+	    	</foreach>
+    	</where>
+		order by o.org_groupname;
+	</select>
+	
 	<select id="listLeave" resultType="com.clockOn.web.entity.member.MemberLeave">
 		select org_teamname as emp_dept, emp_id, emp_name, emp_posi, total_annday, annday_used, (total_annday-annday_used) as annday_rest, emp_join, emp_resi from employee e join organization o on e.emp_dept = o.org_teamcode order by emp_dept;
 	</select>

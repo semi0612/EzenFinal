@@ -3,6 +3,7 @@ package com.clockOn.web.service.empManagement;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -213,6 +214,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberProfile profile(String emp_id) {
 		return memberDao.profile(emp_id);
+	}
+
+	@Override
+	public List<MemberList> searchList(List<Map<String, String>> list) {
+		return memberDao.searchList(list);
 	}
 
 }

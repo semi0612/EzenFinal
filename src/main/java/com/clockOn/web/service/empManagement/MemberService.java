@@ -2,6 +2,7 @@ package com.clockOn.web.service.empManagement;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
@@ -54,4 +55,6 @@ public interface MemberService {
 
 	/* 직원&관리자 - 프로필 정보 불러오기 */
 	public MemberProfile profile(String emp_id);
+
+	public List<MemberList> searchList(List<Map<String, String>> list);
 }

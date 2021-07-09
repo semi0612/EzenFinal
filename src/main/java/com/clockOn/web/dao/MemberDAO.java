@@ -2,6 +2,7 @@ package com.clockOn.web.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
@@ -28,6 +29,8 @@ public interface MemberDAO {
 
 	public List<MemberList> listView();
 	
+	public List<MemberList> searchList(List<Map<String, String>> list);
+	
 	public List<MemberLeave> listLeave();
 
 	public List<MemberSal> listSal();
@@ -45,5 +48,6 @@ public interface MemberDAO {
 	
 	/*¿¹½½´Ô*/   
 	public int infoUpdate(MemberProfile member);
+
 	   
 }

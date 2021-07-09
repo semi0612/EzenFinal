@@ -129,6 +129,7 @@ td:nth-child(5) {
     border-top: 6px solid var(--base-color2);
     border-bottom: 6px solid var(--base-color2);
     padding-bottom: 20px;
+    height: 230px;
 }
 .fyi h4 {
     color: var(--imp-color);
