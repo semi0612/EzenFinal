@@ -52,8 +52,8 @@
                         <td>${thisMonthCount}일</td>
                         <td>${thisMonthLate}일</td>
                         <td></td>
-                        <td></td>
-                        <td></td>  
+                        <td>${thisMonthHoli}일</td>
+                        <td>${thisMonthTime}시간</td>  
                     </tr>
                     
                     <tr>

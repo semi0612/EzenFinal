@@ -47,5 +47,15 @@ public class CommuteServiceImpl implements CommuteService{
 	public int thisMonthLate(String emp_id) {
 		return commuteDAO.thisMonthLate(emp_id);
 	}
+	
+	@Override
+	public int thisMonthHoli(String emp_id) {
+		return commuteDAO.thisMonthHoli(emp_id);
+	}
+	
+	@Override
+	public int thisMonthTime(String emp_id) {
+		return commuteDAO.thisMonthTime(emp_id);
+	}
 
 }

@@ -15,5 +15,9 @@ public interface CommuteDAO {
 	public int thisMonthWork(String emp_id);
 	// 자신의 해당 월 지각 기록 확인
 	public int thisMonthLate(String emp_id);
+	// 자신의 해당 월 휴무 기록 확인
+	public int thisMonthHoli(String emp_id);
+	// 자신의 해당 월 근무 시간 확인
+	public int thisMonthTime(String emp_id);
 	
 }

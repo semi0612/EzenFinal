@@ -54,6 +54,8 @@ public class EmpController {
 		String username = principal.getName();
 		model.addAttribute("thisMonthCount",commuteService.thisMonthWork(username));
 		model.addAttribute("thisMonthLate", commuteService.thisMonthLate(username));
+		model.addAttribute("thisMonthHoli", commuteService.thisMonthHoli(username));
+		model.addAttribute("thisMonthTime", commuteService.thisMonthTime(username));
 		model.addAttribute("annday", leaveService.getVacinfo(username));
 		System.out.println(username);
 		if(session.getAttribute("level")==null) {
