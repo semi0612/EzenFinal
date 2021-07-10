@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
+import com.clockOn.web.service.attendance.CommuteService;
 import com.clockOn.web.service.empManagement.MemberService;
 
 import lombok.Setter;
@@ -36,6 +38,9 @@ public class EmpController {
 	
 	@Autowired
 	private ServletContext ctx;
+
+	@Autowired
+	private CommuteService commuteService;
 	
 	@GetMapping("main")
 	public String emp_main(Principal principal, HttpSession session) {
@@ -81,5 +86,17 @@ public class EmpController {
 		return "emp.main"; 
 
 	}
+	
+	@PostMapping("hiSuccess")
+	public void hiSuccess(String emp_id, HttpServletResponse response) throws IOException {
 
+		commuteService.hiSuccess(emp_id);
+
+		response.sendRedirect("/emp/main");
+	}
+
+	@GetMapping("calendar") // 보여줄 때
+	public String calendar() {
+		return "emp.timeRecord.byCalendar";
+	}
 }
