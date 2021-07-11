@@ -23,6 +23,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="hiSuccess" parameterType="String">
 		insert into working_atti (WORK_DAY, WORK_IN, EMP_ID) values(curdate(), DATE_FORMAT(now(), '%H:%i:%s'), #{emp_id})
 	</insert>
+	
+	<!-- #{emp_id} = ' '로 감싸져나옴, 그래서 주로 스트링 받을때? 사용하는 듯
+		 ${coulm} = 그 자체로 그냥 튀어나옴 감싸지는 거 없이. 그래서 변수 명 같은거 집어넣는거 -->
+	<update id="byeSuccess" parameterType="String">
+		update working_atti set work_out = DATE_FORMAT(now(), '%H:%i:%s')
+		where work_day = curdate() and emp_id=#{emp_id};
+	</update>
 
 	<!-- 자신의 해당 월 출근 기록 확인 -->
 	<select id="thisMonthWork" parameterType="String" resultType="int">
