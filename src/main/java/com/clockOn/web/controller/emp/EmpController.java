@@ -3,6 +3,7 @@ package com.clockOn.web.controller.emp;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -56,17 +57,21 @@ public class EmpController {
 		model.addAttribute("thisMonthLate", commuteService.thisMonthLate(username));
 		model.addAttribute("thisMonthHoli", commuteService.thisMonthHoli(username));
 		model.addAttribute("thisMonthTime", commuteService.thisMonthTime(username));
+		model.addAttribute("thisMonthAbsent",commuteService.thisMonthAbsent(username));
+		model.addAttribute("thisYearCount", commuteService.thisYearWork(username));
+		model.addAttribute("thisYearLate", commuteService.thisYearLate(username));
+		model.addAttribute("thisYearHoli", commuteService.thisYearHoli(username));
+		model.addAttribute("thisYearTime", commuteService.thisYearTime(username));
+		model.addAttribute("thisYearAbsent",commuteService.thisYearAbsent(username));
 		model.addAttribute("annday", leaveService.getVacinfo(username));
 		System.out.println(username);
-		if(session.getAttribute("level")==null) {
+		if(session.getAttribute("level")==null || !session.getAttribute("level").equals("ROLE_MEMBER")) {
 			
 			Member member= memberMapper.read(username);
 	        session.setAttribute("level", member.getEmp_level());
 	        session.setAttribute("id", member.getEmp_id());
 	        session.setAttribute("name", member.getEmp_name());
 		}
-		
-		
 		
 		return "emp.main";
 	}

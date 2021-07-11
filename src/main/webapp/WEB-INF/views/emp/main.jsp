@@ -51,18 +51,18 @@
                         <td><%= month+"월" %></td>
                         <td>${thisMonthCount}일</td>
                         <td>${thisMonthLate}일</td>
-                        <td></td>
+                        <td>${thisMonthAbsent}일</td>
                         <td>${thisMonthHoli}일</td>
                         <td>${thisMonthTime}시간</td>  
                     </tr>
                     
                     <tr>
                         <td><%= year+"년" %></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>  
+                        <td>${thisYearCount}일</td>
+                        <td>${thisYearLate}일</td>
+                        <td>${thisYearAbsent}일</td>
+                        <td>${thisYearHoli}일</td>
+                        <td>${thisYearTime}시간</td>  
                     </tr>
                     
                     
@@ -80,9 +80,9 @@
                     
                     <tr>
                         <td>연차</td>
-                        <td>${annday.total_annday}</td>
-                        <td>${annday.annday_used}</td>
-                        <td>${annday.annday_rest}</td>
+                        <td>${annday.total_annday}일</td>
+                        <td>${annday.annday_used}일</td>
+                        <td>${annday.annday_rest}일</td>
                         <td></td>  
                     </tr>
                     

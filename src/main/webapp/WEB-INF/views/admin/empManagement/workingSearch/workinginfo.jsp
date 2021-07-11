@@ -48,116 +48,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					
+					<c:forEach items="${attendlist}" var="all">
 					<tr>
-						<td class="td-one">47</td>
-						<td class="td-two">경영지원</td>
-						<td class="td-three">민지율</td>
-						<td class="td-four">8</td>
-						<td class="td-five">1</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">72</td>
+						<td class="td-one">${all.emp_id}</td>
+						<td class="td-two">${all.emp_dept}</td>
+						<td class="td-three">${all.emp_name}</td>
+						<td class="td-four">${all.workDay} <c:if test="${!empty all.workDay}">일</c:if></td>
+						<td class="td-five">${all.lateDay}<c:if test="${!empty all.lateDay}">일</c:if></td>
+						<td class="td-six">${all.absent}<c:if test="${!empty all.absent}">일</c:if></td>
+						<td class="td-seven">${all.holiday}<c:if test="${!empty all.holiday}">일</c:if></td>
+						<td class="td-eight">${all.workingTime}<c:if test="${!empty all.workingTime}">시간</c:if></td>
 					</tr>
+					</c:forEach>
 					
-					<tr>
-						<td class="td-one">46</td>
-						<td class="td-two">개발1팀</td>
-						<td class="td-three">박예슬</td>
-						<td class="td-four">7</td>
-						<td class="td-five">0</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">1</td>
-						<td class="td-eight">59</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">45</td>
-						<td class="td-two">상품기획</td>
-						<td class="td-three">신윤호</td>
-						<td class="td-four">7</td>
-						<td class="td-five">1</td>
-						<td class="td-six">1</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">55</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">44</td>
-						<td class="td-two">자산관리</td>
-						<td class="td-three">이다정</td>
-						<td class="td-four">8</td>
-						<td class="td-five">0</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">73</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">43</td>
-						<td class="td-two">개발1팀</td>
-						<td class="td-three">이정연</td>
-						<td class="td-four">8</td>
-						<td class="td-five">0</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">74</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">42</td>
-						<td class="td-two">상품기획</td>
-						<td class="td-three">황근하</td>
-						<td class="td-four">8</td>
-						<td class="td-five">1</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">90</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">41</td>
-						<td class="td-two">개발2팀</td>
-						<td class="td-three">최샘이</td>
-						<td class="td-four">8</td>
-						<td class="td-five">0</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">76</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">41</td>
-						<td class="td-two">개발2팀</td>
-						<td class="td-three">최샘이</td>
-						<td class="td-four">8</td>
-						<td class="td-five">0</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">76</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">41</td>
-						<td class="td-two">개발2팀</td>
-						<td class="td-three">최샘이</td>
-						<td class="td-four">8</td>
-						<td class="td-five">0</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">76</td>
-					</tr>
-					
-					<tr>
-						<td class="td-one">41</td>
-						<td class="td-two">개발2팀</td>
-						<td class="td-three">최샘이</td>
-						<td class="td-four">8</td>
-						<td class="td-five">0</td>
-						<td class="td-six">0</td>
-						<td class="td-seven">0</td>
-						<td class="td-eight">76</td>
-					</tr>
 					
 				</tbody>
 			</table>

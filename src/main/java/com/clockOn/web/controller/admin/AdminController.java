@@ -40,7 +40,7 @@ public class AdminController {
 		model.addAttribute("holiday_count", commuteService.holidayCount());
 		model.addAttribute("late_count", commuteService.lateCount());
 		
-		if(session.getAttribute("level")==null) {
+		if(session.getAttribute("level")==null || !session.getAttribute("level").equals("ROLE_ADMIN")) {
 			String username = principal.getName();
 			Member member= memberMapper.read(username);
 	        session.setAttribute("level", member.getEmp_level());

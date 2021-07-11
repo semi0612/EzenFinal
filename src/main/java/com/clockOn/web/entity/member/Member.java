@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.clockOn.web.entity.commute.Commute;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +27,8 @@ public class Member{
    private String emp_pic;
    private int total_annday;
    private int annday_used;
-   private List<Auth> auth; 
+   private List<Auth> auth;
+   private List<Commute> commute;
 
    
     public Member(String emp_id, String emp_pw, String emp_name, String emp_email, String emp_tel, String emp_dept, String emp_posi, 
@@ -66,6 +69,12 @@ public class Member{
       this.emp_name = emp_name;
       this.emp_level = emp_level;
 //      this.auth.add(new Auth(emp_id, emp_level));
+   }
+   
+   public Member(String emp_id, String emp_dept, String emp_name) {
+	   this.emp_id = emp_id;
+	   this.emp_dept = emp_dept;
+	   this.emp_name = emp_name;
    }
    
    

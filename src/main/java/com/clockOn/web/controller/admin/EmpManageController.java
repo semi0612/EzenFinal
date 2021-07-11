@@ -2,6 +2,7 @@ package com.clockOn.web.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clockOn.web.entity.Organization;
+import com.clockOn.web.entity.member.Attendance;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
 import com.clockOn.web.entity.member.MemberSal;
+import com.clockOn.web.service.attendance.CommuteService;
 import com.clockOn.web.service.empManagement.AttendanceService;
 import com.clockOn.web.service.empManagement.MemberService;
 import com.clockOn.web.service.empManagement.OrgService;
@@ -36,8 +39,10 @@ public class EmpManageController {
    private OrgService orgService;
    @Autowired
    private MemberService memberService;
+   @Autowired
+   private CommuteService commuteService;
 //   @Autowired
-   private AttendanceService attendanceService;
+   //private AttendanceService attendanceService;
 
 
    @GetMapping("organization")
@@ -178,8 +183,10 @@ public class EmpManageController {
    }
    
    @GetMapping("workinginfo")
-   public String workinginfo() {
+   public String workinginfo(Model model) {
 	   
+	   List<HashMap<String, Object>> list= commuteService.allMemberCommute();
+	   model.addAttribute("attendlist", list);
 	   
 	   return "empManagement.workingSearch.workinginfo";
    }

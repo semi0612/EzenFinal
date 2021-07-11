@@ -42,25 +42,98 @@ insert into working_atti (WORK_RID, WORK_DAY, WORK_IN, EMP_ID) values('09', curd
  ]]>
 </select>
 
+<!-- 자신의 해당 월 결근 기록 확인 -->
+
 <!-- 자신의 해당 월 지각 기록 확인 -->
 <select id="thisMonthLate" parameterType="String" resultType="int">
 <![CDATA[ 
-	select count(*) from working_atti where( work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW()) ) and emp_id= #{emp_id} and work_in is not null and WORK_IN between '09:00:00' and '18:00:00';
+	select count(*) from working_atti where( work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW()) ) and emp_id= #{emp_id} and work_in is not null and WORK_IN between '09:00:00' and '18:00:00'
 ]]>
 </select>
 <!-- 자신의 해당 월 휴무 기록 확인 -->
 <select id="thisMonthHoli" parameterType="String" resultType="int">
-<![CDATA[ 
-	select count(*) from holiday where ( HOLI_START > LAST_DAY(NOW() - interval 1 month) or HOLI_END <= LAST_DAY(NOW()) ) and emp_id = #{emp_id};
+
+<![CDATA[
+	select count(holi_code) 
+	from working_atti 
+	where emp_id= #{emp_id} and holi_code is not null and ( work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW()) )
 ]]>
 </select>
 
 <!-- 자신의 해당 월 근무시간 확인 -->
 <select id="thisMonthTime" parameterType="String" resultType="int">
 <![CDATA[ 	
-	select sum(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT)) as workingTime from working_atti where emp_id = #{emp_id} and ( work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW()) );
+	select IF(sum(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT)), sum(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT)), '0') as workingTime from working_atti where emp_id = #{emp_id} and ( work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW()) )
 ]]>	
 </select>
 
 
+
+<!-- 자신의 해당 년도 출근 기록 확인 -->
+<select id="thisYearWork" parameterType="String" resultType="int">
+ <![CDATA[    
+	select count(*) from working_atti where DATE_FORMAT(work_day,'%Y') = DATE_FORMAT(now(),'%Y') and emp_id = #{emp_id} and work_in is not null
+ ]]>
+</select>
+
+<!-- 자신의 해당 년도 결근 기록 확인 -->
+
+<!-- 자신의 해당 년도 지각 기록 확인 -->
+<select id="thisYearLate" parameterType="String" resultType="int">
+<![CDATA[
+	select count(*) from working_atti where DATE_FORMAT(work_day,'%Y') = DATE_FORMAT(now(),'%Y') and emp_id = #{emp_id} and work_in is not null and WORK_IN between '09:00:00' and '18:00:00'
+]]>
+</select>
+<!-- 자신의 해당 년도 휴무 기록 확인 -->
+<select id="thisYearHoli" parameterType="String" resultType="int">
+<![CDATA[ 
+	select count(holi_code) from working_atti where emp_id= #{emp_id} and holi_code is not null and DATE_FORMAT(WORK_DAY,'%Y') = DATE_FORMAT(now(),'%Y')
+]]>
+</select>
+
+<!-- 자신의 해당 년도 근무시간 확인 -->
+<select id="thisYearTime" parameterType="String" resultType="int">
+<![CDATA[ 	
+	select IF(sum(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT)), sum(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT)), '0')  as workingTime from working_atti where DATE_FORMAT(WORK_DAY,'%Y') = DATE_FORMAT(now(),'%Y') and emp_id = #{emp_id}
+]]>	
+</select>
+
+<!--  1. 한번에 여러명 불러온다
+2. service DAO ~~~ list.add() -->
+<!-- 모든직원의 근태기록 조회 -->
+<select id="allMemberCommute" resultType="HashMap">
+	select e.emp_id, emp_dept, emp_name, w.workDay, l.lateDay, h.holiday, t.workingTime from employee e 
+	left outer join (select emp_id, count(work_rid) as workDay from working_atti where work_in is not null group by emp_id) as w on e.emp_id = w.emp_id
+	left outer join (select emp_id, count(*) as lateDay from working_atti where work_in is not null and WORK_IN between '09:00:00' and '18:00:00' group by emp_id) as l on e.emp_id=l.emp_id
+	left outer join (select emp_id, count(holi_code) as holiday from working_atti where holi_code is not null group by emp_id) as h on e.emp_id = h.emp_id
+	left outer join (select emp_id, IF(sum(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT)), sum(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT)), '0') as workingTime from working_atti group by emp_id) as t on e.emp_id = t.emp_id
+</select>
+
+<select id="cntWork" resultType="int">
+	select wkDay_work from employee e 
+	left outer join (select emp_id, count(work_rid) as wkDay_work from working_atti where work_in is not null and  DAYOFWEEK(work_day) !=7 and DAYOFWEEK(work_day) !=1 group by emp_id) as w
+	on e.emp_id = w.emp_id order by e.emp_id asc;
+</select>
+
+<select id="cntWdays" resultType="int" parameterType="String">
+<![CDATA[
+	select count(work_rid) as wkDay_work 
+	from working_atti 
+	where emp_id = #{emp_id} 
+		and work_in is not null 
+		and DAYOFWEEK(work_day) !=7 and DAYOFWEEK(work_day) !=1 
+		and ( work_day > LAST_DAY(NOW() - interval 1 month) AND work_day <= LAST_DAY(NOW()) )
+]]>
+</select>
+
+<select id="cntYdays" resultType="int" parameterType="String">
+<![CDATA[
+	select count(work_rid) as wkDay_work 
+	from working_atti 
+	where emp_id = #{emp_id} 
+		and work_in is not null 
+		and DAYOFWEEK(work_day) !=7 and DAYOFWEEK(work_day) !=1 
+		and DATE_FORMAT(work_day,'%Y') = DATE_FORMAT(now(),'%Y')
+]]>
+</select>
 </mapper>
