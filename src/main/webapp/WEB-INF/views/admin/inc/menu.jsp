@@ -27,7 +27,7 @@
                         <li class="menu" onmouseover="expand_sub(this)"><i class="fas fa-users"></i> <em>직원관리</em></li>
                     </a>
                     <ul class="submenu">
-                        <a href="#">
+                        <a href="/admin/empManagement/workinginfo">
                             <li><em>근태관리</em></li>
                         </a>
                         <a href="/admin/empManagement/memberlist">
@@ -71,7 +71,7 @@
             <ul class="profile">
                 <div class="menu-category">설정</div>
                 
-                <a href="/adminProfile?emp_id=<sec:authentication property='principal.member.emp_id' />">
+                <a href="/adminProfile?emp_id=${id}">
                     <li class="menu"><i class="fas fa-user"></i><em>프로필</em></li>
                 </a>
             </ul>

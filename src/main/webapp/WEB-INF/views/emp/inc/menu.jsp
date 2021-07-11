@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%> 
+<%-- <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%> --%> 
 	  
  <nav class="menubar emp" onmouseover="content_flow()" onmouseout="content_flow2()">
         <ul>
@@ -13,7 +13,7 @@
                     <li class="menu" onmouseover="expand_sub(this)"><i class="fas fa-clock"></i> <em>출퇴근기록</em></li>
                 </a>
                 <ul class="submenu">
-                    <a href="calendar">
+                    <a href="/emp/calendar">
                         <li><em>캘린더형보기</em></li>
                     </a>
                     <a href="#">
@@ -39,10 +39,10 @@
                     <li class="menu" onmouseover="expand_sub(this)"><i class="fas fa-paper-plane"></i> <em>요청</em></li>
                 </a>
                 <ul class="submenu">
-                    <a href="#">
+                    <a href="/emp/request/corrRequest">
                         <li><em>정정신청</em></li>
                     </a>
-                    <a href="#">
+                    <a href="/emp/request/corrList">
                         <li><em>신청내역</em></li>
                     </a>
                 </ul>
@@ -53,7 +53,7 @@
         </ul>
         <ul class="profile">
             <div class="menu-category">설정</div>
-            <a href="/empProfile?emp_id=<sec:authentication property='principal.member.emp_id' />">
+            <a href="/empProfile?emp_id=&{id}">
                 <li class="menu"><i class="fas fa-user"></i><em>프로필</em></li>
             </a>
         </ul>

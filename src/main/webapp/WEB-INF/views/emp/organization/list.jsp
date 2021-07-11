@@ -1,4 +1,4 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/css/organization.css">
@@ -25,6 +25,8 @@
 					<div class="org-center-two">5</div>
 					<span class="org-center-two-text">명</span>
 				</div>
+
+				
 			</div>
 			<table class="org-table">
 				<thead>

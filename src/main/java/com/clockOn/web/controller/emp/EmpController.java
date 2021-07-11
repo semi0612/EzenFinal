@@ -21,6 +21,7 @@ import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
 import com.clockOn.web.service.attendance.CommuteService;
 import com.clockOn.web.service.empManagement.MemberService;
+import com.clockOn.web.service.vacation.LeaveService;
 
 import lombok.Setter;
 
@@ -37,15 +38,33 @@ public class EmpController {
 	private MemberService memberService;
 	
 	@Autowired
+	private LeaveService leaveService;
+	
+	@Autowired
 	private ServletContext ctx;
 
 	@Autowired
 	private CommuteService commuteService;
 	
 	@GetMapping("main")
-	public String emp_main(Principal principal, HttpSession session) {
+	public String emp_main(Principal principal, HttpSession session, Model model) {
+		String username = principal.getName();
+		/*
+		 * model.addAttribute("thisMonthCount",commuteService.thisMonthWork(username));
+		 * model.addAttribute("thisMonthLate", commuteService.thisMonthLate(username));
+		 * model.addAttribute("thisMonthHoli", commuteService.thisMonthHoli(username));
+		 * model.addAttribute("thisMonthTime", commuteService.thisMonthTime(username));
+		 * model.addAttribute("thisMonthAbsent",commuteService.thisMonthAbsent(username)
+		 * ); model.addAttribute("thisYearCount",
+		 * commuteService.thisYearWork(username)); model.addAttribute("thisYearLate",
+		 * commuteService.thisYearLate(username)); model.addAttribute("thisYearHoli",
+		 * commuteService.thisYearHoli(username)); model.addAttribute("thisYearTime",
+		 * commuteService.thisYearTime(username));
+		 * model.addAttribute("thisYearAbsent",commuteService.thisYearAbsent(username));
+		 * model.addAttribute("annday", leaveService.getVacinfo(username));
+		 */
 		if(session.getAttribute("level")==null || !session.getAttribute("level").equals("ROLE_MEMBER")) {
-			String username = principal.getName();
+			
 			Member member= memberMapper.read(username);
 	        session.setAttribute("level", member.getEmp_level());
 	        session.setAttribute("id", member.getEmp_id());

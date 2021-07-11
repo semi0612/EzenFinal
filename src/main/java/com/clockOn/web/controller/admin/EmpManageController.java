@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clockOn.web.entity.Organization;
@@ -25,14 +23,9 @@ import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
 import com.clockOn.web.entity.member.MemberSal;
-import com.clockOn.web.entity.member.Search;
-import com.clockOn.web.service.empManagement.AttendanceService;
+import com.clockOn.web.service.attendance.CommuteService;
 import com.clockOn.web.service.empManagement.MemberService;
 import com.clockOn.web.service.empManagement.OrgService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/admin/empManagement/")
@@ -43,15 +36,17 @@ public class EmpManageController {
 	private OrgService orgService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private CommuteService commuteService;
 //	@Autowired
-	private AttendanceService attendanceService;
+//	private AttendanceService attendanceService;
 
 	@GetMapping("organization")
 	public String organization(Model model) {
 		model.addAttribute("orgView", orgService.orgView());
 		model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
 		model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
-
+		model.addAttribute("memberCount", memberService.count());
 		return "empManagement.organization.list";
 	}
 
@@ -177,5 +172,20 @@ public class EmpManageController {
 		response.sendRedirect("memberlist");
 		return "empManagement.empinfo.memberList";
 	}
+	@GetMapping("profile")
+	public void profile(HttpServletResponse response) throws IOException {
+		   response.sendRedirect("/profile");
+		   
+		   
+	}
+	
+	@GetMapping("workinginfo")
+	public String workinginfo(Model model) {
+		   
+		   List<HashMap<String, Object>> list= commuteService.allMemberCommute();
+		   model.addAttribute("attendlist", list);
+		   
+		   return "empManagement.workingSearch.workinginfo";
+}
 
 }
