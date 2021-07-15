@@ -31,7 +31,10 @@ select * from lateCount
 
 <insert id="hiSuccess" parameterType="String">
 
-insert into working_atti (WORK_RID, WORK_DAY, WORK_IN, EMP_ID) values('09', curdate(), DATE_FORMAT(now(), '%H:%i:%s'), #{emp_id})
+
+insert into working_atti (WORK_DAY, WORK_IN, EMP_ID) values(curdate(), DATE_FORMAT(now(), '%H:%i:%s'), #{emp_id})
+		
+	
    
 </insert>
 
