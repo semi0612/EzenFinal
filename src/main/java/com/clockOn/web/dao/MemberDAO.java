@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
@@ -31,7 +33,7 @@ public interface MemberDAO {
 	
 	public List<MemberList> searchList(List<Map<String, String>> list);
 	
-	public List<MemberLeave> listLeave();
+	public List<MemberLeave> listLeave(@Param("size") int size, @Param("offset") int offset);
 
 	public List<MemberSal> listSal();
 

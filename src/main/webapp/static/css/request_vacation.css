@@ -138,3 +138,7 @@ td:nth-child(5) {
     font-size: 14px;
     transform: rotate(-0.03deg);
 }
+.sub-tab {
+    position: relative;
+    left: 1212px !important;
+}

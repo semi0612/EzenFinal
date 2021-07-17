@@ -73,10 +73,10 @@ public class EmpManageController {
 		return "empManagement.empinfo.memberList";
 	}
 
-
+	//페이징처리
 	@GetMapping("leaveInfo")
-	public String leaveInfo(Model model) {
-		List<MemberLeave> list = memberService.listLeave();
+	public String leaveInfo(Model model, @RequestParam(name="p", defaultValue="1") int page) {
+		List<MemberLeave> list = memberService.listLeave(page);
 		model.addAttribute("list", list);
 		int cnt = memberService.count();
 		model.addAttribute("cnt", cnt);

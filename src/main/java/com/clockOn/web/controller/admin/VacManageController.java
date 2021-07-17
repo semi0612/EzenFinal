@@ -41,7 +41,7 @@ public class VacManageController {
 	
 	@PostMapping("confirm")
 	public void confirmReq(String id, String holi_code, String holi_period, float holi_cnt, String emp_id, HttpServletResponse response) throws IOException {
-		String[] off = holi_period.split(" / ");
+		String[] off = holi_period.split(" / "); 
 //		String last = off[off.length-1];
 //		off[off.length-1] = last.substring(0, 8); //날짜별로 쪼개서 배열에 저장
 //		int indexf = last.indexOf("(");

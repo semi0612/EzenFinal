@@ -36,7 +36,7 @@ public class MemberDAOImplTest {
 	}
 	@Test
 	public void listView() {
-		System.out.println(memberDao.listLeave().get(0).getEmp_dept());
+		System.out.println(memberDao.listLeave(10, 3).get(0).getEmp_dept());
 	}
 
 }

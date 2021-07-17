@@ -62,7 +62,6 @@ function getMap(){
 }
 
 
-
 window.onload = function(){
     getMap();
 }

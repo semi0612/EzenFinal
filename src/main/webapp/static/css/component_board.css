@@ -29,3 +29,6 @@ color: var(--base-color);
     left: 205px;
     top: 10px;
 }
+table.tbl-ex.emp-tbl {
+    margin-bottom: 200px;
+}

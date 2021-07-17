@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<%-- <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%> --%> 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%> 
 	  
  <nav class="menubar emp" onmouseover="content_flow()" onmouseout="content_flow2()">
         <ul>
@@ -47,13 +47,13 @@
                     </a>
                 </ul>
             </div>
-            <a href="organization">
+            <a href="/emp/organization/organization">
                 <li class="menu"><i class="fas fa-users"></i> <em>연락망</em></li>
             </a>
         </ul>
         <ul class="profile">
             <div class="menu-category">설정</div>
-            <a href="/empProfile?emp_id=&{id}">
+            <a href="/empProfile?emp_id=<sec:authentication property='principal.member.emp_id'/>">
                 <li class="menu"><i class="fas fa-user"></i><em>프로필</em></li>
             </a>
         </ul>

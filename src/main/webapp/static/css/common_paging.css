@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.indexer, .pager {
+    color: var(--base-color2);
+    width: 1200px;
+    position: relative;
+    padding-right: 50px;
+    right: -300px;
+}
+.imp, .text-imp{
+	color:var(--imp-color) !important;
+}
+.bold{
+	font-weight:bold;
+}
+
+.align-right{
+	text-align:right;
+}
+
+.align-center, .center{
+	text-align:center;
+}
+
+.pages, .pages li a {
+    color: var(--base-color2);
+    display: inline-block;
+    padding: 10px;
+}
+
+.align-center.pager span, .pager div, .pager ul li {
+    display: inline-block;
+}
+.btn-next, .btn-prev {cursor:pointer;}
+
+table.tbl-ex.emp-tbl {
+    margin-bottom: 20px !important;
+}

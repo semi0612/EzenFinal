@@ -168,8 +168,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberLeave> listLeave() {
-		return memberDao.listLeave();
+	public List<MemberLeave> listLeave(int page) {
+		int size=10; //한 페이지에서 보여줄 항목의 수
+		int offset = 0+(page-1)*size; //건너띌 자료의 개수
+		return memberDao.listLeave(size, offset);
 	}
 
 	@Override
