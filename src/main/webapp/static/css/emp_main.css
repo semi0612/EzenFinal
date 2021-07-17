@@ -1,0 +1,114 @@
+.commute-title {
+    padding-left: 20px;
+    font-size: 24px;
+    margin: 0px;
+}
+
+.vacation-title {
+	padding-left: 20px;
+	padding-top: 50px;
+    font-size: 24px;
+    margin: 0px;
+}
+
+.work-title {
+	padding-left: 20px;
+	padding-top: 50px;
+    font-size: 24px;
+    margin: 0px;
+}
+
+
+/* 근로 통계게시판 디자인 */
+
+.tbl-work, .tbl-work th , .tbl-work td{
+  border:1.5px solid var(--base-color2);
+  width: 800px;    
+  border-width: 0.1px 0;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 20px;
+  font-size: 15px;
+  padding:10px;
+  transform: rotate(-0.03deg);
+}
+
+
+.tbl-work th{
+border-bottom: 1.5px solid var(--base-color4);
+font-size: 14px;
+color: var(--base-color);
+background-color: var(--base-color4);
+}
+
+.tbl-work td{
+  border-style:solid;
+  font-size: 12px;
+}
+
+/* 휴가 통계게시판 디자인 */
+
+.tbl-vacation, .tbl-vacation th , .tbl-vacation td{
+  border:1.5px solid var(--base-color2);
+  width: 500px;    
+  border-width: 0.1px 0;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 20px;
+  font-size: 15px;
+  padding:10px;
+  transform: rotate(-0.03deg);
+}
+
+
+.tbl-vacation th{
+border-bottom: 1.5px solid var(--base-color4);
+font-size: 13px;
+color: var(--base-color);
+background-color: var(--base-color4);
+}
+
+.tbl-vacation td{
+  border-style:solid;
+  font-size: 12px;
+}
+
+/* 버튼 디자인 */
+
+.update-button {
+  color: var(--bg-color);
+  background-color: var(--imp-color2);
+  height: 35px;
+  float: left;
+  margin-top: 30px;
+  margin-right: 20px;
+  margin-left: 30px;
+  width: 588px;
+}
+
+.hi-button {
+  color: var(--bg-color);
+  background-color: var(--imp-color2);
+  margin-left: 20px;
+  margin-top : 20px;
+  width: 120px;
+  font-size: 14px;	
+}
+
+.bye-button {
+  color: var(--bg-color);
+  background-color: var(--base-color2);
+  width: 120px;
+  margin-top : 20px;
+  font-size: 14px;
+}
+
+.hi-button:hover {
+  background-color: var(--imp-color);
+}
+
+.bye-button:hover {
+  background-color: var(--base-color);
+}

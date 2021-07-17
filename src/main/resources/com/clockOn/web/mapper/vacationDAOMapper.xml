@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clockOn.web.dao.VacationDAO">
+
+	<select id="getVacInfo" resultType="com.clockOn.web.entity.vacation.Annday" parameterType="String">
+      select total_annday, annday_used, total_annday-annday_used as annday_rest from employee where emp_id = #{emp_id};
+	</select>
+
+	<select id="list" resultType="com.clockOn.web.entity.member.MemberLeave">
+		select org_teamname as emp_dept, emp_id, emp_name, emp_posi,
+			total_annday, annday_used, total_annday-annday_used as annday_rest, emp_join, emp_resi 
+		from employee e join organization o on e.emp_dept = o.org_teamcode;
+	</select>
+	
+	<insert id="" parameterType="com.clockOn.web.entity.vacation.Vacation">
+		insert into holiday(holi_start, holi_end, holi_res, holi_code, holi_evi, emp_id) values('2021-07-12','2021-07-15','여름휴가','연차','결재.jpg','072210');
+	</insert>
+
+</mapper>

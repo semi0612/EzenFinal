@@ -1,0 +1,225 @@
+/* 버튼 공통 기본디자인 */
+button, .button-label{
+    width: 80px;
+    height: 25px;
+    transform: rotate(-0.03deg);
+    font-family: var( --font);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    /* transition: all 0.3s ease 0s; */
+    cursor: pointer;
+}
+
+label.button-label {
+    text-align: center;
+    padding-top: 7px;
+    height: 27px;
+}
+
+/*프리뷰 들어갈 img css*/
+img#preview {
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 360px;
+    height: 300px;
+    border: 2px solid rgb(217,217,217);
+    text-align: center;
+    display: inline-block;
+    vertical-align: center;
+}
+
+/* 채팅하기 버튼 */
+.component .description .button:hover {
+  background-color: var(--imp-color);
+}
+
+/*승인대기 버튼*/
+.button-one {color: var( --base-color); background-color: var( --base-color3); cursor: auto;}
+
+/*정정요청 버튼*/
+.button-two {  color: var(--bg-color);  background-color: var(--base-color1);  }
+.button-two:hover { background-color: var(--imp-color); }
+
+/* 기본 파란색 계열 버튼 */
+.button-three {color: var(--bg-color); background-color: var(--imp-color2);}
+.button-three:hover {background-color: var(--imp-color);}
+
+/*셀렉트박스*/
+select{
+  height: 24px;
+  transform: rotate(-0.03deg);
+  border: 2px solid var(--base-color3);
+  width: 140px;
+  box-sizing: content-box;
+}
+
+/* 체크박스 */
+  input[type="checkbox"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.emp-tbl input[type="checkbox"] {
+    border: 1px solid var(--base-color3);
+    overflow: hidden;
+    padding: 0;
+    width: 12px;
+    height: 13px;
+    margin: 0;
+    clip: unset;
+    position: relative;
+}
+
+input[type="checkbox"] + label {
+  font-size: 14px;
+  position: relative;
+  padding: 10px;
+  padding-left: 2em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input[type="checkbox"] + label:before {
+  box-sizing: content-box;
+  content: '';
+  color: var(--base-color1);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: -9px;
+  border: 2px solid var(--base-color3);
+  text-align: center;
+}
+
+input[type="checkbox"] + label:after {
+  box-sizing: content-box;
+  content: '';
+  background-color: #900;
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transform-origin: 50%;
+  transform-origin: 50%;
+  -webkit-transition: -webkit-transform 200ms ease-out;
+  transition: -webkit-transform 200ms ease-out;
+  transition: transform 200ms ease-out;
+  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out;
+}
+
+input[type="checkbox"] + label:after {
+  background-color: transparent;
+  top: 50%;
+  left: 4px;
+  width: 8px;
+  height: 3px;
+  margin-top: -4px;
+  border-style: solid;
+  border-color: var(--base-color1);
+  border-width: 0 0 3px 3px;
+  -webkit-border-image: none;
+  -o-border-image: none;
+  border-image: none;
+  -webkit-transform: rotate(-45deg) scale(0);
+  transform: rotate(-45deg) scale(0);
+  -webkit-transition: none;
+  transition: none;
+}
+
+input[type="checkbox"]:checked + label:after {
+  content: '';
+  -webkit-transform: rotate(-45deg) scale(1);
+  transform: rotate(-45deg) scale(1);
+  -webkit-transition: -webkit-transform 200ms ease-out;
+  transition: -webkit-transform 200ms ease-out;
+  transition: transform 200ms ease-out;
+  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out;
+}
+
+input[type="checkbox"]:checked + label:before {
+  -webkit-animation: borderscale 200ms ease-in;
+  animation: borderscale 200ms ease-in;
+}
+
+input[type="checkbox"]:checked + label:after {
+  -webkit-transform: rotate(-45deg) scale(1);
+  transform: rotate(-45deg) scale(1);
+}
+
+:required:not(:focus) ~ .error-msg,
+:invalid:required ~ .error-msg {
+  max-height: 9em;
+}
+
+/* 검색창 */
+th input.search { /*테이블 컬럼별 작은 검색창*/
+  padding: 2px 0px 4px 7px;
+  width: 70px;
+  height: 15px;
+  text-align: left;
+  border: 1px solid var(--base-color4);
+}
+
+#searchform{
+  display: inline-block;
+}
+#simpleSearch {
+  display: inline-block;
+  position: relative;
+  width: 180px; height: 1.5em;
+  border: 2px solid var(--base-color3);
+  background: white;
+  top: 2px;
+}
+.searchInput {
+  margin: 0; border: 0;
+  vertical-align: text-top;
+  padding: 0.3em 0 0.2em 0.2em;
+  font-size: 13px;
+  font-family: var(--font);
+  line-height: 120%;
+  outline: none;
+  transform: rotate(-0.03deg);
+}
+.searchInput::-webkit-search-cancel-button { display: none; }
+.searchButton {
+  position: absolute;
+  top: 0; right: 0;
+  margin: 0; padding: 0; border: 0;
+  width: 1.65em; height: 100%;
+  cursor: pointer;
+  text-indent: -99999px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAANCAAAAAC4QtCeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAP9bkSK1AAAAaklEQVQI12P4///u3NrauXf/AwHD//05YLAfxLmbl7/n48c9+Xn3gZxJYDGg/BQgpyznC4jzJacMmVOMrgxowMFPnw5CDIAZnbMLxAFaWl09txrEY/gPAe87gTwY5//PmTmr4Jz/f699BgAmIHmp1XxJagAAAABJRU5ErkJggg==');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+/* 데이터리스트 */
+.dataoption {
+  transform: rotate(-0.03deg);  
+  border: 2px solid var(--base-color3);
+  font-family: var(--font);
+  position: relative;
+  bottom: 2px;
+  height: 22px;
+  background:url('images/down-arrow.png') no-repeat 97% 50%/12px auto;
+}
+

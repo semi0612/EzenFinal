@@ -1,0 +1,48 @@
+.corrList {
+	table-layout:fixed; 
+}
+
+.corrList .corr1 {
+	width: 150px;
+}
+
+.corrList .corr2 {
+	width: 120px;
+}
+
+.corrList .corr3 {
+	width: 250px;
+}
+
+.corrList .corr4 {
+	width: 150px;
+}
+
+.corrList .corr5 {
+	width: 150px;
+}
+
+.corrList, .corrList th, .corrList td{
+  border:1px solid var(--base-color4);
+  width: 1000px;    
+  border-width: 0.1px 0;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 100px;
+  margin-left: 250px;
+  margin-bottom: 200px;
+  font-size: 15px;
+  padding:10px;
+  transform: rotate(-0.03deg);
+}
+
+
+.corrList th{
+border-bottom: 1.5px solid var(--base-color4);
+font-size: 16px;
+color: var(--base-color);
+}
+
+.corrList td{
+  border-style:solid;
+}
