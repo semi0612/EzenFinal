@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clockOn.web.dao.MemberDAO;
+import com.clockOn.web.entity.Criteria;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
 import com.clockOn.web.service.attendance.CommuteService;
@@ -50,6 +51,9 @@ public class EmpController {
 	@Autowired
 	private ServletContext ctx;
 	
+	@Autowired
+	private Criteria cri;
+	
 	@GetMapping("main")
 	public String emp_main(Principal principal, HttpSession session, Model model) {
 		String username = principal.getName();
@@ -80,7 +84,7 @@ public class EmpController {
 	
 	@GetMapping("organization")
 	public String organization(Model model) {
-		model.addAttribute("orgView", orgService.orgView());
+		model.addAttribute("orgView", orgService.orgView(cri));
 	      model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
 	      model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
 	      model.addAttribute("memberCount", memberService.count());

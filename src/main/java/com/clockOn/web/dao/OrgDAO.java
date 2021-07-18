@@ -3,11 +3,12 @@ package com.clockOn.web.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.clockOn.web.entity.Criteria;
 import com.clockOn.web.entity.Organization;
 
 public interface OrgDAO {
 	//모든 팀 리스트 얻기 - 조직도 페이지 & 팀리스트 셀렉트박스
-	public List<Organization> list();
+	public List<Organization> list(Criteria cri);
 	
 	//팀얻기 - 사실 조건에 따른 팀 얻기로 파라미터 들어가야 함. 일단은 만들어둠
 	public Organization get();

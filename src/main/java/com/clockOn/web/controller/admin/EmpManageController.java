@@ -2,7 +2,6 @@ package com.clockOn.web.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.clockOn.web.entity.Criteria;
 import com.clockOn.web.entity.Organization;
-import com.clockOn.web.entity.member.Attendance;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
 import com.clockOn.web.entity.member.MemberSal;
 import com.clockOn.web.service.attendance.CommuteService;
-import com.clockOn.web.service.empManagement.AttendanceService;
 import com.clockOn.web.service.empManagement.MemberService;
 import com.clockOn.web.service.empManagement.OrgService;
 
@@ -43,11 +41,14 @@ public class EmpManageController {
    private CommuteService commuteService;
 //   @Autowired
    //private AttendanceService attendanceService;
+   
+   @Autowired
+   private Criteria cri;
 
 
    @GetMapping("organization")
    public String organization(Model model) {
-      model.addAttribute("orgView", orgService.orgView());
+      model.addAttribute("orgView", orgService.orgView(cri));
       model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
       model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
       model.addAttribute("memberCount", memberService.count());
@@ -119,7 +120,7 @@ public class EmpManageController {
 //         System.out.println(realPath);
       }
       /*팀명으로 받아서 숫자로 바꿔넣어주기*/
-         List<Organization> o = orgService.orgView();
+         List<Organization> o = orgService.orgView(cri);
          for(int i=0; i<o.size(); i++) {
             if(o.get(i).getOrg_teamname().equals(emp_dept)){
                emp_dept = String.valueOf((i+1));
@@ -154,7 +155,7 @@ public class EmpManageController {
    public String updateInfo(String[] emp_id, String[] emp_dept, String[] emp_name, String[] emp_posi, String[] emp_tel, String[] emp_email, String[] emp_level, HttpServletResponse response) throws IOException {
       
       /*팀명으로 받아서 숫자로 바꿔넣어주기*/
-      List<Organization> o = orgService.orgView();
+      List<Organization> o = orgService.orgView(cri);
       
       List<MemberList> list = new ArrayList();
       for(int i=0; i<emp_name.length; i++) {

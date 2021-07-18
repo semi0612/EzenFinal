@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clockOn.web.dao.OrgDAO;
+import com.clockOn.web.entity.Criteria;
 import com.clockOn.web.entity.Organization;
 @Service
 public class OrgServiceImpl implements OrgService {
@@ -15,8 +16,8 @@ public class OrgServiceImpl implements OrgService {
 	private OrgDAO orgDao;
 
 	@Override
-	public List<Organization> orgView() {
-		return orgDao.list();
+	public List<Organization> orgView(Criteria cri) {
+		return orgDao.list(cri);
 	}
 
 	@Override
