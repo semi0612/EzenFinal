@@ -8,8 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       resultType="com.clockOn.web.entity.Organization"> <!-- 리스트인지 객체인지는 구분하지 않는다. 전부 객체로 적어줌 -->
       <!-- select * from organization order by org_teamcode  -->
       select * 
-      from (select org_teamcode, org_groupname, org_teamname, org_teamtel, org_content from organization order by org_teamcode desc) as T1 limit #{skip},#{amount}; 
-   </select> 
+      from (select * from organization order by org_teamcode desc) as T1 limit #{start}, 10; 
+   </select>
+   
+   	<select id="countList" resultType="int">
+		SELECT COUNT(*) FROM organization
+	</select> 
         
    <insert id="add" parameterType="com.clockOn.web.entity.Organization">
       insert into organization(org_groupname, org_teamname, org_teamtel, org_content) 

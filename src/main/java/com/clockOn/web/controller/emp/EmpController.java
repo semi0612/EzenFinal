@@ -15,10 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clockOn.web.dao.MemberDAO;
-import com.clockOn.web.entity.Criteria;
+import com.clockOn.web.entity.PagingVO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
 import com.clockOn.web.service.attendance.CommuteService;
@@ -33,27 +34,25 @@ import lombok.Setter;
 @Controller
 @RequestMapping("/emp/") //localhost ~ /emp/login_emp
 public class EmpController {
-	
+
 	@Setter(onMethod_ = { @Autowired })
 	private MemberDAO memberMapper;
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private LeaveService leaveService;
-	
+
 	@Autowired
 	private CommuteService commuteService;
-	
+
 	@Autowired OrgService orgService;
-	
+
 	@Autowired
 	private ServletContext ctx;
-	
-	@Autowired
-	private Criteria cri;
-	
+
+
 	@GetMapping("main")
 	public String emp_main(Principal principal, HttpSession session, Model model) {
 		String username = principal.getName();
@@ -70,36 +69,52 @@ public class EmpController {
 		model.addAttribute("annday", leaveService.getVacinfo(username));
 		System.out.println(username);
 		if(session.getAttribute("level")==null || !session.getAttribute("level").equals("ROLE_MEMBER")) {
-			
+
 			Member member= memberMapper.read(username);
-	        session.setAttribute("level", member.getEmp_level());
-	        session.setAttribute("id", member.getEmp_id());
-	        session.setAttribute("name", member.getEmp_name());
+			session.setAttribute("level", member.getEmp_level());
+			session.setAttribute("id", member.getEmp_id());
+			session.setAttribute("name", member.getEmp_name());
 		}
-		
+
 		return "emp.main";
 	}
-	
-	
-	
+
+
+
 	@GetMapping("organization")
-	public String organization(Model model) {
-		model.addAttribute("orgView", orgService.orgView(cri));
-	      model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
-	      model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
-	      model.addAttribute("memberCount", memberService.count());
+	public String organization(Model model, PagingVO vo, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+
+		int total = orgService.countList();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "10";
+		}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("orgView", orgService.orgView(vo));
+		model.addAttribute("paging", vo);
+		
+		model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
+		model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
+		model.addAttribute("memberCount", memberService.count());
 		return "emp.organization.list";
 	}
-	
+
+
+
 	@GetMapping("contacts")
-    public String contacts(Model model, String org_teamname) {
-       //System.out.println(contactsService.contactsRead(org_teamname).get(0).getEmp_name());
-       model.addAttribute("contacts", memberService.contactsRead(org_teamname));
-       
-       return "empManagement.organization.contacts";
- }
-	
-	
+	public String contacts(Model model, String org_teamname) {
+		//System.out.println(contactsService.contactsRead(org_teamname).get(0).getEmp_name());
+		model.addAttribute("contacts", memberService.contactsRead(org_teamname));
+
+		return "empManagement.organization.contacts";
+	}
+
+
 	/*
 	 * public ModelAndView handleRequest(HttpServletRequest request,
 	 * HttpServletResponse response) throws Exception {
@@ -109,24 +124,24 @@ public class EmpController {
 	 * 
 	 * return mv; }
 	 */
-	
-	
 
-	
+
+
+
 	@GetMapping("infoUpdate") //보여줄 때
 	public String infoUpdate(String emp_id, Model model) {
 		model.addAttribute("updateProfile", memberService.profile(emp_id));
 		return "emp.infoUpdate";
 	}
 
-	
+
 	@PostMapping("infoUpdate") //처리할 때 (form action) 
 	public String infoUpdate(String emp_id, String emp_pw, String emp_email, String emp_tel, MultipartFile emp_pic) throws IllegalStateException, IOException {
 		//null값이 허용된다면 MemberDAOMapper.xml > 동적쿼리로 만들어야
 		String fileName = emp_pic.getOriginalFilename();
 		System.out.println(fileName + "hi");
 		if(fileName !=null && fileName !="") {
-		//파일업로드
+			//파일업로드
 			String webPath = "/static/upload";
 			String realPath = ctx.getRealPath(webPath);
 			File savePath = new File(realPath);
@@ -138,20 +153,20 @@ public class EmpController {
 			System.out.println("저장경로1" + realPath);
 			emp_pic.transferTo(saveFile);
 		}
-		
+
 		MemberProfile memberProfile = new MemberProfile(emp_id, emp_pw, emp_email, emp_tel, fileName);
-		
+
 		System.out.println("수정된 레코드 수:" + memberService.infoUpdate(memberProfile));
-		
+
 		return "emp.main"; 
 
 	}
-	
+
 	@PostMapping("hiSuccess")
 	public void hiSuccess(String emp_id, HttpServletResponse response) throws IOException {
-		
+
 		commuteService.hiSuccess(emp_id);
-		
+
 		response.sendRedirect("/emp/main");
 	}
 
