@@ -11,16 +11,6 @@ function checkImg() {
 	else return false;
 }
 
-function checkEvi() {
-	var imgname = document.getElementById('vac-prove').value;
-	if (imgname == "") {
-		alert("이미지를 첨부해주세요.");
-		return false;
-	}
-	return true;
-}
-
-
 
 
 /**

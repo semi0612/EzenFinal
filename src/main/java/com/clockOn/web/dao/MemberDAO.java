@@ -2,6 +2,9 @@ package com.clockOn.web.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
@@ -28,7 +31,9 @@ public interface MemberDAO {
 
 	public List<MemberList> listView();
 	
-	public List<MemberLeave> listLeave();
+	public List<MemberList> searchList(List<Map<String, String>> list);
+	
+	public List<MemberLeave> listLeave(@Param("size") int size, @Param("offset") int offset);
 
 	public List<MemberSal> listSal();
 
@@ -45,5 +50,6 @@ public interface MemberDAO {
 	
 	/*¿¹½½´Ô*/   
 	public int infoUpdate(MemberProfile member);
+
 	   
 }

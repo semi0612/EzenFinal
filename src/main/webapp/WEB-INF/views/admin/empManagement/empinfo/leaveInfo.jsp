@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="/css/update_memberinfo.css">
 <link rel="stylesheet" href="/css/component_board.css">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <div class="content-wrapper">
 	<main>
 		<h2>연차정보관리</h2>
@@ -57,14 +58,46 @@
 					<td>${list.annday_rest}</td>
 					<td>${list.emp_join}</td>
 					<td>${list.emp_resi}</td>
-					<%-- <c:if test="${list.emp_level=='1'}">
-						<td>관리자</td>
-					</c:if>
-					<c:if test="${list.emp_level!='1'}">
-						<td>직원</td>
-					</c:if> --%>
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<c:set var ="page" value="${(empty param.p)?1:param.p}"/> <!-- p는 쿼리스트링으로 넘겨준 p 아래참고 -->
+		<c:set var="startNum" value="${page-(page-1)%5}" />
+		<!-- el태그안에서 나누기 연산, 실수값으로 변환 -->
+		<c:set var="lastNum" value="${fn:substringBefore(Math.ceil(cnt/10),'.')}" />
+		<div class="indexer align-right">
+			<div>
+				<span class="text-imp text-strong">${(empty param.p)?1:param.p}</span>
+				/ ${lastNum} pages
+			</div>
+		</div>
+		<div class="align-center pager">
+			<div>
+				<c:if test="${startNum>1}">
+					<a href="?p=${startNum-1}" class="btn btn-next">이전</a>
+				</c:if>
+				<c:if test="${startNum<=1}">
+					<span class="btn btn-prev" onclick="alert('이전 페이지가 없습니다.');">이전</span>
+				</c:if>
+			</div>
+			<ul class="pages center">
+				<c:forEach var="i" begin="0" end="4">
+					<!-- 큰따옴표 안에서 el안 큰따옴표 쓸수 없음. 작은따옴표 &f=${param.f}&q=${param.q}-->
+					<c:if test="${(startNum+i) <= lastNum}">
+						<li><a class="${(page==(startNum+i))?'imp':''} bold"	href="?p=${startNum+i}">${startNum+i}</a></li>
+					</c:if>
+				</c:forEach>
+			</ul>
+			<div>
+				<!-- el태그를 통해서 연산 -->
+				<c:if test="${startNum+5<=lastNum}">
+					<a href="?p=${startNum+5}" class="btn btn-next">다음</a>
+				</c:if>
+				<c:if test="${startNum+5>lastNum}">
+					<span class="btn btn-next" onclick="alert('다음 페이지가 없습니다.');">다음</span>
+				</c:if>
+			</div>
+		</div>
 	</main>
 </div>

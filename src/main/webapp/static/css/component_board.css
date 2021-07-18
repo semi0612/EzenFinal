@@ -1,4 +1,4 @@
-/* 게시판 디자인 */
+/* 寃뚯떆�뙋 �뵒�옄�씤 */
 
 .tbl-ex, .tbl-ex th , .tbl-ex td{
   border:1px solid var(--base-color4);
@@ -22,4 +22,13 @@ color: var(--base-color);
 
 .tbl-ex td{
   border-style:solid;
+}
+
+.btns3{
+	position: relative;
+    left: 205px;
+    top: 10px;
+}
+table.tbl-ex.emp-tbl {
+    margin-bottom: 200px;
 }

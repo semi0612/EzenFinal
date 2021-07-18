@@ -27,7 +27,7 @@
                         <li class="menu" onmouseover="expand_sub(this)"><i class="fas fa-users"></i> <em>직원관리</em></li>
                     </a>
                     <ul class="submenu">
-                        <a href="#">
+                        <a href="/admin/empManagement/workinginfo">
                             <li><em>근태관리</em></li>
                         </a>
                         <a href="/admin/empManagement/memberlist">
@@ -44,10 +44,10 @@
                         </li>
                     </a>
                     <ul class="submenu">
-                        <a href="/admin/vacManagement/current">
+                        <a href="/admin/vacManage/current">
                             <li><em>대기중 요청</em></li>
                         </a>
-                        <a href="/admin/vacManagement/all">
+                        <a href="/admin/vacManage/all">
                             <li><em>전체 내역</em></li>
                         </a>
                     </ul>
@@ -70,8 +70,7 @@
             </ul>
             <ul class="profile">
                 <div class="menu-category">설정</div>
-                
-                <a href="/adminProfile?emp_id=<sec:authentication property='principal.member.emp_id' />">
+              <a href="/empProfile?emp_id=<sec:authentication property='principal.member.emp_id'/>">
                     <li class="menu"><i class="fas fa-user"></i><em>프로필</em></li>
                 </a>
             </ul>

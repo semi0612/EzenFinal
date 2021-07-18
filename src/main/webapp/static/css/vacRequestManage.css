@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+table.tbl-ex.emp-tbl.check th:first-child, td:first-child {
+    width: 30px;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 5%;
+}
+
+th:nth-child(3), td:nth-child(3), th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
+    width: 8%;
+}
+
+th:nth-child(6), td:nth-child(6) {
+   width: 20%;
+   word-break: break-word;
+}
+th:nth-child(7), td:nth-child(7),th:nth-child(8), td:nth-child(8) {
+    width: 11%;
+    word-break: break-all;
+}
+
+td:nth-child(9) {
+    max-width: 40px !important;
+    overflow: hidden;
+}
+
+th:last-child, td:last-child{
+	width:8%;
+}
+td:nth-child(6) {
+    text-align: left;
+}

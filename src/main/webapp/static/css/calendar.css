@@ -86,8 +86,11 @@ button {
     position: relative;
 }
 .calendar{
-    width: 1500px;
+    width: 1000px;
     margin:auto;
+}
+.emp_cal .date.choice-date {
+    height: 80px;
 }
 .clock-record {
     text-align: center;
@@ -95,6 +98,12 @@ button {
     position: relative;
     color: var(--base-color);
     font-weight: 400;
+}
+.warning{
+	color:var(--warn-color); font-weight:bold;
+}
+i.fas.fa-exclamation-circle.warning {
+    padding-left: 39px;
 }
 #msg{
     color: var(--warn-color);

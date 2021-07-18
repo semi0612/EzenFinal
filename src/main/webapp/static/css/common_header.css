@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
-/*헤더영역, 그림자효과, postion 고정*/
+/*�뿤�뜑�쁺�뿭, 洹몃┝�옄�슚怨�, postion 怨좎젙*/
 header{
     user-select: none;
     position: fixed;
@@ -13,13 +13,13 @@ header{
     box-shadow: 0 4px 8px rgb(165 173 184 / 20%);
     z-index: 99;
 }
-/*회사이름란*/
+/*�쉶�궗�씠由꾨�*/
 li.nav-item.company-name {
     line-height: 29px;
     vertical-align: bottom;
     font-weight: 500;
 }
-/*계정 관련 드롭다운 메뉴*/
+/*怨꾩젙 愿��젴 �뱶濡��떎�슫 硫붾돱*/
 li.nav-item.open {
     position: relative;
     left: -20px;
@@ -78,7 +78,7 @@ li.nav-item.setting {
     content: "\f013";
 }
 
-/*기본 : 감추기*/
+/*湲곕낯 : 媛먯텛湲�*/
 #menu > ul > li > ul {
     padding:0;
     padding-bottom: 5px;
@@ -91,9 +91,16 @@ li.nav-item.setting {
 #menu > ul > li > ul > li.link:hover {
     padding-bottom: 5px;
     background: var(--imp-color);
-    color:#fff;
+    color:fff;
+}
+#menu > ul > li > ul > li a {
+	display:block;
+}
+#menu > ul > li > ul > li:hover a {
+	color:white;
 }
 li.dropdown-divider {
     border-bottom: 1px solid #d8dfe8;
     margin-bottom: 5px;
 }
+

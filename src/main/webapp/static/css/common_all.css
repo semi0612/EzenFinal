@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
-:root {  /*사용할 때는 var(--bg-color), var(--font)로 색상명, 폰트명 바로 대체하면 됨*/
+:root {   /*사용할 때는 var(--bg-color), var(--font)로 색상명, 폰트명 바로 대체하면 됨*/
     --bg-color: whitesmoke;/*배경색*/ 
     --imp-color: #0c4c77; /*강조 진한 파랑색*/
     --imp-color2:#3498db; /*강조 연한 파랑색*/
@@ -26,6 +26,7 @@ ul li{ list-style: none;}
 
 /*a태그 밑줄 없애기 */
 a {
+	color: black;
     cursor: pointer;
     text-decoration: none;
 }

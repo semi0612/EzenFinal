@@ -2,6 +2,7 @@ package com.clockOn.web.service.empManagement;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
@@ -29,14 +30,14 @@ public interface MemberService {
 	public List<MemberList> listView();
 
 	/* 관리자 - 모든 직원 연차정보 가져오기 */
-	public List<MemberLeave> listLeave();
+	public List<MemberLeave> listLeave(int page);
 
 	/* 관리자 - 모든 직원 연봉 관련 정보 가져오기 */
 	public List<MemberSal> listSal();
 
 	/* 직원&관리자 - 직원 수 구하기 */
 	public int count();
-
+	
 	/* 관리자 - 직급 가져오기 ++ 쿼리가 직원 리스트 중 지금 존재하는 직급에서 가져옴(수정필요) */
 	public List<String> listPosi();
 
@@ -54,4 +55,6 @@ public interface MemberService {
 
 	/* 직원&관리자 - 프로필 정보 불러오기 */
 	public MemberProfile profile(String emp_id);
+
+	public List<MemberList> searchList(List<Map<String, String>> list);
 }

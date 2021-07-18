@@ -32,7 +32,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			log.warn("ROLE NAMES: " + roleNames);
 			// 만약 로그인 된 권한이 "ROLE_ADMIN" 이면  "/admin/empManagement/organization" 경로로 자동 이동한다.
 			if(roleNames.contains("ROLE_ADMIN")) {
-				response.sendRedirect("/admin/empManagement/organization");
+				response.sendRedirect("/admin/main");
 				return;
 			}
 			// 만약 로그인 된 권한이 "ROLE_MEMBER" 이면  "/sample/member" 경로로 자동 이동한다.

@@ -3,6 +3,7 @@ package com.clockOn.web.service.empManagement;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -167,8 +168,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberLeave> listLeave() {
-		return memberDao.listLeave();
+	public List<MemberLeave> listLeave(int page) {
+		int size=10; //한 페이지에서 보여줄 항목의 수
+		int offset = 0+(page-1)*size; //건너띌 자료의 개수
+		return memberDao.listLeave(size, offset);
 	}
 
 	@Override
@@ -213,6 +216,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberProfile profile(String emp_id) {
 		return memberDao.profile(emp_id);
+	}
+
+	@Override
+	public List<MemberList> searchList(List<Map<String, String>> list) {
+		return memberDao.searchList(list);
 	}
 
 }

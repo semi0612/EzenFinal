@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/update_memberinfo.css">
 <link rel="stylesheet" href="/css/component_board.css">
+<script type="text/javascript" src="/js/search_list.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="content-wrapper">
 	<main>
@@ -20,14 +21,14 @@
 			<summary>총 직원수 : ${cnt}</summary>
 			<thead>
 				<tr class="search-tr">
-					<th><input type="text" class="search" placeholder="검색.."></th>
-					<th><input type="text" class="search" placeholder="검색.."></th>
-					<th><input type="text" class="search" placeholder="검색.."></th>
-					<th><input type="text" class="search" placeholder="검색.."></th>
-					<th><input type="text" class="search" placeholder="검색.."></th>
-					<th><input type="text" class="search" placeholder="검색.."></th>
-					<th><input type="text" class="search" placeholder="검색.."></th>
-					<th><input type="text" class="search" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="org_groupname" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="org_teamname" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="emp_id" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="emp_name" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="emp_posi" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="emp_tel" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="emp_email" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="emp_level" onkeyup="getMap()" placeholder="검색.."></th>
 				</tr>
 			<thead>
 				<tr class="title-tr">
@@ -41,6 +42,7 @@
 					<th>액세스권한</th>
 				</tr>
 			</thead>
+			<tbody id="ajax">
 			<c:forEach var="list" items="${list}">
 				<tr>
 					<td>${list.org_groupname}</td>
@@ -50,14 +52,15 @@
 					<td>${list.emp_posi}</td>
 					<td>${list.emp_tel}</td>
 					<td>${list.emp_email}</td>
-					<c:if test="${list.emp_level=='1'}">
+					<c:if test="${list.emp_level=='ROLE_ADMIN'}">
 						<td>관리자</td>
 					</c:if>
-					<c:if test="${list.emp_level!='1'}">
+					<c:if test="${list.emp_level=='ROLE_MEMBER'}">
 						<td>직원</td>
 					</c:if>
 				</tr>
 			</c:forEach>
+			</tbody>
 		</table>
 	</main>
 </div>

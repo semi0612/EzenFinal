@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberProfile;
+import com.clockOn.web.service.attendance.CommuteService;
 import com.clockOn.web.service.empManagement.MemberService;
+import com.clockOn.web.service.vacation.LeaveService;
 
 import lombok.Setter;
 
@@ -34,12 +38,33 @@ public class EmpController {
 	private MemberService memberService;
 	
 	@Autowired
+	private LeaveService leaveService;
+	
+	@Autowired
 	private ServletContext ctx;
+
+	@Autowired
+	private CommuteService commuteService;
 	
 	@GetMapping("main")
-	public String emp_main(Principal principal, HttpSession session) {
-		if(session.getAttribute("level")==null) {
-			String username = principal.getName();
+	public String emp_main(Principal principal, HttpSession session, Model model) {
+		String username = principal.getName();
+		/*
+		 * model.addAttribute("thisMonthCount",commuteService.thisMonthWork(username));
+		 * model.addAttribute("thisMonthLate", commuteService.thisMonthLate(username));
+		 * model.addAttribute("thisMonthHoli", commuteService.thisMonthHoli(username));
+		 * model.addAttribute("thisMonthTime", commuteService.thisMonthTime(username));
+		 * model.addAttribute("thisMonthAbsent",commuteService.thisMonthAbsent(username)
+		 * ); model.addAttribute("thisYearCount",
+		 * commuteService.thisYearWork(username)); model.addAttribute("thisYearLate",
+		 * commuteService.thisYearLate(username)); model.addAttribute("thisYearHoli",
+		 * commuteService.thisYearHoli(username)); model.addAttribute("thisYearTime",
+		 * commuteService.thisYearTime(username));
+		 * model.addAttribute("thisYearAbsent",commuteService.thisYearAbsent(username));
+		 * model.addAttribute("annday", leaveService.getVacinfo(username));
+		 */
+		if(session.getAttribute("level")==null || !session.getAttribute("level").equals("ROLE_MEMBER")) {
+			
 			Member member= memberMapper.read(username);
 	        session.setAttribute("level", member.getEmp_level());
 	        session.setAttribute("id", member.getEmp_id());
@@ -49,22 +74,11 @@ public class EmpController {
 		return "emp.main";
 	}
 	
-	/*
-	 * public ModelAndView handleRequest(HttpServletRequest request,
-	 * HttpServletResponse response) throws Exception {
-	 * 
-	 * ModelAndView mv = new ModelAndView("/login_emp");
-	 * //mv.setViewName("/WEB-INF/view/notice/list.jsp");
-	 * 
-	 * return mv; }
-	 */
-	
 	@GetMapping("infoUpdate") //보여줄 때
-	public String infoUpdate() {
-
+	public String infoUpdate(String emp_id, Model model) {
+		model.addAttribute("updateProfile", memberService.profile(emp_id));
 		return "emp.infoUpdate";
 	}
-
 	
 	@PostMapping("infoUpdate") //처리할 때 (form action) 
 	public String infoUpdate(String emp_id, String emp_pw, String emp_email, String emp_tel, MultipartFile emp_pic) throws IllegalStateException, IOException {
@@ -91,5 +105,17 @@ public class EmpController {
 		return "emp.main"; 
 
 	}
+	
+	@PostMapping("hiSuccess")
+	public void hiSuccess(String emp_id, HttpServletResponse response) throws IOException {
 
+		commuteService.hiSuccess(emp_id);
+
+		response.sendRedirect("/emp/main");
+	}
+
+	@GetMapping("calendar") // 보여줄 때
+	public String calendar() {
+		return "emp.timeRecord.byCalendar";
+	}
 }
