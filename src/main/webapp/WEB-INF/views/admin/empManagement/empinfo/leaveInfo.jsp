@@ -61,7 +61,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		
+		<!-- 쿼리스트링으로 전달된 파라미터 값을 꺼낼 때 param.name -->
 		<c:set var ="page" value="${(empty param.p)?1:param.p}"/> <!-- p는 쿼리스트링으로 넘겨준 p 아래참고 -->
 		<c:set var="startNum" value="${page-(page-1)%5}" />
 		<!-- el태그안에서 나누기 연산, 실수값으로 변환 -->
