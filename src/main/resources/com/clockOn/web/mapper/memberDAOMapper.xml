@@ -21,8 +21,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 실시간 검색되는 멤버리스트 -->
-	<select id="searchList" resultType ="com.clockOn.web.entity.member.MemberList" parameterType="HashMap">
+	<select id="searchList" resultType ="com.clockOn.web.entity.member.MemberList">
 		select o.org_groupname, o.org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level 
+		from employee e join organization o on e.emp_dept=o.org_teamcode 
+	    <where> 
+    		<foreach item="map" collection="list">
+    			<if test="map.keyword !=null and map.keyword !=''">
+					and ${map.field} like '%${map.keyword}%'
+				</if>
+	    	</foreach>
+    	</where>
+		order by o.org_groupname limit ${page.offset}, ${page.scalePerPage}
+	</select>
+	<!-- 실시간 검색 결과수 -->
+	<select id="cntRows" resultType="int" parameterType="HashMap">
+		select count(emp_id) 
 		from employee e join organization o on e.emp_dept=o.org_teamcode 
 	    <where> 
     		<foreach item="map" collection="list">

@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listVacReq" parameterType="String" resultType="com.clockOn.web.entity.vacation.Vacation">
 		select holi_rid, holi_period, holi_cnt, holi_res, holi_code,
 			case when holi_state= '0' then '대기' when holi_state ='1' then '승인' when holi_state ='2' then '거절' end as 'holi_state', holi_evi
-		from holiday where emp_id=#{emp_id} order by holi_rid desc
+		from holiday where emp_id=#{emp_id} order by holi_rid desc limit ${offset}, ${limit}
 	</select>
 
 	<!-- 관리자 : 모든 직원의 모든 요청 불러오기 -->
@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="cancel" parameterType="String">
 		update holiday set holi_state = '0' where holi_rid = #{holi_rid}
 	</update>
-	
+
 	<!-- 직원 : 처리되지 않은 요청들의 합계 연차수 -->
 	<select id="cntwoff" parameterType="String" resultType="int">
 		SELECT ifnull(sum(cntoff), 0)
@@ -104,6 +104,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						ELSE 0 END AS 'CNTOFF' 
 		FROM HOLIDAY 
 		WHERE EMP_ID = #{emp_id} AND HOLI_STATE = '0') as cnt
+	</select>
+	
+	<!-- 직원 : 자신의 모든 요청 수 -->
+	<select id="cntMyReq" resultType="int" parameterType="String">
+		select count(holi_rid) from holiday where emp_id = #{emp_id}
 	</select>
 	
 	<!-- <delete id="cancel" parameterType="String">

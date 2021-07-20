@@ -15,8 +15,8 @@ import com.clockOn.web.entity.member.Member;
 
 import lombok.extern.log4j.Log4j;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 @Log4j
 public class MemberDAOImplTest {
 
@@ -30,7 +30,8 @@ public class MemberDAOImplTest {
 	}
 	
 	@Test
-	public void insert() {
+	public void ceil() {
+		System.out.println(Math.ceil((double) 238/10));
 //		Member member = new Member("")
 //		memberDao.add(member);
 	}

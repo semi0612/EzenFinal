@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.clockOn.web.entity.commute.WorkOff;
 import com.clockOn.web.entity.vacation.Annday;
 import com.clockOn.web.entity.vacation.Vacation;
@@ -15,7 +17,7 @@ public interface VacationDAO {
 
 	public int reqVac(Vacation vacation);
 
-	public List<Vacation> listVacReq(String emp_id);
+	public List<Vacation> listVacReq(@Param("emp_id") String emp_id, @Param("offset") int offset, @Param("limit") int limit);
 
 	public int cancelVacReq(String holi_rid);
 
@@ -44,4 +46,6 @@ public interface VacationDAO {
 	public List<HashMap<String, Object>> comingVac(String emp_id);
 
 	public List<HashMap<String, String>> waitingVac(String emp_id);
+
+	public int cntMyReq(String emp_id);
 }

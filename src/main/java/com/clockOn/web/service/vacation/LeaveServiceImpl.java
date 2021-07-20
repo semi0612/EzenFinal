@@ -30,9 +30,9 @@ public class LeaveServiceImpl implements LeaveService {
 	}
 
 	@Override
-	public List<Vacation> listVacReq(String emp_id) {
+	public List<Vacation> listVacReq(String emp_id, int offset, int limit) {
 		
-		return vacationDao.listVacReq(emp_id);
+		return vacationDao.listVacReq(emp_id, offset, limit);
 		
 	}
 
@@ -103,6 +103,11 @@ public class LeaveServiceImpl implements LeaveService {
 	@Override
 	public List<HashMap<String, String>> waitingVac(String emp_id) {
 		return vacationDao.waitingVac(emp_id);
+	}
+
+	@Override
+	public int cntMyReq(String emp_id) {
+		return vacationDao.cntMyReq(emp_id);
 	}
 
 }

@@ -32,15 +32,6 @@
 				<tr>
 					<td>${vac.holi_rid}</td>
 					<td>${vac.holi_period} <b style="color:var(--imp-color)">(${vac.holi_cnt}일)</b></td>
-				<%--<td>
-						<c:set var="period" value="${vac.holi_period}"/>
-						<c:set var="len" value="${fn:length(period)}"/>
-						<c:set var="index" value="${fn:indexOf(period,'(')}"/>
-						<c:set var="index2" value="${fn:indexOf(period,')')}"/>
-						<c:set var="days" value="${fn:substring(period,0,index-1)}"/>
-						<c:set var="cnt" value="${fn:substring(period,(index+1),index2)}"/>
-						${days} <b style="color:var(--imp-color)">(${cnt}일)</b>
-					</td> --%>
 					<td>${vac.holi_res}</td>
 					<td>${vac.holi_code}</td>
 					<c:set var="style" value="font-weight:500;"/>
@@ -61,5 +52,38 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div class="indexer align-right">
+			<div>
+				<span class="text-imp text-strong">${pg.page==''?1:pg.page}</span>
+				/ ${pg.lastNum} pages
+			</div>
+		</div>
+		<div class="align-center pager">
+			<div>
+				<c:if test="${pg.startNum>1}">
+					<a href="?p=${pg.startNum-1}" class="btn btn-next">이전</a>
+				</c:if>
+				<c:if test="${pg.startNum<=1}">
+					<span class="btn btn-prev" onclick="alert('이전 페이지가 없습니다.');">이전</span>
+				</c:if>
+			</div>
+			<ul class="pages center">
+				<c:forEach var="i" begin="0" end="4">
+					<!-- 큰따옴표 안에서 el안 큰따옴표 쓸수 없음. 작은따옴표 &f=${param.f}&q=${param.q}-->
+					<c:if test="${(pg.startNum+i) <= pg.lastNum}">
+						<li><a class="${(pg.page==(pg.startNum+i))?'imp':''} bold" href="?p=${pg.startNum+i}">${pg.startNum+i}</a></li>
+					</c:if>
+				</c:forEach>
+			</ul>
+			<div>
+				<!-- el태그를 통해서 연산 -->
+				<c:if test="${pg.startNum+5<=pg.lastNum}">
+					<a href="?p=${pg.startNum+5}" class="btn btn-next">다음</a>
+				</c:if>
+				<c:if test="${pg.startNum+5>pg.lastNum}">
+					<span class="btn btn-next" onclick="alert('다음 페이지가 없습니다.');">다음</span>
+				</c:if>
+			</div>
+		</div>
 	</main>
 </div>

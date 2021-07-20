@@ -1,19 +1,31 @@
-/**
- * 
- */
-//var keys= [];
-function getMap(){
+var page = 1;
+var last;
+
+$(document).ready(function () { $("#ajax").on('scroll',function() {
+
+	if (page == last) return;
+	 
+	var innerHeight = $(this).innerHeight(); //tbody의 padding값 포함한 높이 (border, margin은 미포함)
+	var scroll = $(this).scrollTop() + $(this).innerHeight(); //스크롤을 내린만큼의 길이 + tbody 높이 
+	var height = $(this)[0].scrollHeight; //tbody 컨텐츠의 전체 길이(스크롤 전체 길이)
+
+	if (scroll >= height) { //scroll = height 시점은 스크롤이 바닥에 닿았을 때
+		page++;
+		console.log("로딩중" +page);
+	}
+	});
+});
+
+//	console.log("innerHeight:" + innerHeight);
+//	console.log("scroll(innerHeight+scrollTop) : " + scroll);
+//	console.log("전체높이 : " + height);
+//		console.log("끝");
+function getMap(p){
 	let search = $('.search');
-//	let obj = {};
-//	obj.search = [];
 	search = [];
-//	let fields = ['org_groupname','org_teamname','emp_id','emp_name','emp_posi','emp_tel','emp_email','emp_level'];
-//	let keys = [];
 	
 	console.log(search);
 	$('.search').each(function(){
-		/*console.log($(this).val());
-		console.log($(this).attr(('id')));*/
 		let s ={
 			field : $(this).attr('id'),
 			keyword : $(this).val()
@@ -22,17 +34,21 @@ function getMap(){
 	});
 	var jsonData = JSON.stringify(search);
 	console.log(jsonData);
-//	console.log(obj.member);
-//	obj.keys = keys;
-	
+	console.log("page:" + p);
 	$.ajax({
 		url : "searchlist",
 		type:"post",
 //		dateType:'json', @ResponseBody를 담아놓았기 때문에 자동 처리
 		data : {
-			"search":jsonData
+			"search":jsonData,
+			"page": p
 			},
-		success : function(member){
+		success : function(data){
+			var member = data.member;
+			var cnt = data.totRows;
+			last = data.lastNum;
+			console.log("검색결과 : "+cnt);
+			console.log("마지막페이지 : "+last);
 //			$("#ajax").remove();
 //			var html='<tbody id="ajax">';
 			var html='';
@@ -56,6 +72,7 @@ function getMap(){
 		},
 		error : function(xhr){
 			console.log(xhr.status);
+			console.log(xhr.responseText);
 //			alert("Error code : " + xhr.status);
 		}
 	});
@@ -63,6 +80,6 @@ function getMap(){
 
 
 window.onload = function(){
-    getMap();
+    getMap(1);
 }
 

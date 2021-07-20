@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.dao.OrgDAO;
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
@@ -170,7 +171,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MemberLeave> listLeave(int page) {
 		int size=10; //한 페이지에서 보여줄 항목의 수
-		int offset = 0+(page-1)*size; //건너띌 자료의 개수
+		int offset = 0+(page-1)*size; //건너뛸 자료의 개수
 		return memberDao.listLeave(size, offset);
 	}
 
@@ -219,8 +220,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberList> searchList(List<Map<String, String>> list) {
-		return memberDao.searchList(list);
+	public List<MemberList> searchList(List<Map<String, String>> list, Page page) {
+		return memberDao.searchList(list, page);
 	}
+
+	@Override
+	public int cntRows(List<Map<String, String>> mapList) {
+		return memberDao.cntRows(mapList);
+	}
+
 
 }

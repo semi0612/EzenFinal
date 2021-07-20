@@ -13,7 +13,7 @@ public interface LeaveService {
 
 	int reqVac(Vacation vacation);
 
-	List<Vacation> listVacReq(String emp_id);
+	List<Vacation> listVacReq(String emp_id, int offset, int limit);
 
 	List<VacationInfo> listAllVacReq();
 
@@ -36,5 +36,7 @@ public interface LeaveService {
 	List<HashMap<String, Object>> comingVac(String emp_id);
 
 	List<HashMap<String, String>> waitingVac(String emp_id);
+
+	int cntMyReq(String emp_id);
 		
 }

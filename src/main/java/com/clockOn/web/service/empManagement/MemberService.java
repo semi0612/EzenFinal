@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
@@ -38,6 +39,9 @@ public interface MemberService {
 	/* 직원&관리자 - 직원 수 구하기 */
 	public int count();
 	
+	/*검색 결과 행의 수 구하기*/
+	public int cntRows(List<Map<String, String>> mapList);
+	
 	/* 관리자 - 직급 가져오기 ++ 쿼리가 직원 리스트 중 지금 존재하는 직급에서 가져옴(수정필요) */
 	public List<String> listPosi();
 
@@ -56,5 +60,5 @@ public interface MemberService {
 	/* 직원&관리자 - 프로필 정보 불러오기 */
 	public MemberProfile profile(String emp_id);
 
-	public List<MemberList> searchList(List<Map<String, String>> list);
+	public List<MemberList> searchList(List<Map<String, String>> list, Page page);
 }
