@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/css/organization.css">
+
 <div class="content-wrapper">
 <main>
 	<h2>조직도</h2>
@@ -46,8 +47,45 @@
 						<td class="td-four">${org.org_content}</td>
 					</tr>
 					</c:forEach>
+					
+					
 				</tbody>
+				
+				
+					
 			</table>
+			
+			
+			<div class="page_wrap">
+   				<div class="page_nation">
+   					<a class="arrow prev" href="/emp/organization?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-double-left"></i></a>
+      				<a class="arrow pprev" href="/emp/organization?nowPage=${paging.nowPage -1}&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-left"></i></a>
+      				
+      				<c:if test="${paging.startPage != 1 }">
+						<a href="/emp/organization?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+					</c:if>
+					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+							<c:choose>
+					
+							<c:when test="${p == paging.nowPage }">
+								<a class="active">${p}</a>
+							</c:when>
+							<c:when test="${p != paging.nowPage }">
+								<a href="/emp/organization?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+							</c:when>
+							</c:choose>
+					</c:forEach>
+      				
+      				
+      				<a class="arrow next" href="/emp/organization?nowPage=${paging.nowPage +1}&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-right"></i></a>
+      				<a class="arrow nnext" href="/emp/organization?nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-double-right"></i></a>
+      				<c:if test="${paging.endPage != paging.lastPage}">
+					<a href="/emp/organization?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+					</c:if>
+   				</div>
+			</div>
+			
+			
 		</div>
 	</div>
 </main>
