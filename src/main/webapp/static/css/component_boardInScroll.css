@@ -1,7 +1,10 @@
 @charset "UTF-8";
 table {
 	display: block;
-	overflow-x: unset;
+	/*overflow-x: unset;*/
+}
+table.tbl-ex.emp-tbl {
+	width: 62vw !important;
 }
 
 tbody tr {
@@ -9,13 +12,33 @@ tbody tr {
 }
 
 thead {
-	display: inline-block;
+	/*display: inline-block;*/
 	width: 62vw;
+	padding-right:18px;
+	box-sizing: border-box;
 }
 
 tbody {
-	height: 500px;
-	display: inline-block;
+	display: block;
 	width: 62vw;
+	max-height: 500px;
 	overflow-y: auto;
+}
+
+td, th {
+	box-sizing:border-box;
+}
+.gname, .tname, .eid, .ename, .eposi, .elevel{
+	width:10.5% !important;
+}
+.etel{
+	width:13.33% !important;
+}
+.email{
+	width:24% !importatnt;
+}
+
+input#emp_level {
+    font-size: 12px;
+    width: 100px;
 }

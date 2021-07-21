@@ -19,31 +19,31 @@
 			</span>
 		</div>
 		<table class="tbl-ex emp-tbl">
-			<summary>총 직원수 : ${cnt}</summary>
+			<summary>총 직원수 : ${cnt} &nbsp; <span id="totRows"></span></summary>
 			<thead>
 				<tr class="search-tr">
-					<th><input type="text" class="search" id="org_groupname" onkeyup="getMap(1)" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="org_teamname" onkeyup="getMap(1)" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="emp_id" onkeyup="getMap(1)" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="emp_name" onkeyup="getMap(1)" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="emp_posi" onkeyup="getMap(1)" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="emp_tel" onkeyup="getMap(1)" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="emp_email" onkeyup="getMap(1)" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="emp_level" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="gname"><input type="text" class="search" id="org_groupname" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="tname"><input type="text" class="search" id="org_teamname" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="eid"><input type="text" class="search" id="emp_id" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="ename"><input type="text" class="search" id="emp_name" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="eposi"><input type="text" class="search" id="emp_posi" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="etel"><input type="text" class="search" id="emp_tel" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="email"><input type="text" class="search" id="emp_email" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th class="elevel"><input type="text" class="search" id="emp_level" onkeyup="getMap(1)" placeholder="admin/member"></th>
 				</tr>
 				<tr class="title-tr">
-					<th>본부</th>
-					<th>부서</th>
-					<th>사번</th>
-					<th>이름</th>
-					<th>직급</th>
-					<th>내선번호</th>
-					<th>이메일</th>
-					<th>액세스권한</th>
+					<th class="gname">본부</th>
+					<th class="tname">부서</th>
+					<th class="eid">사번</th>
+					<th class="ename">이름</th>
+					<th class="eposi">직급</th>
+					<th class="etel">내선번호</th>
+					<th class="email">이메일</th>
+					<th class="elevel">액세스권한</th>
 				</tr>
 			</thead>
 			<tbody id="ajax">
-			<c:forEach var="list" items="${list}">
+			<%-- <c:forEach var="list" items="${list}">
 				<tr>
 					<td>${list.org_groupname}</td>
 					<td>${list.emp_dept}</td>
@@ -59,7 +59,7 @@
 						<td>직원</td>
 					</c:if>
 				</tr>
-			</c:forEach>
+			</c:forEach> --%>
 			</tbody>
 		</table>
 	</main>

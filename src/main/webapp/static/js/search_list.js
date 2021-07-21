@@ -1,5 +1,6 @@
 var page = 1;
 var last;
+var html;
 
 $(document).ready(function () { $("#ajax").on('scroll',function() {
 
@@ -11,7 +12,7 @@ $(document).ready(function () { $("#ajax").on('scroll',function() {
 
 	if (scroll >= height) { //scroll = height 시점은 스크롤이 바닥에 닿았을 때
 		page++;
-		console.log("로딩중" +page);
+		getMap(page);
 	}
 	});
 });
@@ -33,8 +34,6 @@ function getMap(p){
 		search.push(s);
 	});
 	var jsonData = JSON.stringify(search);
-	console.log(jsonData);
-	console.log("page:" + p);
 	$.ajax({
 		url : "searchlist",
 		type:"post",
@@ -46,25 +45,25 @@ function getMap(p){
 		success : function(data){
 			var member = data.member;
 			var cnt = data.totRows;
+			var cntRows = $('#totRows');
 			last = data.lastNum;
-			console.log("검색결과 : "+cnt);
-			console.log("마지막페이지 : "+last);
 //			$("#ajax").remove();
 //			var html='<tbody id="ajax">';
-			var html='';
+			if(p==1) {html=''; page=1; cntRows.html('검색 결과 : ' +cnt+ '건');}
+//			if(p!=undefined) 
 			for(var i=0; i<member.length; i++){
 				html += "<tr>"+
-							"<td>"+member[i].org_groupname+"</td>"+
-							"<td>"+member[i].emp_dept+"</td>" +
-							"<td>"+member[i].emp_id+"</td>" +
-							"<td>"+member[i].emp_name+"</td>" +
-							"<td>"+member[i].emp_posi+"</td>" +
-							"<td>"+member[i].emp_tel+"</td>" +
-							"<td>"+member[i].emp_email+"</td>";
+							"<td class='gname'>"+member[i].org_groupname+"</td>"+
+							"<td class='tname'>"+member[i].emp_dept+"</td>" +
+							"<td class='eid'>"+member[i].emp_id+"</td>" +
+							"<td class='ename'>"+member[i].emp_name+"</td>" +
+							"<td class='eposi'>"+member[i].emp_posi+"</td>" +
+							"<td class='etel'>"+member[i].emp_tel+"</td>" +
+							"<td class='email'>"+member[i].emp_email+"</td>";
 				if(member[i].emp_level == "ROLE_ADMIN")
-					html +="<td>관리자</td>";
+					html +="<td class='elevel'>관리자</td>";
 				if(member[i].emp_level == "ROLE_MEMBER")
-					html +="<td>직원</td>";
+					html +="<td class='elevel'>직원</td>";
 					html+="</tr>";
 			}
 			$("#ajax").html(html);
@@ -80,6 +79,6 @@ function getMap(p){
 
 
 window.onload = function(){
-    getMap(1);
+    getMap();
 }
 
