@@ -13,9 +13,6 @@ public class CorrectionServiceImpl implements CorrectionService {
 
 	@Autowired
 	private CorrectionDAO correctionDAO;
-	
-	@Autowired
-	private Correction correction;
 
 	@Override //근태 기록 생성
 	public int corrReq(List<Correction> list) {
@@ -83,9 +80,9 @@ public class CorrectionServiceImpl implements CorrectionService {
 	public List<Correction> corrListAll() {
 		
 		//내역 조회에서 진행중인 요청만 보여야 하므로 승인대기만 보이도록 조건 처리
-		if(correction.getCor_work_state() != "승인대기") {
-			return null;
-		}
+		/*
+		 * if(correction.getCor_work_state() != "승인대기") { return null; }
+		 */
 		
 		return correctionDAO.corrListAll();
 	}
