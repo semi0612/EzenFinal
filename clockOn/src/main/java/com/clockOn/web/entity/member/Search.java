@@ -8,5 +8,4 @@ import lombok.Setter;
 public class Search {
 	private String field;
 	private String key;
-	
 }

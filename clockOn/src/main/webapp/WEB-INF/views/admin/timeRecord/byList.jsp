@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/update_memberinfo.css">
 <link rel="stylesheet" href="/css/component_board.css">
+<link rel="stylesheet" href="/css/scroll_board.css">
 <script type="text/javascript" src="/js/search_list.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -19,30 +20,31 @@
 			</span>
 		</div>
 		<table class="tbl-ex emp-tbl">
-			<summary>총 직원수 : ${cnt}</summary>
+			<summary>총 직원수 : ${cnt} &nbsp; <span id="totRows"></span></summary>
 			<thead>
-				<tr class="search-tr"> <!--컬럼명과 매핑해서 id 작성 -->
+			
+				<tr class="search-tr">
 					<th></th>
-					<th><input type="text" class="search" id="work_day" onkeyup="getMap()" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="emp_name" onkeyup="getMap()" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="org_teamname" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="work_day" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="emp_name" onkeyup="getMap(1)" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="org_teamname" onkeyup="getMap(1)" placeholder="검색.."></th>
 					<th></th>
 					<th></th>
 					<th></th>
-					<th><input type="text" class="search" id="work_comm" onkeyup="getMap()" placeholder="검색.."></th>
+					<th><input type="text" class="search" id="work_comm" onkeyup="getMap(1)" placeholder="검색.."></th>
 					<th></th>
 				</tr>
 			<!-- select work_rid, work_date, emp_name, org_teamname as emp_dept, work_in, work_out, work_comm  -->
 				<tr class="title-tr">
-					<th>No</th> <!-- work_rid -->
-					<th>Date</th> <!-- work_date -->
-					<th>직원</th> <!-- emp_name -->
-					<th>부서</th> <!-- emp_dept --> <!-- Date, 7/17 -->
-					<th>출근시각</th> <!-- work_in -->
-					<th>퇴근시각</th> <!-- work_out -->
-					<th>근무시간</th> <!-- workingTime-->
-					<th>비고</th> <!-- WORK_COMM -->
-					<th>요청</th>
+					<th class="NO">No</th> <!-- work_rid -->
+					<th class="DATE">Date</th> <!-- work_date -->
+					<th class="ENAME">직원</th> <!-- emp_name -->
+					<th class="TNAME">부서</th> <!-- emp_dept --> <!-- Date, 7/17 -->
+					<th class="INTIME">출근시각</th> <!-- work_in -->
+					<th class="ENDTIME">퇴근시각</th> <!-- work_out -->
+					<th class="TOTIME">근무시간</th> <!-- workingTime-->
+					<th class="COMM">비고</th> <!-- WORK_COMM -->
+					<th class="REQUEST">요청</th>
 				</tr>
 			</thead>
 			<tbody id="ajax">

@@ -26,9 +26,18 @@ public class Commute {
 		this.holi_code = holi_code;
 		this.work_comm = work_comm;
 	}
-		
 	
-	
+	public Commute(String work_rid, String work_day, String work_in, String work_out, String work_late, String holi_code,
+				String work_comm, String emp_id) {
+		this.work_rid = work_rid;
+		this.work_day = work_day;
+		this.work_in = work_in;
+		this.work_out = work_out;
+		this.work_late = work_late;
+		this.holi_code = holi_code;
+		this.work_comm = work_comm;
+		this.emp_id = emp_id;
+	}
 }
 
 /*

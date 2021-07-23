@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.clockOn.web.dao.CommuteDAO;
 import com.clockOn.web.dao.MemberDAO;
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.commute.Commute;
 import com.clockOn.web.entity.commute.CommuteDetail;
 
@@ -39,18 +40,23 @@ public class CommuteServiceImpl implements CommuteService {
 	}
 
 	@Override
-	public List<CommuteDetail> allByList(List<Map<String, String>> mapList) {
-		return commuteDAO.allByList(mapList);
+	public List<CommuteDetail> allByList(List<Map<String, String>> mapList, Page page) {
+		return commuteDAO.allByList(mapList, page);
 	}
 
 	@Override
-	public List<CommuteDetail> myList(List<Map<String, String>> mapList) {
-		return commuteDAO.myList(mapList);
+	public List<CommuteDetail> myList(Map<String, String> map) {
+		return commuteDAO.myList(map);
 	}
 
 	@Override
 	public int byeSuccess(String emp_id) {
 		return commuteDAO.byeSuccess(emp_id);
+	}
+	
+	@Override
+	public int cntRows(List<Map<String, String>> mapList) {
+		return commuteDAO.cntRows(mapList);
 	}
 
 	/* Á¤¿¬´Ô */

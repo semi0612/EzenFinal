@@ -34,28 +34,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 관리자  : 직원들의 근태 기록 날짜순으로 가져오기  parameter : keyword, field-->
-	<select id="allByList" parameterType="Map" resultType="com.clockOn.web.entity.commute.CommuteDetail">
+	<select id="allByList" resultType="com.clockOn.web.entity.commute.CommuteDetail">
 		select work_rid, work_day, emp_name, org_teamname as emp_dept, work_in, work_out,
 		IF(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT), TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT), '0') as workingTime, work_late, holi_code, work_comm
 		from employee e join organization o on e.emp_dept = o.org_teamcode join
 		working_atti w on e.emp_id = w.emp_id
 		<where> 
+    		<foreach item="map" collection="mapList"> 
+    			<if test="map.keyword !=null and map.keyword !=''">
+					and ${map.field} like '%${map.keyword}%'
+				</if>
+	    	</foreach>
+    	</where>
+		order by work_rid desc limit ${page.offset}, ${page.scalePerPage}
+	</select>
+	<!-- List<Map<String,String> el, jstl, mybatis 태그 기반: map을 사용하는 방법 : map.key -->
+	<!-- 객체의 필드를 사용하는 방법 매핑해준 객체명.필드명  -->
+	
+	<!-- 실시간 검색 결과수 -->
+	<select id="cntRows" resultType="int" parameterType="HashMap">
+		select count(WORK_RID)
+		from working_atti w
+		join employee e on w.emp_id = e.emp_id 
+	    <where>
     		<foreach item="map" collection="list">
     			<if test="map.keyword !=null and map.keyword !=''">
 					and ${map.field} like '%${map.keyword}%'
 				</if>
 	    	</foreach>
     	</where>
-		order by work_rid desc
+    	 order by work_rid asc
 	</select>
 	
 	<!-- 본인 기록 보기 : parameter : keyword, field-->
-	<select id="myList" parameterType="Map" resultType="com.clockOn.web.entity.commute.CommuteDetail">
+	<select id="myList" parameterType="Map" resultType="com.clockOn.web.entity.commute.List">
 		select work_rid, work_day, emp_name, org_teamname as emp_dept, work_in, work_out,
 		IF(TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT), TIMESTAMPDIFF(HOUR, WORK_IN, WORK_OUT), '0') as workingTime, work_late, holi_code, work_comm
 		from employee e join organization o on e.emp_dept = o.org_teamcode join
 		working_atti w on e.emp_id = w.emp_id
-        where e.emp_id = #{emp_id};
+        where e.emp_id = #{emp_id}
+        order by work_rid desc
+        limit ${page.offset}, ${page.scalePerPage}
 	</select>
 	
 	<!-- 정연님 -->

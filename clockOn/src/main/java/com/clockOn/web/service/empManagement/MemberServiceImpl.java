@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.clockOn.web.dao.MemberDAO;
 import com.clockOn.web.dao.OrgDAO;
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
@@ -217,8 +218,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberList> searchList(List<Map<String, String>> list) {
-		return memberDao.searchList(list);
+	public List<MemberList> searchList(List<Map<String, String>> list, Page page) {
+		return memberDao.searchList(list, page);
+	}
+
+	@Override
+	public int cntRows(List<Map<String, String>> mapList) {
+		return memberDao.cntRows(mapList);
 	}
 
 }

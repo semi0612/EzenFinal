@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.commute.Commute;
 import com.clockOn.web.entity.commute.CommuteDetail;
 
@@ -18,10 +19,11 @@ public interface CommuteService {
 	// 퇴근 찍기
 	public int byeSuccess(String emp_id);
 	// 관리자 - 모든 직원의 근태기록 리스트 가져오기 (날짜순)
-	public List<CommuteDetail> allByList(List<Map<String, String>> mapList);
+	public List<CommuteDetail> allByList(List<Map<String, String>> mapList, Page page);
 	// 직원 - 본인 근태 리스트 가져오기 (날짜 순)
-	public List<CommuteDetail> myList(List<Map<String, String>> mapList);
-
+	public List<CommuteDetail> myList(Map<String, String> map);
+	// 갯수
+	public int cntRows(List<Map<String, String>> mapList);
 	
 	/* 정연님 */
 	// 출근 인원 카운트
@@ -54,6 +56,5 @@ public interface CommuteService {
 	public int thisYearAbsent(String emp_id);
 	// 모든 직원의 근태기록 조회
 	public List<HashMap<String, Object>> allMemberCommute();
-
 
 }

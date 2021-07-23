@@ -18,17 +18,7 @@
 			</span>
 		</div>
 		<table class="tbl-ex emp-tbl">
-			<summary>총 직원수 : ${cnt}</summary>
-			<thead>
-				<tr class="search-tr">
-					<th></th>
-					<th><input type="text" class="search" id="work_day" onkeyup="getMap()" placeholder="검색.."></th>
-					<th></th>
-					<th></th>
-					<th><input type="text" class="search" id="workingTime" onkeyup="getMap()" placeholder="검색.."></th>
-					<th><input type="text" class="search" id="work_comm" onkeyup="getMap()" placeholder="검색.."></th>
-					<th></th>
-				</tr>
+			<summary> 검색 결과 : ${cnt} &nbsp; <span id="totRows"></span></summary>
 			<thead>
 				<tr class="title-tr">
 					<th>No</th> <!-- work_rid -->

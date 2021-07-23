@@ -26,20 +26,20 @@ public class MemberInfoController {
 	private MemberService service;
 	
 	//ResponseBody -- 바로 제이슨 문자열로 받고 보내줌
-	@PostMapping("searchlist")
-	public List<MemberList> searchResult(@RequestParam(value = "search") String search) throws JsonMappingException, JsonProcessingException {
+	//@PostMapping("searchlist")
+	//public List<MemberList> searchResult(@RequestParam(value = "search") String search) throws JsonMappingException, JsonProcessingException {
 		
 		ObjectMapper mapper = new ObjectMapper();
 //		List<Search> list = mapper.readValue(search, new TypeReference<List<Search>>() {});
 //		List<MemberList> model =service.searchList(list);
-		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
-		System.out.println(search);
+	//	List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
+		//System.out.println(search);
 //		System.out.println(mapList.get(0).get("field"));
 //		System.out.println(mapList.get(0).get("key"));
 //		System.out.println(mapList.get(1).get("key"));
 //		System.out.println(mapList.get(1).get("field"));
 		
-		List<MemberList> model = service.searchList(mapList);
-        return model;
+		// List<MemberList> model = service.searchList(mapList);
+       //  return model;
 	}
-}
+//}

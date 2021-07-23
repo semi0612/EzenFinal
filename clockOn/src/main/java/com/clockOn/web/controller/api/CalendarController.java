@@ -6,11 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.type.TypeAliasRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.commute.Commute;
 import com.clockOn.web.entity.commute.CommuteDetail;
 import com.clockOn.web.service.attendance.CommuteService;
@@ -45,6 +47,11 @@ public class CalendarController {
 		List<Commute> result = commuteService.listRecord(map);
 		// 만약에 js에서 객체를 값으로 가지는 배열을 넘겨주었다면, 
 		//[{field:'emp_name', keyword:'김'},{field:'emp_dept', keyword:'개발'}, {field:'work_date', keyword:'7/17'}]
+		//  map1 : map.put("field", "emp_name"); map.put("keyword", "김")
+		//  map2 : map.put("field", "emp_dept"); map.put("keyword", "개발")
+		//  map3
+		// map.get
+		
 		//[{field:'', keyword:''},{field:'', keyword:''}, {field:'work_date', keyword:'7/17'}]
 		// List로 변환해서 > 파라미터로 주면 List<HashMap<String, String>>
 		// 배열을 선언해서 반복문 돌면서 배열에 3개의 요소 추가 --> json 문자열로 변환 --> ajax로 넘기
@@ -58,22 +65,36 @@ public class CalendarController {
 		
 		String emp_id = session.getAttribute("id").toString();
 		
-		ObjectMapper mapper = new ObjectMapper();
-		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
+		Map<String, String> map = new HashMap<>();
 		
-		List<CommuteDetail> result = commuteService.myList(mapList);
-
+		map.put("emp_id", emp_id);
+		
+		List<CommuteDetail> result = commuteService.myList(map);
+		
 		return result;
 	}
 	
 	
-	@PostMapping("/admin/timeRecord/byList")
-	public List<CommuteDetail> allByList(@RequestParam(value = "search") String search) throws JsonMappingException, JsonProcessingException{
+	@PostMapping("/admin/byList")
+	public Map<String,Object> allByList(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p)
+			throws JsonMappingException, JsonProcessingException{
+		//{keyword : 
 		ObjectMapper mapper = new ObjectMapper();
 		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
-		List<CommuteDetail> result = commuteService.allByList(mapList);
+		//mapList.get(0).get("field");
+		double totRows = commuteService.cntRows(mapList);
+		System.out.println(totRows);
+		Page page = new Page(p, totRows);
+		
+		page.setScalePerPage(13);
+		List<CommuteDetail> member = commuteService.allByList(mapList, page);
+		
+		Map<String,Object> data = new HashMap<>();
+		data.put("member", member);
+		data.put("totRows",totRows);
+		data.put("lastNum", page.getLastNum());
 
-		return result;
+		return data;
 	}
 
 	//select 1, 2, 3,4,5 ,5, where #{field} like '%keyword%'

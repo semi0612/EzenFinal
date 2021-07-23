@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.commute.Commute;
 import com.clockOn.web.entity.commute.CommuteDetail;
 
@@ -17,9 +20,13 @@ public interface CommuteDAO {
 	// 퇴근 찍기
 	public int byeSuccess(String emp_id);
 	// 본인 근태 기록 보기
-	public List<CommuteDetail> myList(List<Map<String, String>> mapList);
+	public List<CommuteDetail> myList(Map<String, String> map);
 	// 관리자 - 모든 직원의 근태 기록 가져오기 
-	public List<CommuteDetail> allByList(List<Map<String, String>> mapList);
+	// @Param : 넘겨줄 값이 여러개다보니 제대로 찾아가라고 지정해준다
+	// 파람 속 "mapList" 이거는 mapper의 collection과 이름을 맞춰줌
+	public List<CommuteDetail> allByList(@Param("mapList") List<Map<String, String>> mapList, @Param("page") Page page);
+	
+	public int cntRows(List<Map<String, String>> mapList);
 	
 	/*정연님*/
 	// 출근 인원 카운트

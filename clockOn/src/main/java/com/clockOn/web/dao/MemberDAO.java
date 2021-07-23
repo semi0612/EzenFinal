@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
@@ -29,7 +30,7 @@ public interface MemberDAO {
 
 	public List<MemberList> listView();
 	
-	public List<MemberList> searchList(List<Map<String, String>> list);
+	public List<MemberList> searchList(List<Map<String, String>> list, Page page);
 	
 	public List<MemberLeave> listLeave();
 
@@ -48,6 +49,8 @@ public interface MemberDAO {
 	
 	/*¿¹½½´Ô*/   
 	public int infoUpdate(MemberProfile member);
+
+	public int cntRows(List<Map<String, String>> mapList);
 
 	   
 }
