@@ -96,7 +96,7 @@ public class VacReqController {
 		int cntReq = vacationService.cntMyReq(emp_id);
 		model.addAttribute("cntReq", cntReq);
 		//페이징 처리 2단계 : page VO를 통해 필요한 정보 도출 (view : page, startNum, lastNum | mapper : offset, limit)
-		Page p = new Page(page,cnt);
+		Page p = new Page(page,cntReq);
 		model.addAttribute("pg", p);
 		
 		List<Vacation> vac = vacationService.listVacReq(emp_id, p.getOffset(), p.getScalePerPage());

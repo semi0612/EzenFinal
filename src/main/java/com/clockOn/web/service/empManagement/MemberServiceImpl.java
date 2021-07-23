@@ -229,5 +229,25 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.cntRows(mapList);
 	}
 
+	@Override
+	public int cntSalRows(List<Map<String, String>> mapList) {
+		return memberDao.cntSalRows(mapList);
+	}
+
+	@Override
+	public List<MemberSal> salList(List<Map<String, String>> mapList, Page page) {
+		return memberDao.salList(mapList, page);
+	}
+
+	@Override
+	public int cntLeaveRows(List<Map<String, String>> mapList) {
+		return memberDao.cntLeaveRows(mapList);
+	}
+
+	@Override
+	public List<MemberSal> leaveList(List<Map<String, String>> mapList, Page page) {
+		return memberDao.leaveList(mapList, page);
+	}
+
 
 }

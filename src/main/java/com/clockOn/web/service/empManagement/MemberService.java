@@ -61,4 +61,13 @@ public interface MemberService {
 	public MemberProfile profile(String emp_id);
 
 	public List<MemberList> searchList(List<Map<String, String>> list, Page page);
+
+	public int cntSalRows(List<Map<String, String>> mapList);
+
+	public List<MemberSal> salList(List<Map<String, String>> mapList, Page page);
+
+	public int cntLeaveRows(List<Map<String, String>> mapList);
+
+	public List<MemberSal> leaveList(List<Map<String, String>> mapList, Page page);
+	
 }

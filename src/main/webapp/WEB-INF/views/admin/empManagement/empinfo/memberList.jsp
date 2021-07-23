@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/component_board.css">
 <link rel="stylesheet" href="/css/component_boardInScroll.css">
 <script type="text/javascript" src="/js/search_list.js"></script>
+<script type="text/javascript" src="/js/paging.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="content-wrapper">
 	<main>

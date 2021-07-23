@@ -5,6 +5,7 @@ table {
 }
 table.tbl-ex.emp-tbl {
 	width: 62vw !important;
+	padding: 10px 0px;
 }
 
 tbody tr {
@@ -12,7 +13,7 @@ tbody tr {
 }
 
 thead {
-	/*display: inline-block;*/
+	display: block;
 	width: 62vw;
 	padding-right:18px;
 	box-sizing: border-box;
@@ -28,11 +29,24 @@ tbody {
 td, th {
 	box-sizing:border-box;
 }
-.gname, .tname, .eid, .ename, .eposi, .elevel{
+.gname, .tname, .eid, .ename, .eposi, .elevel, .esal, .monthly, .exit, .total, .rest, .used {
 	width:10.5% !important;
+}
+.ejoin{
+	width:12% !important;
+}
+.esal_op, .ejoin_op, .rest_op{
+	width:10% !important;
+	padding-right: 17px !important;
 }
 .etel{
 	width:13.33% !important;
+}
+th.chk {
+    /*width: 4.4% !important;*/
+}
+input#emp_join {
+    width: 120px;
 }
 .email{
 	width:24% !importatnt;
@@ -41,4 +55,16 @@ td, th {
 input#emp_level {
     font-size: 12px;
     width: 100px;
+}
+input#empCheck {
+    margin: 0px 10px;
+}
+td.chk {
+    padding-right: 5px !important;
+}
+
+select#upDown, #beforeAfter {
+    width: 100%;
+    height: 21px;
+    border :1px solid var(--base-color3);
 }

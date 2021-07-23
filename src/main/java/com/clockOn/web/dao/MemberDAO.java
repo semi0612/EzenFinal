@@ -54,5 +54,13 @@ public interface MemberDAO {
 
 	public int cntRows(List<Map<String, String>> mapList);
 
+	public int cntSalRows(List<Map<String, String>> mapList);
+
+	public List<MemberSal> salList(@Param("list") List<Map<String, String>> mapList, @Param("page") Page page);
+
+	public int cntLeaveRows(List<Map<String, String>> mapList);
+
+	public List<MemberSal> leaveList(@Param("list") List<Map<String, String>> mapList, @Param("page") Page page);
+
 	   
 }

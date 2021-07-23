@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.member.MemberList;
+import com.clockOn.web.entity.member.MemberSal;
 import com.clockOn.web.service.empManagement.MemberService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController("MemberInfoController") // @ResponseBody를 하지 않아도 알아서 제이슨 데이터타입으로 변환(제이슨 문자열)
 @RequestMapping("/admin/empManagement/")
 public class MemberInfoController {
+	ObjectMapper mapper = new ObjectMapper();
 	
 	@Autowired
 	private MemberService service;
@@ -28,7 +30,6 @@ public class MemberInfoController {
 	//ResponseBody -- 바로 제이슨 문자열로 받고 보내줌
 	@PostMapping("searchlist")
 	public Map<String,Object> searchResult(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p) throws JsonMappingException, JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
 		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
 		double totRows = service.cntRows(mapList);
 		Page page = new Page(p, totRows);
@@ -40,6 +41,36 @@ public class MemberInfoController {
 		data.put("lastNum", page.getLastNum());
         return data;
 	}
+	
+	@PostMapping("salarylist")
+	public Map<String,Object> salaryList(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p) throws JsonMappingException, JsonProcessingException {
+		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
+		double totRows = service.cntSalRows(mapList);
+		Page page = new Page(p, totRows);
+		page.setScalePerPage(13);
+		List<MemberSal> member =service.salList(mapList, page);
+		Map<String,Object> data = new HashMap();
+		data.put("member", member);
+		data.put("totRows",totRows);
+		data.put("lastNum", page.getLastNum());
+		return data;
+	}
+	
+	@PostMapping("leavelist")
+	public Map<String,Object> leaveList(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p) throws JsonMappingException, JsonProcessingException {
+		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
+		double totRows = service.cntLeaveRows(mapList);
+		Page page = new Page(p, totRows);
+		page.setScalePerPage(13);
+		List<MemberSal> member =service.leaveList(mapList, page);
+		Map<String,Object> data = new HashMap();
+		data.put("member", member);
+		data.put("totRows",totRows);
+		data.put("lastNum", page.getLastNum());
+		return data;
+	}
+	
+	
 	
 	/*
 	 * @PostMapping("searchlist") public List<MemberList>
