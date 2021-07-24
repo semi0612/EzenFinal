@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
@@ -31,7 +32,7 @@ public interface MemberDAO {
 
 	public List<MemberList> listView();
 	
-	public List<MemberList> searchList(List<Map<String, String>> list);
+	public List<MemberList> searchList(@Param("list") List<Map<String, String>> list, @Param ("page") Page page);
 	
 	public List<MemberLeave> listLeave(@Param("size") int size, @Param("offset") int offset);
 
@@ -50,6 +51,16 @@ public interface MemberDAO {
 	
 	/*¿¹½½´Ô*/   
 	public int infoUpdate(MemberProfile member);
+
+	public int cntRows(List<Map<String, String>> mapList);
+
+	public int cntSalRows(List<Map<String, String>> mapList);
+
+	public List<MemberSal> salList(@Param("list") List<Map<String, String>> mapList, @Param("page") Page page);
+
+	public int cntLeaveRows(List<Map<String, String>> mapList);
+
+	public List<MemberSal> leaveList(@Param("list") List<Map<String, String>> mapList, @Param("page") Page page);
 
 	   
 }

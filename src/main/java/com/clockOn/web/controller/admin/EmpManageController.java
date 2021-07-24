@@ -106,7 +106,7 @@ public class EmpManageController {
 			MultipartFile emp_pic, HttpServletResponse response) throws IllegalStateException, IOException {
 		String fileName = emp_pic.getOriginalFilename();
 		if (fileName != null) {
-			String webPath = "/static/upload";
+			String webPath = "/static/images";
 			String realPath = ctx.getRealPath(webPath);
 			File savePath = new File(realPath);
 			if (!savePath.exists())

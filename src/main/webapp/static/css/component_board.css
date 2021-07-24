@@ -1,5 +1,4 @@
 /* 寃뚯떆�뙋 �뵒�옄�씤 */
-
 .tbl-ex, .tbl-ex th , .tbl-ex td{
   border:1px solid var(--base-color4);
   width: 1000px;    
@@ -15,9 +14,9 @@
 
 
 .tbl-ex th{
-border-bottom: 1.5px solid var(--base-color4);
-font-size: 16px;
-color: var(--base-color);
+	border-bottom: 1.5px solid var(--base-color4);
+	font-size: 16px;
+	color: var(--base-color);
 }
 
 .tbl-ex td{

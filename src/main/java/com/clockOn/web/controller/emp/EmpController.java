@@ -86,7 +86,7 @@ public class EmpController {
 		String fileName = emp_pic.getOriginalFilename();
 		if(fileName !=null && fileName !="") {
 		//파일업로드
-			String webPath = "/static/upload";
+			String webPath = "/static/images";
 			String realPath = ctx.getRealPath(webPath);
 			File savePath = new File(realPath);
 			System.out.println("저장경로2" + savePath);

@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 실시간 검색되는 멤버리스트 -->
-	<select id="searchList" resultType ="com.clockOn.web.entity.member.MemberList" parameterType="HashMap">
+	<select id="searchList" resultType ="com.clockOn.web.entity.member.MemberList">
 		select o.org_groupname, o.org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_tel, emp_email, emp_level 
 		from employee e join organization o on e.emp_dept=o.org_teamcode 
 	    <where> 
@@ -31,7 +31,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>
 	    	</foreach>
     	</where>
-		order by o.org_groupname;
+		order by o.org_groupname limit ${page.offset}, ${page.scalePerPage}
+	</select>
+	<!-- 실시간 검색 결과수 -->
+	<select id="cntRows" resultType="int" parameterType="HashMap">
+		select count(emp_id) 
+		from employee e join organization o on e.emp_dept=o.org_teamcode 
+	    <where> 
+    		<foreach item="map" collection="list">
+    			<if test="map.keyword !=null and map.keyword !=''">
+					and ${map.field} like '%${map.keyword}%'
+				</if>
+	    	</foreach>
+    	</where>
+		order by o.org_groupname
 	</select>
 	
 	<select id="listLeave" resultType="com.clockOn.web.entity.member.MemberLeave">
@@ -39,12 +52,154 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from employee e join organization o on e.emp_dept = o.org_teamcode 
 		order by emp_dept limit #{offset}, #{size}
 	</select>
+	<!-- 실시간 검색되는 멤버리스트 -->
+	<select id="leaveList" resultType ="com.clockOn.web.entity.member.MemberLeave">
+		select org_teamname as emp_dept, emp_id, emp_name, emp_posi, total_annday, annday_used, (total_annday-annday_used) as annday_rest,
+		substr(emp_join,1,10) as emp_join, ifnull(substr(emp_resi,1,10),'') as emp_resi 
+		from employee e join organization o on e.emp_dept=o.org_teamcode
+	    <where> 
+    		<foreach item="map" collection="list">
+   			<if test="map.keyword != null and map.keyword != ''">
+    		<choose>
+    			<when test="map.field != 'annday_rest' and map.field != 'emp_join'">
+					and ${map.field} like '%${map.keyword}%'
+				</when>
+				<when test="map.field == 'annday_rest' or map.field == 'emp_join'">
+					<choose>
+					<when test="map.op1 =='up'">
+						and (total_annday - annday_used) &gt;= #{map.keyword}			
+					</when>
+					<when test="map.op1 =='down'">
+						and (total_annday - annday_used) &lt;= #{map.keyword}			
+					</when>
+					</choose>
+					<choose>
+					<when test="map.op2 =='before'">
+						and ${map.field} &lt; #{map.keyword}			
+					</when>
+					<when test="map.op2 =='after'">
+						and ${map.field} &gt; #{map.keyword}			
+					</when>
+					</choose>
+				</when>
+			</choose>
+			</if>
+	    	</foreach>
+    	</where>
+		order by o.org_groupname limit ${page.offset}, ${page.scalePerPage}
+	</select>
+	<!-- 실시간 검색 결과수 -->
+	<select id="cntLeaveRows" resultType="int" parameterType="HashMap">
+		select count(emp_id) 
+		from employee e join organization o on e.emp_dept=o.org_teamcode 
+	    <where> 
+    		<foreach item="map" collection="list">
+   			<if test="map.keyword !=null and map.keyword !=''">
+    		<choose>
+    			<when test="map.field != 'annday_rest' and map.field != 'emp_join'">
+					and ${map.field} like '%${map.keyword}%'
+				</when>
+				<when test="map.field == 'annday_rest' or map.field =='emp_join'">
+					<choose>
+					<when test="map.op1 =='up'">
+						and (total_annday - annday_used) &gt;= #{map.keyword}			
+					</when>
+					<when test="map.op1 =='down'">
+						and (total_annday - annday_used) &lt;= #{map.keyword}			
+					</when>
+					</choose>
+					<choose>
+					<when test="map.op2 =='before'">
+						and ${map.field} &lt; #{map.keyword}			
+					</when>
+					<when test="map.op2 =='after'">
+						and ${map.field} &gt; #{map.keyword}			
+					</when>
+					</choose>
+				</when>
+			</choose>
+			</if>
+	    	</foreach>
+    	</where>
+	</select>
 	
 	<select id="listSal" resultType="com.clockOn.web.entity.member.MemberSal">
 		select org_groupname, org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_sal,
 			cast(floor(emp_sal/12) as char) as emp_pay, emp_join, emp_resi from employee e 
 		inner join organization o on o.org_teamcode = e.emp_dept
 	</select>
+	<!-- 실시간 검색되는 멤버리스트 -->
+	<select id="salList" resultType ="com.clockOn.web.entity.member.MemberSal">
+		select org_groupname, org_teamname as emp_dept, emp_id, emp_name, emp_posi, emp_sal, cast(floor(emp_sal/12) as char) as emp_pay, 
+		substr(emp_join,1,10) as emp_join, ifnull(substr(emp_resi,1,10),'') as emp_resi 
+		from employee e join organization o on e.emp_dept=o.org_teamcode
+	    <where> 
+    		<foreach item="map" collection="list">
+   			<if test="map.keyword != null and map.keyword != ''">
+    		<choose>
+    			<when test="map.field != 'emp_sal' and map.field != 'emp_join'">
+					and ${map.field} like '%${map.keyword}%'
+				</when>
+				<when test="map.field == 'emp_sal' or map.field == 'emp_join'">
+					<choose>
+					<when test="map.op1 =='up'">
+						and ${map.field} &gt;= #{map.keyword}			
+					</when>
+					<when test="map.op1 =='down'">
+						and ${map.field} &lt;= #{map.keyword}			
+					</when>
+					</choose>
+					<choose>
+					<when test="map.op2 =='before'">
+						and ${map.field} &lt; #{map.keyword}			
+					</when>
+					<when test="map.op2 =='after'">
+						and ${map.field} &gt; #{map.keyword}			
+					</when>
+					</choose>
+				</when>
+			</choose>
+			</if>
+	    	</foreach>
+    	</where>
+		order by o.org_groupname limit ${page.offset}, ${page.scalePerPage}
+	</select>
+	<!-- 실시간 검색 결과수 -->
+	<select id="cntSalRows" resultType="int" parameterType="HashMap">
+		select count(emp_id) 
+		from employee e join organization o on e.emp_dept=o.org_teamcode 
+	    <where> 
+    		<foreach item="map" collection="list">
+   			<if test="map.keyword !=null and map.keyword !=''">
+    		<choose>
+    			<when test="map.field != 'emp_sal' and map.field != 'emp_join'">
+					and ${map.field} like '%${map.keyword}%'
+				</when>
+				<when test="map.field == 'emp_sal' or map.field =='emp_join'">
+					<choose>
+					<when test="map.op1 =='up'">
+						and ${map.field} &gt;= #{map.keyword}			
+					</when>
+					<when test="map.op1 =='down'">
+						and ${map.field} &lt;= #{map.keyword}			
+					</when>
+					</choose>
+					<choose>
+					<when test="map.op2 =='before'">
+						and ${map.field} &lt; #{map.keyword}			
+					</when>
+					<when test="map.op2 =='after'">
+						and ${map.field} &gt; #{map.keyword}			
+					</when>
+					</choose>
+				</when>
+			</choose>
+			</if>
+	    	</foreach>
+    	</where>
+	</select>
+	
+	
 	<insert id="add" parameterType="com.clockOn.web.entity.member.Member">
 		insert into employee(emp_id, emp_pw, emp_name, emp_email, emp_tel, emp_dept, emp_posi, emp_level, emp_sal, emp_pic, total_annday) 
 		values(#{emp_id}, #{emp_pw}, #{emp_name}, #{emp_email}, #{emp_tel}, #{emp_dept}, #{emp_posi}, #{emp_level}, #{emp_sal}, #{emp_pic}, #{total_annday})

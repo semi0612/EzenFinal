@@ -17,8 +17,8 @@ public class Member{
 	private String emp_dept;
 	private String emp_posi;
 	private String emp_level;
-	private Date emp_join;
-	private Date emp_resi;
+	private String emp_join;
+	private String emp_resi;
 	private String emp_sal;
 	private String emp_pic;
 	private int total_annday;
@@ -28,7 +28,7 @@ public class Member{
 
 	
     public Member(String emp_id, String emp_pw, String emp_name, String emp_email, String emp_tel, String emp_dept, String emp_posi, 
-            String emp_level, Date emp_join, Date emp_resi, String emp_sal, String emp_pic, int total_annday, float annday_used){
+            String emp_level, String emp_join, String emp_resi, String emp_sal, String emp_pic, int total_annday, float annday_used){
         this.emp_id = emp_id;
         this.emp_pw = emp_pw;
         this.emp_name = emp_name;
@@ -47,7 +47,7 @@ public class Member{
     
 
 	public Member(String emp_dept, String emp_id, String emp_name, String emp_posi, int total_annday,
-			float annday_used, Date emp_join, Date emp_resi) {
+			float annday_used, String emp_join, String emp_resi) {
 		this.emp_dept = emp_dept;
 		this.emp_id = emp_id;
 		this.emp_name = emp_name;

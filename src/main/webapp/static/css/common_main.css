@@ -1,7 +1,10 @@
 main{
     position: relative;
     width: 100%;
+    max-width: 1600px;
     height: 100%;
+    overflow-x: hidden;
+    margin-bottom:100px;
 }
 .content-wrapper{
     top:62px;

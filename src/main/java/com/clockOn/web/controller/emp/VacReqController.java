@@ -19,8 +19,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.clockOn.web.entity.Page;
 import com.clockOn.web.entity.vacation.Vacation;
 import com.clockOn.web.service.vacation.LeaveService;
 
@@ -86,12 +88,21 @@ public class VacReqController {
 	
 	/*본인 요청 불러오기*/
 	@GetMapping("vcList")
-	public String vacReqlist(HttpSession session, Model model) {
+	public String vacReqlist(HttpSession session, Model model, @RequestParam(name="p", defaultValue="1") int page) {
 		String emp_id = session.getAttribute("id").toString();
-		List<Vacation> vac = vacationService.listVacReq(emp_id);
+		int cnt = vacationService.cntwoff(emp_id);
+		model.addAttribute("cntwoff", cnt);
+		//페이징 처리 1단계 : 쿼리 실행 시 가져오는 레코드 수 구하기 (count함수 활용)
+		int cntReq = vacationService.cntMyReq(emp_id);
+		model.addAttribute("cntReq", cntReq);
+		//페이징 처리 2단계 : page VO를 통해 필요한 정보 도출 (view : page, startNum, lastNum | mapper : offset, limit)
+		Page p = new Page(page,cntReq);
+		model.addAttribute("pg", p);
+		
+		List<Vacation> vac = vacationService.listVacReq(emp_id, p.getOffset(), p.getScalePerPage());
 		model.addAttribute("vacList",vac);
+		
 		model.addAttribute("annday", vacationService.getVacinfo(emp_id));
-		model.addAttribute("cntwoff", vacationService.cntwoff(emp_id));
 		return "emp.vacation.vcList";
 	}
 	

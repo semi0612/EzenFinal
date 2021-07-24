@@ -16,11 +16,11 @@ public class MemberSal {
 	private String emp_posi;
 	private String emp_sal;
 	private String emp_pay;
-	private Date emp_join;
-	private Date emp_resi;
+	private String emp_join;
+	private String emp_resi;
 	
 	public MemberSal(String org_groupname, String emp_dept, String emp_id, String emp_name, String emp_posi, String emp_sal,
-			String emp_pay,Date emp_join, Date emp_resi) {
+			String emp_pay,String emp_join, String emp_resi) {
 		this.org_groupname = org_groupname;
 		this.emp_dept = emp_dept;
 		this.emp_id = emp_id;
