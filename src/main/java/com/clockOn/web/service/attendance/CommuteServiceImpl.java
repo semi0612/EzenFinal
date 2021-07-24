@@ -78,9 +78,6 @@ public class CommuteServiceImpl implements CommuteService{
 		int cntWknd= getCntWknd(today); //오늘까지 주말 수
 		int cntWork = commuteDAO.cntWdays(emp_id); //평일 근무일수
 		absent = today - (cntWknd + commuteDAO.thisMonthHoli(emp_id) + cntWork) ;
-		System.out.println(today);
-		System.out.println(cntWknd);
-		System.out.println(cntWork);
 		return absent;
 	}
 
@@ -134,7 +131,6 @@ public class CommuteServiceImpl implements CommuteService{
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH);
 		
-		System.out.println(month);
 		int cntWknd=0;
 		/*cal.getActualMaximum(Calendar.DAY_OF_MONTH);*/
 
@@ -143,8 +139,6 @@ public class CommuteServiceImpl implements CommuteService{
 			cal.set(year, month, i);
 			int m = cal.get(Calendar.DAY_OF_WEEK);
 			if(m==1 || m==7) { cntWknd++; }
-			System.out.println(i);
-			System.out.println(cntWknd);
 		}
 		
 		return cntWknd;

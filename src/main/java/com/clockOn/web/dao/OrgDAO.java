@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.clockOn.web.entity.Organization;
+import com.clockOn.web.entity.PagingVO;
 
 public interface OrgDAO {
 	//모든 팀 리스트 얻기 - 조직도 페이지 & 팀리스트 셀렉트박스
-	public List<Organization> list();
+	public List<Organization> list(PagingVO vo);
+	
+	//게시판 리스트의 갯수 출력
+	public int countList();
 	
 	//팀얻기 - 사실 조건에 따른 팀 얻기로 파라미터 들어가야 함. 일단은 만들어둠
 	public Organization get();
@@ -27,6 +31,8 @@ public interface OrgDAO {
 
 	/*조직도 수(팀수, 본부수)*/
 	public HashMap orgCount();
+
+	public List<Organization> orgList();
 	   
 //	public List<Map<String, String>> selectAllMember(); 결과값 Map이 여러개라면 이방식
 	

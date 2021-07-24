@@ -33,34 +33,18 @@
 					<th class="elevel"><input type="text" class="search" id="emp_level" onkeyup="getMap(1)" placeholder="admin/member"></th>
 				</tr>
 				<tr class="title-tr">
-					<th class="gname">본부</th>
-					<th class="tname">부서</th>
-					<th class="eid">사번</th>
-					<th class="ename">이름</th>
-					<th class="eposi">직급</th>
-					<th class="etel">내선번호</th>
-					<th class="email">이메일</th>
-					<th class="elevel">액세스권한</th>
+					<th class="gname" id="org_groupname">본부<img src="/images/down-arrow.png" class="arrow" ></th>
+					<th class="tname" id="org_teamname">부서<img src="/images/down-arrow.png" class="arrow" ></th>
+					<th class="eid" id="emp_id">사번<img src="/images/down-arrow.png" class="arrow" ></th>
+					<th class="ename" id="emp_name">이름<img src="/images/down-arrow.png" class="arrow" ></th>
+					<th class="eposi" id="emp_posi">직급<img src="/images/down-arrow.png" class="arrow" ></th>
+					<th class="etel" id="emp_tel">내선번호<img src="/images/down-arrow.png" class="arrow" ></th>
+					<th class="email" id="emp_email">이메일<img src="/images/down-arrow.png" class="arrow" ></th>
+					<th class="elevel" id="emp_level">액세스권한<img src="/images/down-arrow.png" class="arrow" ></th>
 				</tr>
 			</thead>
 			<tbody id="ajax">
-			<%-- <c:forEach var="list" items="${list}">
-				<tr>
-					<td>${list.org_groupname}</td>
-					<td>${list.emp_dept}</td>
-					<td>${list.emp_id}</td>
-					<td>${list.emp_name}</td>
-					<td>${list.emp_posi}</td>
-					<td>${list.emp_tel}</td>
-					<td>${list.emp_email}</td>
-					<c:if test="${list.emp_level=='ROLE_ADMIN'}">
-						<td>관리자</td>
-					</c:if>
-					<c:if test="${list.emp_level=='ROLE_MEMBER'}">
-						<td>직원</td>
-					</c:if>
-				</tr>
-			</c:forEach> --%>
+			
 			</tbody>
 		</table>
 	</main>

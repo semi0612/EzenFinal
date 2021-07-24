@@ -47,7 +47,7 @@
                     </a>
                 </ul>
             </div>
-            <a href="/emp/organization/organization">
+            <a href="/emp/organization">
                 <li class="menu"><i class="fas fa-users"></i> <em>연락망</em></li>
             </a>
         </ul>

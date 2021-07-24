@@ -31,7 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>
 	    	</foreach>
     	</where>
-		order by o.org_groupname limit ${page.offset}, ${page.scalePerPage}
+    	<if test="o.by != ''">
+			order by ${o.by} ${o.order}
+		</if>
+		limit ${page.offset}, ${page.scalePerPage}
 	</select>
 	<!-- 실시간 검색 결과수 -->
 	<select id="cntRows" resultType="int" parameterType="HashMap">
@@ -44,7 +47,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>
 	    	</foreach>
     	</where>
-		order by o.org_groupname
 	</select>
 	
 	<select id="listLeave" resultType="com.clockOn.web.entity.member.MemberLeave">

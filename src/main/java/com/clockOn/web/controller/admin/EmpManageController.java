@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clockOn.web.entity.Organization;
+import com.clockOn.web.entity.PagingVO;
 import com.clockOn.web.entity.member.Member;
 import com.clockOn.web.entity.member.MemberLeave;
 import com.clockOn.web.entity.member.MemberList;
@@ -41,14 +42,19 @@ public class EmpManageController {
 //	@Autowired
 //	private AttendanceService attendanceService;
 
-	@GetMapping("organization")
-	public String organization(Model model) {
-		model.addAttribute("orgView", orgService.orgView());
-		model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
-		model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
-		model.addAttribute("memberCount", memberService.count());
-		return "empManagement.organization.list";
-	}
+	@GetMapping("organization") 
+	   public String organization(Model model, PagingVO vo, @RequestParam(value="nowPage", defaultValue = "1") int nowPage) {
+	      int total = orgService.countList();
+	      int cntPerPage =10;
+	      vo = new PagingVO(total, nowPage, cntPerPage);
+	      model.addAttribute("orgView", orgService.orgView(vo));
+	      model.addAttribute("paging", vo);
+	      
+	      model.addAttribute("groupcount", orgService.orgCount().get("groupcount"));
+	      model.addAttribute("teamcount", orgService.orgCount().get("teamcount"));
+	      model.addAttribute("memberCount", memberService.count()); 
+	      return "empManagement.organization.list"; 
+	   }
 
 	@GetMapping("contacts")
 	public String contacts(Model model, String org_teamname) {
@@ -117,7 +123,7 @@ public class EmpManageController {
 //			System.out.println(realPath);
 		}
 		/* 팀명으로 받아서 숫자로 바꿔넣어주기 */
-		List<Organization> o = orgService.orgView();
+		List<Organization> o = orgService.orgList();
 		for (int i = 0; i < o.size(); i++) {
 			if (o.get(i).getOrg_teamname().equals(emp_dept)) {
 				emp_dept = String.valueOf((i + 1));
@@ -154,7 +160,7 @@ public class EmpManageController {
 			String[] emp_email, String[] emp_level, HttpServletResponse response) throws IOException {
 
 		/* 팀명으로 받아서 숫자로 바꿔넣어주기 */
-		List<Organization> o = orgService.orgView();
+		List<Organization> o = orgService.orgList();
 
 		List<MemberList> list = new ArrayList();
 		for (int i = 0; i < emp_name.length; i++) {

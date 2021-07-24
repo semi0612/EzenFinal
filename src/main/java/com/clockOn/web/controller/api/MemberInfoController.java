@@ -29,12 +29,13 @@ public class MemberInfoController {
 	
 	//ResponseBody -- 바로 제이슨 문자열로 받고 보내줌
 	@PostMapping("searchlist")
-	public Map<String,Object> searchResult(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p) throws JsonMappingException, JsonProcessingException {
+	public Map<String,Object> searchResult(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p, @RequestParam(value="order") String o) throws JsonMappingException, JsonProcessingException {
 		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
+		Map<String, String> order = mapper.readValue(o, new TypeReference<Map<String, String>>(){});
 		double totRows = service.cntRows(mapList);
-		Page page = new Page(p, totRows);
-		page.setScalePerPage(13);
-		List<MemberList> member =service.searchList(mapList, page);
+		/*select count(1) ~~~~~~~~~~*/
+		Page page = new Page(p, totRows, 13);
+		List<MemberList> member =service.searchList(mapList, page, order);
 		Map<String,Object> data = new HashMap();
 		data.put("member", member);
 		data.put("totRows",totRows);
@@ -46,8 +47,7 @@ public class MemberInfoController {
 	public Map<String,Object> salaryList(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p) throws JsonMappingException, JsonProcessingException {
 		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
 		double totRows = service.cntSalRows(mapList);
-		Page page = new Page(p, totRows);
-		page.setScalePerPage(13);
+		Page page = new Page(p, totRows, 13);
 		List<MemberSal> member =service.salList(mapList, page);
 		Map<String,Object> data = new HashMap();
 		data.put("member", member);
@@ -60,8 +60,7 @@ public class MemberInfoController {
 	public Map<String,Object> leaveList(@RequestParam(value = "search") String search, @RequestParam(value="page", defaultValue = "1") int p) throws JsonMappingException, JsonProcessingException {
 		List<Map<String, String>> mapList = mapper.readValue(search, new TypeReference<List<Map<String, String>>>(){});
 		double totRows = service.cntLeaveRows(mapList);
-		Page page = new Page(p, totRows);
-		page.setScalePerPage(13);
+		Page page = new Page(p, totRows, 13);
 		List<MemberSal> member =service.leaveList(mapList, page);
 		Map<String,Object> data = new HashMap();
 		data.put("member", member);

@@ -70,7 +70,7 @@
             </ul>
             <ul class="profile">
                 <div class="menu-category">설정</div>
-              <a href="/empProfile?emp_id=<sec:authentication property='principal.member.emp_id'/>">
+              <a href="/adminProfile?emp_id=<sec:authentication property='principal.member.emp_id'/>">
                     <li class="menu"><i class="fas fa-user"></i><em>프로필</em></li>
                 </a>
             </ul>

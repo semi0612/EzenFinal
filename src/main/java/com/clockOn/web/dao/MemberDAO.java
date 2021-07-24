@@ -32,7 +32,7 @@ public interface MemberDAO {
 
 	public List<MemberList> listView();
 	
-	public List<MemberList> searchList(@Param("list") List<Map<String, String>> list, @Param ("page") Page page);
+	public List<MemberList> searchList(@Param("list") List<Map<String, String>> list, @Param ("page") Page page, @Param("o") Map<String, String> order);
 	
 	public List<MemberLeave> listLeave(@Param("size") int size, @Param("offset") int offset);
 

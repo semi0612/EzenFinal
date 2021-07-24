@@ -29,6 +29,8 @@ tbody {
 td, th {
 	box-sizing:border-box;
 }
+
+
 .gname, .tname, .eid, .ename, .eposi, .elevel, .esal, .monthly, .exit, .total, .rest, .used {
 	width:10.5% !important;
 }
@@ -67,4 +69,8 @@ select#upDown, #beforeAfter {
     width: 100%;
     height: 21px;
     border :1px solid var(--base-color3);
+}
+
+.title-tr th{
+	cursor:pointer;
 }

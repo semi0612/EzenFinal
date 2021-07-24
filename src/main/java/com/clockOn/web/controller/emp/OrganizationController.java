@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.clockOn.web.service.empManagement.MemberService;
 import com.clockOn.web.service.empManagement.OrgService;
-
+/*
 @Controller
 @RequestMapping("/emp/organization/")
 public class OrganizationController {
@@ -37,4 +37,4 @@ public class OrganizationController {
 		return "emp.organization.contacts";
 	}
 
-}
+}*/

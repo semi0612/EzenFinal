@@ -220,8 +220,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberList> searchList(List<Map<String, String>> list, Page page) {
-		return memberDao.searchList(list, page);
+	public List<MemberList> searchList(List<Map<String, String>> list, Page page, Map<String, String> order) {
+		return memberDao.searchList(list, page, order);
 	}
 
 	@Override

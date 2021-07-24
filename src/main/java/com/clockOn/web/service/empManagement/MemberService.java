@@ -60,7 +60,7 @@ public interface MemberService {
 	/* 직원&관리자 - 프로필 정보 불러오기 */
 	public MemberProfile profile(String emp_id);
 
-	public List<MemberList> searchList(List<Map<String, String>> list, Page page);
+	public List<MemberList> searchList(List<Map<String, String>> list, Page page, Map<String, String> order);
 
 	public int cntSalRows(List<Map<String, String>> mapList);
 

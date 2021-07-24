@@ -25,4 +25,14 @@ public class Page {
 		this.startNum = page-(page-1)%scalePerBlock; 
 	}
 	
+	public Page(int page, double cntRows, int scalePerPage) {
+		this.page = page;
+		this.cntRows = cntRows;
+		this.scalePerPage = scalePerPage;
+		this.offset =  0+(page-1)*scalePerPage;
+		this.lastNum = (int) Math.ceil(cntRows/scalePerPage); 
+		this.startNum = page-(page-1)%scalePerBlock; 
+		
+	}
+	
 }

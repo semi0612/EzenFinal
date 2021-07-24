@@ -1,5 +1,5 @@
 
-/* ì¡°ì§ë„ ë¶€ë¶„ */
+/* ì¡°ì§ „ ë¶ ë¶  */
 .org-wrapper{ text-align: center;}
 
 .org-header {
@@ -107,32 +107,47 @@
   margin-left: 5px;
 }
 
-/* orgê²Œì‹œíŒ ë””ìì¸ */
+/* org Å×ÀÌºí */
+.org-table {
+   width: 800px;
+}
+
+
+td:last-child, th:last-child {
+    width: 250px;
+}
+
+td, th {
+    width: 120px;
+}
 
 .org-table, .org-table th , .org-table td{
-  border:1px solid var(--base-color4);
-  width: 800px;    
+  border:1px solid var(--base-color4);     
   border-width: 0.1px 0;
   border-collapse: collapse;
   text-align: center;
   margin: auto;
   margin-top: 50px;
-  margin-bottom: 200px;
+  margin-bottom: 20px;
   font-size: 15px;
   padding:10px;
   transform: rotate(-0.03deg);
 }
 
+
 .org-img { margin:auto; }
 .org-table th{
   border-top: 1.5px solid var(--base-color4);
   border-bottom: 1.5px solid var(--base-color4);
-  font-size: 14px;
+  font-size: 12px;
+  height: 8px;
   color: var(--base-color);
 }
 
 .org-table td{
   border-style:solid;
-  font-size: 14px;
+  font-size: 12px;
+  height: 30px;
 }
 .org-table .td-two { cursor: pointer;}
+

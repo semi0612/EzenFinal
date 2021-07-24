@@ -1,17 +1,16 @@
 var page = 1;
 var last;
-var html;
-
+var html; //var : 전역변수 let :지역변수
+var orderBy = '';
+var order = '';
 
 //	console.log("innerHeight:" + innerHeight);
 //	console.log("scroll(innerHeight+scrollTop) : " + scroll);
 //	console.log("전체높이 : " + height);
 //		console.log("끝");
 function getMap(p){
-	//let search = $('.search');
+	//검색 처리
 	search = [];
-	
-	//console.log(search);
 	$('.search').each(function(){
 		let s ={
 			field : $(this).attr('id'),
@@ -20,23 +19,30 @@ function getMap(p){
 		search.push(s);
 	});
 	var jsonData = JSON.stringify(search);
+	
+	//정렬 처리
+	let o = {};
+	o.order = order;
+	o.by = orderBy;
+	var jsonO = JSON.stringify(o);
+	
 	$.ajax({
 		url : "searchlist",
 		type:"post",
 //		dateType:'json', @ResponseBody를 담아놓았기 때문에 자동 처리
 		data : {
 			"search":jsonData,
-			"page": p
+			"page": p,
+			"order" : jsonO
 			},
-		success : function(data){
-			var member = data.member;
-			var cnt = data.totRows;
-			var cntRows = $('#totRows');
+		success : function(data){ 
+			var member = data.member; //List<MemberList>
+			var cnt = data.totRows; //double
+			var cntRows = $('#totRows'); 
 			last = data.lastNum;
 //			$("#ajax").remove();
 //			var html='<tbody id="ajax">';
-			if(p==1) {html=''; page=1; cntRows.html('검색 결과 : ' +cnt+ '건');}
-//			if(p!=undefined) 
+			if(p==1) {html=''; page=1; cntRows.html('검색 결과 : ' +cnt+ '건');} //새로 검색 키워드가 입력되었을 때
 			for(var i=0; i<member.length; i++){
 				html += "<tr>"+
 							"<td class='gname'>"+member[i].org_groupname+"</td>"+
@@ -63,7 +69,7 @@ function getMap(p){
 	});
 }
 
-
+//페이지 첫 요청시 데이터 가져오기
 window.onload = function(){
     getMap();
 }
